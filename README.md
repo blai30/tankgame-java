@@ -1,6 +1,6 @@
 # csc413-TankGame
 
-## Student Name :
-## Student ID :
+## Student Name : Brian Lai
+## Student ID : 916818167
 
 
