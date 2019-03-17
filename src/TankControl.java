@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tankrotationexample;
 
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 
 /**
  *
@@ -52,8 +50,6 @@ public class TankControl implements KeyListener {
         if (keyPressed == right) {
             this.t1.toggleRightPressed();
         }
-        
-
     }
 
     @Override
@@ -71,6 +67,6 @@ public class TankControl implements KeyListener {
         if (keyReleased  == right) {
             this.t1.unToggleRightPressed();
         }
-
     }
+
 }

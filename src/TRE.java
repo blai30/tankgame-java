@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tankrotationexample;
 
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
-
 import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
@@ -22,7 +21,6 @@ import static javax.imageio.ImageIO.read;
  */
 public class TRE extends JPanel  {
 
-
     public static final int SCREEN_WIDTH = 1280;
     public static final int SCREEN_HEIGHT = 960;
     private BufferedImage world;
@@ -30,13 +28,11 @@ public class TRE extends JPanel  {
     private JFrame jf;
     private Tank t1;
 
-
     public static void main(String[] args) {
         Thread x;
         TRE trex = new TRE();
         trex.init();
         try {
-
             while (true) {
                 trex.t1.update();
                 trex.repaint();
@@ -46,9 +42,7 @@ public class TRE extends JPanel  {
         } catch (InterruptedException ignored) {
 
         }
-
     }
-
 
     private void init() {
         this.jf = new JFrame("Tank Rotation");
@@ -62,22 +56,17 @@ public class TRE extends JPanel  {
              * current working directory.
              */
             t1img = read(new File("tank1.png"));
-
-
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
         t1 = new Tank(200, 200, 0, 0, 0, t1img);
-
 
         TankControl tc1 = new TankControl(t1, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_ENTER);
 
         this.jf.setLayout(new BorderLayout());
         this.jf.add(this);
 
-
         this.jf.addKeyListener(tc1);
-
 
         this.jf.setSize(TRE.SCREEN_WIDTH, TRE.SCREEN_HEIGHT + 30);
         this.jf.setResizable(false);
@@ -85,8 +74,6 @@ public class TRE extends JPanel  {
 
         this.jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.jf.setVisible(true);
-
-
     }
 
     @Override
@@ -97,8 +84,6 @@ public class TRE extends JPanel  {
 
         this.t1.drawImage(buffer);
         g2.drawImage(world,0,0,null);
-
     }
-
 
 }

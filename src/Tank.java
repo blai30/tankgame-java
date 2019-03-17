@@ -1,5 +1,3 @@
-package tankrotationexample;
-
 
 
 import java.awt.*;
@@ -12,7 +10,6 @@ import java.awt.image.BufferedImage;
  */
 public class Tank{
 
-
     private int x;
     private int y;
     private int vx;
@@ -22,14 +19,11 @@ public class Tank{
     private final int R = 2;
     private final int ROTATIONSPEED = 4;
 
-
-
     private BufferedImage img;
     private boolean UpPressed;
     private boolean DownPressed;
     private boolean RightPressed;
     private boolean LeftPressed;
-
 
     Tank(int x, int y, int vx, int vy, int angle, BufferedImage img) {
         this.x = x;
@@ -38,9 +32,7 @@ public class Tank{
         this.vy = vy;
         this.img = img;
         this.angle = angle;
-
     }
-
 
     void toggleUpPressed() {
         this.UpPressed = true;
@@ -74,8 +66,6 @@ public class Tank{
         this.LeftPressed = false;
     }
 
-
-
     public void update() {
         if (this.UpPressed) {
             this.moveForwards();
@@ -83,15 +73,12 @@ public class Tank{
         if (this.DownPressed) {
             this.moveBackwards();
         }
-
         if (this.LeftPressed) {
             this.rotateLeft();
         }
         if (this.RightPressed) {
             this.rotateRight();
         }
-
-
     }
 
     private void rotateLeft() {
@@ -118,9 +105,6 @@ public class Tank{
         checkBorder();
     }
 
-
-
-
     private void checkBorder() {
         if (x < 30) {
             x = 30;
@@ -141,14 +125,11 @@ public class Tank{
         return "x=" + x + ", y=" + y + ", angle=" + angle;
     }
 
-
     void drawImage(Graphics g) {
         AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
         rotation.rotate(Math.toRadians(angle), this.img.getWidth() / 2.0, this.img.getHeight() / 2.0);
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(this.img, rotation, null);
     }
-
-
 
 }
