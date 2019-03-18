@@ -10,4 +10,8 @@ public class Tank {
         this.position = new Vector2D();
     }
 
+    public Tank(Vector2D pos) {
+        this.position = pos;
+    }
+
 }

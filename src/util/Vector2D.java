@@ -112,4 +112,9 @@ public class Vector2D {
         this.y /= vec.y;
     }
 
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
+
 }
