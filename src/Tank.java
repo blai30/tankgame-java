@@ -22,8 +22,9 @@ public class Tank {
     private BufferedImage sprite;
     private boolean UpPressed;
     private boolean DownPressed;
-    private boolean RightPressed;
     private boolean LeftPressed;
+    private boolean RightPressed;
+    private boolean ActionPressed;
 
     // Avoid using this constructor
     public Tank() {
@@ -57,12 +58,16 @@ public class Tank {
         this.DownPressed = true;
     }
 
+    void toggleLeftPressed() {
+        this.LeftPressed = true;
+    }
+
     void toggleRightPressed() {
         this.RightPressed = true;
     }
 
-    void toggleLeftPressed() {
-        this.LeftPressed = true;
+    void toggleActionPressed() {
+        this.ActionPressed = true;
     }
 
     void unToggleUpPressed() {
@@ -73,12 +78,16 @@ public class Tank {
         this.DownPressed = false;
     }
 
+    void unToggleLeftPressed() {
+        this.LeftPressed = false;
+    }
+
     void unToggleRightPressed() {
         this.RightPressed = false;
     }
 
-    void unToggleLeftPressed() {
-        this.LeftPressed = false;
+    void unToggleActionPressed() {
+        this.ActionPressed = false;
     }
 
     private void rotateRight() {
@@ -101,6 +110,13 @@ public class Tank {
         position.add(-vx, -vy);
     }
 
+    private void fire() {
+        if (this.maxBullets > 0) {
+            // TODO: shoot a bullet with fireRate and damage
+            this.maxBullets--;
+        }
+    }
+
     public void update() {
         if (this.UpPressed) {
             this.moveForwards();
@@ -112,6 +128,10 @@ public class Tank {
             this.rotateLeft();
         } else if (this.RightPressed) {
             this.rotateRight();
+        }
+
+        if (this.ActionPressed) {
+            this.fire();
         }
     }
 
