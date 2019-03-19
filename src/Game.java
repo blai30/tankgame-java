@@ -1,10 +1,14 @@
 
 
 import util.Key;
+import util.Vector2D;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class Game extends JPanel {
@@ -12,9 +16,13 @@ public class Game extends JPanel {
     public static final int SCREEN_WIDTH = 1280;
     public static final int SCREEN_HEIGHT = 960;
 
+    private static boolean running = false;
+
     private static HashMap<Integer, Key> controls1;
     private static HashMap<Integer, Key> controls2;
 
+    private BufferedImage world;
+    private Graphics2D buffer;
     private JFrame screen;
     private Tank tank1;
     private Tank tank2;
@@ -36,8 +44,30 @@ public class Game extends JPanel {
     }
 
     private void init() {
+        running = true;
+
+        this.screen = new JFrame("Tank Game");
+        this.world = new BufferedImage(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
+        BufferedImage sprTank1 = null;
+        BufferedImage sprTank2 = null;
+
+        try {
+            System.out.println(System.getProperty("user.dir"));
+            sprTank1 = ImageIO.read(Game.class.getResourceAsStream("resources/tank1.png"));
+            sprTank2 = ImageIO.read(Game.class.getResourceAsStream("resources/tank2.png"));
+        } catch (IOException e) {
+            System.out.println("IOException: cannot read image file");
+            e.printStackTrace();
+        }
+
+        this.tank1 = new Tank(new Vector2D(200, 200), 0f, sprTank1);
+        this.tank2 = new Tank(new Vector2D(400, 400), 0f, sprTank2);
+
         TankController tankController1 = new TankController(tank1, controls1);
         TankController tankController2 = new TankController(tank2, controls2);
+
+        this.screen.addKeyListener(tankController1);
+        this.screen.addKeyListener(tankController2);
 
         this.screen.setLayout(new BorderLayout());
         this.screen.add(this);
@@ -49,8 +79,33 @@ public class Game extends JPanel {
     }
 
     public static void main(String[] args) {
+        Thread thread;
         Game game = new Game();
         game.init();
+
+        try {
+            while (running) {
+                game.tank1.update();
+                game.tank2.update();
+                game.repaint();
+                System.out.println("[Tank1] " + game.tank1);
+                System.out.println("[Tank2] " + game.tank2);
+                Thread.sleep(1000 / 144);
+            }
+        } catch (InterruptedException ignored) {
+
+        }
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        buffer = world.createGraphics();
+        super.paintComponent(g2);
+
+        this.tank1.drawImage(buffer);
+        this.tank2.drawImage(buffer);
+        g2.drawImage(world,0,0,null);
     }
 
 }
