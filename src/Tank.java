@@ -2,6 +2,8 @@
 
 import util.Vector2D;
 
+import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 public class Tank {
@@ -133,6 +135,18 @@ public class Tank {
         if (this.ActionPressed) {
             this.fire();
         }
+    }
+
+    public void drawImage(Graphics g) {
+        AffineTransform rotation = AffineTransform.getTranslateInstance(position.getX(), position.getY());
+        rotation.rotate(Math.toRadians(angle), this.sprite.getWidth() / 2.0, this.sprite.getHeight() / 2.0);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(this.sprite, rotation, null);
+    }
+
+    @Override
+    public String toString() {
+        return "Position: " + position + ", Angle: " + angle;
     }
 
 }
