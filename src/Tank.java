@@ -19,7 +19,7 @@ public class Tank {
     private int armor;
     private int maxBullets;
 
-    private final float ROTATIONSPEED = 2;
+    private final float ROTATIONSPEED = 1.5f;
 
     private BufferedImage sprite;
     private boolean UpPressed;
@@ -28,24 +28,12 @@ public class Tank {
     private boolean RightPressed;
     private boolean ActionPressed;
 
-    // Avoid using this constructor
-    public Tank() {
-        this.position = new Vector2D();
-        this.angle = 0;
-
-        this.moveSpeed = 1.0f;
-        this.fireRate = 1.0f;
-        this.damage = 1;
-        this.armor = 1;
-        this.maxBullets = 5;
-    }
-
     public Tank(Vector2D pos, float angle, BufferedImage sprite) {
         this.position = pos;
         this.angle = angle;
         this.sprite = sprite;
 
-        this.moveSpeed = 1.0f;
+        this.moveSpeed = 1.2f;
         this.fireRate = 1.0f;
         this.damage = 1;
         this.armor = 1;
@@ -101,14 +89,14 @@ public class Tank {
     }
 
     private void moveForwards() {
-        vx = (float) Math.round(this.moveSpeed * Math.cos(Math.toRadians(this.angle)));
-        vy = (float) Math.round(this.moveSpeed * Math.sin(Math.toRadians(this.angle)));
+        vx = (float) (this.moveSpeed * Math.cos(Math.toRadians(this.angle)));
+        vy = (float) (this.moveSpeed * Math.sin(Math.toRadians(this.angle)));
         position.add(vx, vy);
     }
 
     private void moveBackwards() {
-        vx = (float) Math.round(this.moveSpeed * Math.cos(Math.toRadians(this.angle)));
-        vy = (float) Math.round(this.moveSpeed * Math.sin(Math.toRadians(this.angle)));
+        vx = (float) (this.moveSpeed * Math.cos(Math.toRadians(this.angle)));
+        vy = (float) (this.moveSpeed * Math.sin(Math.toRadians(this.angle)));
         position.add(-vx, -vy);
     }
 

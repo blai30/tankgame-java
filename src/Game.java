@@ -27,7 +27,10 @@ public class Game extends JPanel {
     private Tank tank1;
     private Tank tank2;
 
-    private static void setControls() {
+    private void setControls() {
+        controls1 = new HashMap<>();
+        controls2 = new HashMap<>();
+
         // Player 1
         controls1.put(KeyEvent.VK_UP, Key.up);
         controls1.put(KeyEvent.VK_DOWN, Key.down);
@@ -81,6 +84,7 @@ public class Game extends JPanel {
     public static void main(String[] args) {
         Thread thread;
         Game game = new Game();
+        game.setControls();
         game.init();
 
         try {
@@ -90,6 +94,7 @@ public class Game extends JPanel {
                 game.repaint();
                 System.out.println("[Tank1] " + game.tank1);
                 System.out.println("[Tank2] " + game.tank2);
+                System.out.println();
                 Thread.sleep(1000 / 144);
             }
         } catch (InterruptedException ignored) {
