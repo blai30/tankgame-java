@@ -36,7 +36,7 @@ public class TankController implements KeyListener {
         }
 
         if (controls.get(e.getKeyCode()) == Key.action) {
-            this.tank1.toggleRightPressed();
+            this.tank1.toggleActionPressed();
         }
     }
 
@@ -57,7 +57,7 @@ public class TankController implements KeyListener {
         }
 
         if (controls.get(e.getKeyCode()) == Key.action) {
-            this.tank1.unToggleRightPressed();
+            this.tank1.unToggleActionPressed();
         }
     }
 
