@@ -57,21 +57,6 @@ public class Vector2D {
         this.y += scalar;
     }
 
-    public void subtract(int scalar) {
-        this.x -= scalar;
-        this.y -= scalar;
-    }
-
-    public void multiply(int scalar) {
-        this.x *= scalar;
-        this.y *= scalar;
-    }
-
-    public void divide(int scalar) {
-        this.x /= scalar;
-        this.y /= scalar;
-    }
-
     public void add(int x, int y) {
         this.x += x;
         this.y += y;
@@ -80,36 +65,6 @@ public class Vector2D {
     public void add(Vector2D vec) {
         this.x += vec.x;
         this.y += vec.y;
-    }
-
-    public void subtract(int x, int y) {
-        this.x += x;
-        this.y += y;
-    }
-
-    public void subtract(Vector2D vec) {
-        this.x -= vec.x;
-        this.y -= vec.y;
-    }
-
-    public void multiply(int x, int y) {
-        this.x += x;
-        this.y += y;
-    }
-
-    public void multiply(Vector2D vec) {
-        this.x *= vec.x;
-        this.y *= vec.y;
-    }
-
-    public void divide(int x, int y) {
-        this.x /= x;
-        this.y /= y;
-    }
-
-    public void divide(Vector2D vec) {
-        this.x /= vec.x;
-        this.y /= vec.y;
     }
 
     @Override
