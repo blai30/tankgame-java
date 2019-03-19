@@ -20,22 +20,24 @@ public class Game extends JPanel {
     private Tank tank2;
 
     private static void setControls() {
+        // Player 1
         controls1.put(KeyEvent.VK_UP, Key.up);
         controls1.put(KeyEvent.VK_DOWN, Key.down);
         controls1.put(KeyEvent.VK_LEFT, Key.left);
         controls1.put(KeyEvent.VK_RIGHT, Key.right);
-        controls1.put(KeyEvent.VK_SLASH, Key.fire);
+        controls1.put(KeyEvent.VK_SLASH, Key.action);
 
+        // Player 2
         controls2.put(KeyEvent.VK_W, Key.up);
         controls2.put(KeyEvent.VK_S, Key.down);
         controls2.put(KeyEvent.VK_A, Key.left);
         controls2.put(KeyEvent.VK_D, Key.right);
-        controls2.put(KeyEvent.VK_F, Key.fire);
+        controls2.put(KeyEvent.VK_F, Key.action);
     }
 
     private void init() {
-        TankController ctrlTank1 = new TankController(tank1, controls1);
-        TankController ctrlTank2 = new TankController(tank2, controls2);
+        TankController tankController1 = new TankController(tank1, controls1);
+        TankController tankController2 = new TankController(tank2, controls2);
 
         this.screen.setLayout(new BorderLayout());
         this.screen.add(this);
