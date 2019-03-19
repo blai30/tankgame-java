@@ -4,8 +4,8 @@ package util;
 
 public class Vector2D {
 
-    private int x;
-    private int y;
+    private float x;
+    private float y;
 
     public Vector2D() {
         this.x = 0;
@@ -22,19 +22,19 @@ public class Vector2D {
         this.y = vec.y;
     }
 
-    public int getX() {
+    public float getX() {
         return this.x;
     }
 
-    public int getY() {
+    public float getY() {
         return this.y;
     }
 
-    public void setX(int newX) {
+    public void setX(float newX) {
         this.x = newX;
     }
 
-    public void setY(int newY) {
+    public void setY(float newY) {
         this.y = newY;
     }
 
@@ -42,7 +42,7 @@ public class Vector2D {
         return (this.x == vec.x) && (this.y == vec.y);
     }
 
-    public void set(int newX, int newY) {
+    public void set(float newX, float newY) {
         this.x = newX;
         this.y = newY;
     }
@@ -52,12 +52,12 @@ public class Vector2D {
         this.y = vec.y;
     }
 
-    public void add(int scalar) {
+    public void add(float scalar) {
         this.x += scalar;
         this.y += scalar;
     }
 
-    public void add(int x, int y) {
+    public void add(float x, float y) {
         this.x += x;
         this.y += y;
     }
