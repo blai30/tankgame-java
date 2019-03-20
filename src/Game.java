@@ -54,12 +54,14 @@ public class Game extends JPanel {
 
         BufferedImage sprTank1 = null;
         BufferedImage sprTank2 = null;
+        Image icon = null;
 
         // Loading sprites
         try {
             System.out.println(System.getProperty("user.dir"));
             sprTank1 = ImageIO.read(Game.class.getResourceAsStream("resources/tank1.png"));
             sprTank2 = ImageIO.read(Game.class.getResourceAsStream("resources/tank2.png"));
+            icon = ImageIO.read(Game.class.getResourceAsStream("resources/icon.png"));
         } catch (IOException e) {
             System.out.println("IOException: cannot read image file");
             e.printStackTrace();
@@ -74,6 +76,7 @@ public class Game extends JPanel {
         this.screen.addKeyListener(tankController2);
 
         // Setting JFrame properties
+        this.screen.setIconImage(icon);
         this.screen.setLayout(new BorderLayout());
         this.screen.add(this);
         this.screen.setSize(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);

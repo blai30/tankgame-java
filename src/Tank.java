@@ -8,10 +8,6 @@ import java.awt.image.BufferedImage;
 
 public class Tank extends GameObject {
 
-    private Vector2D position;
-    private Vector2D move;
-    private float angle;
-
     private float moveSpeed;
     private float fireRate;
     private int damage;
@@ -20,16 +16,14 @@ public class Tank extends GameObject {
 
     private final float ROTATIONSPEED = 1.2f;
 
-    private BufferedImage sprite;
     private boolean UpPressed;
     private boolean DownPressed;
     private boolean LeftPressed;
     private boolean RightPressed;
     private boolean ActionPressed;
 
-    public Tank(Vector2D pos, float angle, BufferedImage sprite) {
+    Tank(Vector2D pos, float angle, BufferedImage sprite) {
         // Set properties
-        this.move = new Vector2D();
         this.position = pos;
         this.angle = angle;
         this.sprite = sprite;
@@ -91,15 +85,15 @@ public class Tank extends GameObject {
     }
 
     private void moveForwards() {
-        this.move.setX((float) (this.moveSpeed * Math.cos(Math.toRadians(this.angle))));
-        this.move.setY((float) (this.moveSpeed * Math.sin(Math.toRadians(this.angle))));
-        this.position.add(move);
+        float vx = (float) (this.moveSpeed * Math.cos(Math.toRadians(this.angle)));
+        float vy = (float) (this.moveSpeed * Math.sin(Math.toRadians(this.angle)));
+        this.position.move(vx, vy);
     }
 
     private void moveBackwards() {
-        this.move.setX((float) -(this.moveSpeed * Math.cos(Math.toRadians(this.angle))));
-        this.move.setY((float) -(this.moveSpeed * Math.sin(Math.toRadians(this.angle))));
-        this.position.add(move);
+        float vx = (float) -(this.moveSpeed * Math.cos(Math.toRadians(this.angle)));
+        float vy = (float) -(this.moveSpeed * Math.sin(Math.toRadians(this.angle)));
+        this.position.move(vx, vy);
     }
 
     private void fire() {
@@ -109,6 +103,7 @@ public class Tank extends GameObject {
         }
     }
 
+    @Override
     public void update() {
         // Movement
         if (this.UpPressed) {
@@ -130,9 +125,10 @@ public class Tank extends GameObject {
         }
     }
 
+    @Override
     public void drawImage(Graphics g) {
         AffineTransform rotation = AffineTransform.getTranslateInstance(this.position.getX(), this.position.getY());
-        rotation.rotate(Math.toRadians(angle), this.sprite.getWidth() / 2.0, this.sprite.getHeight() / 2.0);
+        rotation.rotate(Math.toRadians(this.angle), this.sprite.getWidth() / 2.0, this.sprite.getHeight() / 2.0);
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(this.sprite, rotation, null);
     }
