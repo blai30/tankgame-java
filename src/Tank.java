@@ -104,7 +104,7 @@ public class Tank extends GameObject {
     private void fire() {
         if (this.maxBullets > 0) {
             this.bullet = new Bullet(this.position, this.angle, this.sprBullet, this.damage);
-            Scene.add(this.bullet);
+            Game.add(this.bullet);
             this.maxBullets--;
         }
     }

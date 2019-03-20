@@ -27,6 +27,8 @@ public class Game extends JPanel {
     private static HashMap<Integer, Key> controls1;
     private static HashMap<Integer, Key> controls2;
 
+    public static ArrayList<GameObject> gameObjects;
+
     private void setControls() {
         controls1 = new HashMap<>();
         controls2 = new HashMap<>();
@@ -48,6 +50,7 @@ public class Game extends JPanel {
 
     private void init() {
         running = true;
+        gameObjects = new ArrayList<>();
 
         // Creating game window
         this.window = new JFrame("Tank Game");
@@ -64,6 +67,8 @@ public class Game extends JPanel {
             System.out.println(System.getProperty("user.dir"));
             sprTank1 = ImageIO.read(Game.class.getResourceAsStream("resources/tank1.png"));
             sprTank2 = ImageIO.read(Game.class.getResourceAsStream("resources/tank2.png"));
+            sprBullet1 = ImageIO.read(Game.class.getResourceAsStream("resources/bullet1.png"));
+            sprBullet2 = ImageIO.read(Game.class.getResourceAsStream("resources/bullet2.png"));
             icon = ImageIO.read(Game.class.getResourceAsStream("resources/icon.png"));
         } catch (IOException e) {
             System.out.println("IOException: cannot read image file");
@@ -87,6 +92,10 @@ public class Game extends JPanel {
         this.window.setLocationRelativeTo(null);
         this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.window.setVisible(true);
+    }
+
+    public static void add(GameObject newObj) {
+        gameObjects.add(newObj);
     }
 
     public static void main(String[] args) {
@@ -118,7 +127,7 @@ public class Game extends JPanel {
 
         this.tank1.drawSprite(buffer);
         this.tank2.drawSprite(buffer);
-        for (GameObject obj : Scene.getGameObjects()) {
+        for (GameObject obj : gameObjects) {
             obj.drawSprite(buffer);
         }
         g2.drawImage(world,0,0,null);
