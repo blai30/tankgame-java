@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Game extends JPanel {
@@ -54,6 +55,8 @@ public class Game extends JPanel {
 
         BufferedImage sprTank1 = null;
         BufferedImage sprTank2 = null;
+        BufferedImage sprBullet1 = null;
+        BufferedImage sprBullet2 = null;
         Image icon = null;
 
         // Loading sprites
@@ -68,8 +71,8 @@ public class Game extends JPanel {
         }
 
         // Instantiating tanks
-        this.tank1 = new Tank(new Vector2D(200, 200), 0f, sprTank1);
-        this.tank2 = new Tank(new Vector2D(400, 400), 0f, sprTank2);
+        this.tank1 = new Tank(new Vector2D(200, 200), 0f, sprTank1, sprBullet1);
+        this.tank2 = new Tank(new Vector2D(400, 400), 0f, sprTank2, sprBullet2);
         TankController tankController1 = new TankController(tank1, controls1);
         TankController tankController2 = new TankController(tank2, controls2);
         this.window.addKeyListener(tankController1);
@@ -97,7 +100,7 @@ public class Game extends JPanel {
                 game.tank1.update();
                 game.tank2.update();
                 game.repaint();
-                System.out.println("\\u001B[31m[Tank1] " + game.tank1);
+                System.out.println("[Tank1] " + game.tank1);
                 System.out.println("[Tank2] " + game.tank2);
                 System.out.println();
                 Thread.sleep(1000 / 144);
@@ -115,6 +118,9 @@ public class Game extends JPanel {
 
         this.tank1.drawSprite(buffer);
         this.tank2.drawSprite(buffer);
+        for (GameObject obj : Scene.getGameObjects()) {
+            obj.drawSprite(buffer);
+        }
         g2.drawImage(world,0,0,null);
         buffer.clearRect(0, 0, getWidth(), getHeight());
     }

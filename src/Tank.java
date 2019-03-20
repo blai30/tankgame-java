@@ -11,6 +11,7 @@ public class Tank extends GameObject {
     private final float ROTATION_SPEED = 1.2f;
 
     private Bullet bullet;
+    private BufferedImage sprBullet;
 
     private float moveSpeed;
     private float fireRate;
@@ -24,11 +25,13 @@ public class Tank extends GameObject {
     private boolean RightPressed;
     private boolean ActionPressed;
 
-    Tank(Vector2D pos, float angle, BufferedImage sprite) {
+    Tank(Vector2D pos, float angle, BufferedImage sprite, BufferedImage sprBullet) {
         // Set properties
         this.position = pos;
         this.angle = angle;
         this.sprite = sprite;
+
+        this.sprBullet = sprBullet;
 
         // Default stats
         this.moveSpeed = 1.2f;
@@ -100,7 +103,8 @@ public class Tank extends GameObject {
 
     private void fire() {
         if (this.maxBullets > 0) {
-            // TODO: shoot a bullet with fireRate and damage
+            this.bullet = new Bullet(this.position, this.angle, this.sprBullet, this.damage);
+            Scene.add(this.bullet);
             this.maxBullets--;
         }
     }
