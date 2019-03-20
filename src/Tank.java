@@ -14,7 +14,7 @@ public class Tank extends GameObject {
     private int armor;
     private int maxBullets;
 
-    private final float ROTATIONSPEED = 1.2f;
+    private final float ROTATION_SPEED = 1.2f;
 
     private boolean UpPressed;
     private boolean DownPressed;
@@ -77,11 +77,11 @@ public class Tank extends GameObject {
     }
 
     private void rotateRight() {
-        this.angle += this.ROTATIONSPEED;
+        this.angle += this.ROTATION_SPEED;
     }
 
     private void rotateLeft() {
-        this.angle -= this.ROTATIONSPEED;
+        this.angle -= this.ROTATION_SPEED;
     }
 
     private void moveForwards() {
