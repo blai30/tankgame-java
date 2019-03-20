@@ -28,11 +28,13 @@ public class Tank {
     private boolean ActionPressed;
 
     public Tank(Vector2D pos, float angle, BufferedImage sprite) {
+        // Set properties
         this.move = new Vector2D();
         this.position = pos;
         this.angle = angle;
         this.sprite = sprite;
 
+        // Default stats
         this.moveSpeed = 1.2f;
         this.fireRate = 1.0f;
         this.damage = 1;

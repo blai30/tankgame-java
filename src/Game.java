@@ -18,27 +18,27 @@ public class Game extends JPanel {
 
     private static boolean running = false;
 
-    private static HashMap<Integer, Key> controls1;
-    private static HashMap<Integer, Key> controls2;
-
     private BufferedImage world;
     private Graphics2D buffer;
     private JFrame screen;
+
     private Tank tank1;
     private Tank tank2;
+    private static HashMap<Integer, Key> controls1;
+    private static HashMap<Integer, Key> controls2;
 
     private void setControls() {
         controls1 = new HashMap<>();
         controls2 = new HashMap<>();
 
-        // Player 1
+        // Set Player 1 controls
         controls1.put(KeyEvent.VK_UP, Key.up);
         controls1.put(KeyEvent.VK_DOWN, Key.down);
         controls1.put(KeyEvent.VK_LEFT, Key.left);
         controls1.put(KeyEvent.VK_RIGHT, Key.right);
         controls1.put(KeyEvent.VK_SLASH, Key.action);
 
-        // Player 2
+        // Set Player 2 controls
         controls2.put(KeyEvent.VK_W, Key.up);
         controls2.put(KeyEvent.VK_S, Key.down);
         controls2.put(KeyEvent.VK_A, Key.left);
@@ -49,11 +49,14 @@ public class Game extends JPanel {
     private void init() {
         running = true;
 
+        // Creating game window
         this.screen = new JFrame("Tank Game");
         this.world = new BufferedImage(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
+
         BufferedImage sprTank1 = null;
         BufferedImage sprTank2 = null;
 
+        // Loading sprites
         try {
             System.out.println(System.getProperty("user.dir"));
             sprTank1 = ImageIO.read(Game.class.getResourceAsStream("resources/tank1.png"));
@@ -63,15 +66,15 @@ public class Game extends JPanel {
             e.printStackTrace();
         }
 
+        // Instantiating tanks
         this.tank1 = new Tank(new Vector2D(200, 200), 0f, sprTank1);
         this.tank2 = new Tank(new Vector2D(400, 400), 0f, sprTank2);
-
         TankController tankController1 = new TankController(tank1, controls1);
         TankController tankController2 = new TankController(tank2, controls2);
-
         this.screen.addKeyListener(tankController1);
         this.screen.addKeyListener(tankController2);
 
+        // Setting JFrame properties
         this.screen.setLayout(new BorderLayout());
         this.screen.add(this);
         this.screen.setSize(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
