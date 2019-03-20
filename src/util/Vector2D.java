@@ -38,10 +38,6 @@ public class Vector2D {
         this.y = newY;
     }
 
-    public boolean equals(Vector2D vec) {
-        return (this.x == vec.x) && (this.y == vec.y);
-    }
-
     public void set(float newX, float newY) {
         this.x = newX;
         this.y = newY;
@@ -52,19 +48,23 @@ public class Vector2D {
         this.y = vec.y;
     }
 
-    public void add(float scalar) {
+    public void move(float scalar) {
         this.x += scalar;
         this.y += scalar;
     }
 
-    public void add(float x, float y) {
+    public void move(float x, float y) {
         this.x += x;
         this.y += y;
     }
 
-    public void add(Vector2D vec) {
+    public void move(Vector2D vec) {
         this.x += vec.x;
         this.y += vec.y;
+    }
+
+    public boolean equals(Vector2D vec) {
+        return (this.x == vec.x) && (this.y == vec.y);
     }
 
     @Override
