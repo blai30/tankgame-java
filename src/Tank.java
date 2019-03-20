@@ -8,13 +8,15 @@ import java.awt.image.BufferedImage;
 
 public class Tank extends GameObject {
 
+    private final float ROTATION_SPEED = 1.2f;
+
+    private Bullet bullet;
+
     private float moveSpeed;
     private float fireRate;
     private int damage;
     private int armor;
     private int maxBullets;
-
-    private final float ROTATION_SPEED = 1.2f;
 
     private boolean UpPressed;
     private boolean DownPressed;
@@ -123,14 +125,6 @@ public class Tank extends GameObject {
         if (this.ActionPressed) {
             this.fire();
         }
-    }
-
-    @Override
-    public void drawImage(Graphics g) {
-        AffineTransform rotation = AffineTransform.getTranslateInstance(this.position.getX(), this.position.getY());
-        rotation.rotate(Math.toRadians(this.angle), this.sprite.getWidth() / 2.0, this.sprite.getHeight() / 2.0);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(this.sprite, rotation, null);
     }
 
     @Override
