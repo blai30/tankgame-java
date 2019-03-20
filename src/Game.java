@@ -111,11 +111,7 @@ public class Game extends JPanel {
         this.tank1.drawImage(buffer);
         this.tank2.drawImage(buffer);
         g2.drawImage(world,0,0,null);
-    }
-
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
+        buffer.clearRect(0, 0, getWidth(), getHeight());
     }
 
 }
