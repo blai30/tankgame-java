@@ -19,7 +19,7 @@ public class Game extends JPanel {
 
     private BufferedImage world;
     private Graphics2D buffer;
-    private JFrame screen;
+    private JFrame window;
 
     private Tank tank1;
     private Tank tank2;
@@ -49,7 +49,7 @@ public class Game extends JPanel {
         running = true;
 
         // Creating game window
-        this.screen = new JFrame("Tank Game");
+        this.window = new JFrame("Tank Game");
         this.world = new BufferedImage(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
 
         BufferedImage sprTank1 = null;
@@ -72,18 +72,18 @@ public class Game extends JPanel {
         this.tank2 = new Tank(new Vector2D(400, 400), 0f, sprTank2);
         TankController tankController1 = new TankController(tank1, controls1);
         TankController tankController2 = new TankController(tank2, controls2);
-        this.screen.addKeyListener(tankController1);
-        this.screen.addKeyListener(tankController2);
+        this.window.addKeyListener(tankController1);
+        this.window.addKeyListener(tankController2);
 
         // Setting JFrame properties
-        this.screen.setIconImage(icon);
-        this.screen.setLayout(new BorderLayout());
-        this.screen.add(this);
-        this.screen.setSize(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
-        this.screen.setResizable(false);
-        this.screen.setLocationRelativeTo(null);
-        this.screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.screen.setVisible(true);
+        this.window.setIconImage(icon);
+        this.window.setLayout(new BorderLayout());
+        this.window.add(this);
+        this.window.setSize(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
+        this.window.setResizable(false);
+        this.window.setLocationRelativeTo(null);
+        this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.window.setVisible(true);
     }
 
     public static void main(String[] args) {
@@ -97,7 +97,7 @@ public class Game extends JPanel {
                 game.tank1.update();
                 game.tank2.update();
                 game.repaint();
-                System.out.println("[Tank1] " + game.tank1);
+                System.out.println("\\u001B[31m[Tank1] " + game.tank1);
                 System.out.println("[Tank2] " + game.tank2);
                 System.out.println();
                 Thread.sleep(1000 / 144);
@@ -113,8 +113,8 @@ public class Game extends JPanel {
         buffer = world.createGraphics();
         super.paintComponent(g2);
 
-        this.tank1.drawImage(buffer);
-        this.tank2.drawImage(buffer);
+        this.tank1.drawSprite(buffer);
+        this.tank2.drawSprite(buffer);
         g2.drawImage(world,0,0,null);
         buffer.clearRect(0, 0, getWidth(), getHeight());
     }
