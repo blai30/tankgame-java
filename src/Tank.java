@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
-public class Tank {
+public class Tank extends GameObject {
 
     private Vector2D position;
     private Vector2D move;
@@ -18,7 +18,7 @@ public class Tank {
     private int armor;
     private int maxBullets;
 
-    private final float ROTATIONSPEED = 1.5f;
+    private final float ROTATIONSPEED = 1.2f;
 
     private BufferedImage sprite;
     private boolean UpPressed;

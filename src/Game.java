@@ -1,7 +1,6 @@
 
 
-import util.Key;
-import util.Vector2D;
+import util.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
