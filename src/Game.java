@@ -113,4 +113,9 @@ public class Game extends JPanel {
         g2.drawImage(world,0,0,null);
     }
 
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+    }
+
 }

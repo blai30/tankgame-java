@@ -9,8 +9,7 @@ import java.awt.image.BufferedImage;
 public class Tank {
 
     private Vector2D position;
-    private float vx;
-    private float vy;
+    private Vector2D move;
     private float angle;
 
     private float moveSpeed;
@@ -29,6 +28,7 @@ public class Tank {
     private boolean ActionPressed;
 
     public Tank(Vector2D pos, float angle, BufferedImage sprite) {
+        this.move = new Vector2D();
         this.position = pos;
         this.angle = angle;
         this.sprite = sprite;
@@ -89,15 +89,15 @@ public class Tank {
     }
 
     private void moveForwards() {
-        vx = (float) (this.moveSpeed * Math.cos(Math.toRadians(this.angle)));
-        vy = (float) (this.moveSpeed * Math.sin(Math.toRadians(this.angle)));
-        position.add(vx, vy);
+        this.move.setX((float) (this.moveSpeed * Math.cos(Math.toRadians(this.angle))));
+        this.move.setY((float) (this.moveSpeed * Math.sin(Math.toRadians(this.angle))));
+        this.position.add(move);
     }
 
     private void moveBackwards() {
-        vx = (float) (this.moveSpeed * Math.cos(Math.toRadians(this.angle)));
-        vy = (float) (this.moveSpeed * Math.sin(Math.toRadians(this.angle)));
-        position.add(-vx, -vy);
+        this.move.setX((float) -(this.moveSpeed * Math.cos(Math.toRadians(this.angle))));
+        this.move.setY((float) -(this.moveSpeed * Math.sin(Math.toRadians(this.angle))));
+        this.position.add(move);
     }
 
     private void fire() {
@@ -108,25 +108,28 @@ public class Tank {
     }
 
     public void update() {
+        // Movement
         if (this.UpPressed) {
             this.moveForwards();
         } else if (this.DownPressed) {
             this.moveBackwards();
         }
 
+        // Rotation
         if (this.LeftPressed) {
             this.rotateLeft();
         } else if (this.RightPressed) {
             this.rotateRight();
         }
 
+        // Weapon
         if (this.ActionPressed) {
             this.fire();
         }
     }
 
     public void drawImage(Graphics g) {
-        AffineTransform rotation = AffineTransform.getTranslateInstance(position.getX(), position.getY());
+        AffineTransform rotation = AffineTransform.getTranslateInstance(this.position.getX(), this.position.getY());
         rotation.rotate(Math.toRadians(angle), this.sprite.getWidth() / 2.0, this.sprite.getHeight() / 2.0);
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(this.sprite, rotation, null);
@@ -134,7 +137,7 @@ public class Tank {
 
     @Override
     public String toString() {
-        return "Position: " + position + ", Angle: " + angle;
+        return "Position: " + this.position + ", Angle: " + this.angle;
     }
 
 }

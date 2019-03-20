@@ -21,7 +21,9 @@ public class TankController implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        // Print key pressed
         System.out.println(e.paramString());
+
         if (controls.get(e.getKeyCode()) == Key.up) {
             this.tank1.toggleUpPressed();
         }
@@ -43,7 +45,9 @@ public class TankController implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        // Print key released
         System.out.println(e.paramString());
+
         if (controls.get(e.getKeyCode()) == Key.up) {
             this.tank1.unToggleUpPressed();
         }
