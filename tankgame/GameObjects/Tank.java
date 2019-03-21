@@ -32,6 +32,21 @@ public class Tank extends Player {
         this.maxBullets = 5;
     }
 
+    public Tank(float xPosition, float yPosition, float rotation, BufferedImage sprite, BufferedImage sprBullet) {
+        // Set properties
+        this.transform = new Transform(xPosition, yPosition, rotation);
+        this.sprite = sprite;
+
+        this.sprBullet = sprBullet;
+
+        // Default stats
+        this.moveSpeed = 1.4f;
+        this.fireRate = 1.0f;
+        this.damage = 1;
+        this.armor = 1;
+        this.maxBullets = 5;
+    }
+
     private void rotateRight() {
         this.transform.rotate(this.ROTATION_SPEED);
     }
@@ -74,12 +89,8 @@ public class Tank extends Player {
         // Weapon
         if (this.ActionPressed) {
             this.fire();
+            this.ActionPressed = false;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Position: " + this.transform.getPosition() + ", Angle: " + this.transform.getRotation();
     }
 
 }

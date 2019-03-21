@@ -20,6 +20,11 @@ public class Transform {
         this.rotation = rotation;
     }
 
+    public Transform(float xPosition, float yPosition, float rotation) {
+        this.position = new Vector2D(xPosition, yPosition);
+        this.rotation = rotation;
+    }
+
     public Vector2D getPosition() {
         return this.position;
     }

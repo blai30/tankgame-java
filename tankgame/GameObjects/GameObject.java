@@ -26,6 +26,11 @@ public abstract class GameObject {
         g2d.drawImage(this.sprite, rotation, null);
     }
 
+    @Override
+    public String toString() {
+        return "[" + this.getClass().getSimpleName() + "] " + "Position: " + this.transform.getPosition() + ", Angle: " + this.transform.getRotation();
+    }
+
     public abstract void update();
 
 
