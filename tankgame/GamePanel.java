@@ -1,6 +1,6 @@
 
 
-import GameObjects.GameObject;
+import GameObjects.GameObjectCollection;
 import GameObjects.Tank;
 import util.*;
 
@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -64,7 +63,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.running = true;
         this.setControls();
         this.world = new BufferedImage(GamePanel.SCREEN_WIDTH, GamePanel.SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
-        GameObject.init();
+        GameObjectCollection.init();
 
         BufferedImage sprTank1 = null;
         BufferedImage sprTank2 = null;
@@ -90,8 +89,8 @@ public class GamePanel extends JPanel implements Runnable {
         TankController tankController2 = new TankController(tank2, controls2);
         this.addKeyListener(tankController1);
         this.addKeyListener(tankController2);
-        GameObject.spawn(tank1);
-        GameObject.spawn(tank2);
+        GameObjectCollection.spawn(tank1);
+        GameObjectCollection.spawn(tank2);
     }
 
     @Override
@@ -105,9 +104,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     private void update() {
         try {
-            for (int i = 0; i < GameObject.numGameObjects(); i++) {
-                GameObject.getGameObject(i).update();
-                System.out.println(GameObject.getGameObject(i));
+            for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
+                GameObjectCollection.getGameObject(i).update();
+                System.out.println(GameObjectCollection.getGameObject(i));
             }
             System.out.println();
             this.repaint();
@@ -123,8 +122,8 @@ public class GamePanel extends JPanel implements Runnable {
         buffer = world.createGraphics();
         super.paintComponent(g2);
 
-        for (int i = 0; i < GameObject.numGameObjects(); i++) {
-            GameObject.getGameObject(i).drawSprite(buffer);
+        for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
+            GameObjectCollection.getGameObject(i).drawSprite(buffer);
         }
         g2.drawImage(world,0,0,null);
         buffer.clearRect(0, 0, getWidth(), getHeight());
