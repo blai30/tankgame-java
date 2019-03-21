@@ -45,6 +45,11 @@ public class Transform {
 
     // Negative scalar for left rotation
     public void rotate(float scalar) {
+        if (this.rotation >= 360.0f) {
+            this.rotation -= 360.0f;
+        } else if (this.rotation <= 0.0f) {
+            this.rotation += 360.0f;
+        }
         this.rotation += scalar;
     }
 
