@@ -76,8 +76,8 @@ public class Game extends JPanel {
         }
 
         // Instantiating tanks
-        this.tank1 = new Tank(new Vector2D(200, 200), 0f, sprTank1, sprBullet1);
-        this.tank2 = new Tank(new Vector2D(400, 400), 0f, sprTank2, sprBullet2);
+        this.tank1 = new Tank(new Transform(new Vector2D(200, 200), 0f), sprTank1, sprBullet1);
+        this.tank2 = new Tank(new Transform(new Vector2D(400, 400), 0f), sprTank2, sprBullet2);
         TankController tankController1 = new TankController(tank1, controls1);
         TankController tankController2 = new TankController(tank2, controls2);
         this.window.addKeyListener(tankController1);

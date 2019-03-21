@@ -6,11 +6,11 @@ import java.util.HashMap;
 
 public class TankController implements KeyListener {
 
-    private Controllable gameObject;
+    private Tank tank;
     private HashMap<Integer, Key> controls;
 
-    public TankController(Controllable obj, HashMap<Integer, Key> controls) {
-        this.gameObject = obj;
+    public TankController(Tank obj, HashMap<Integer, Key> controls) {
+        this.tank = obj;
         this.controls = controls;
     }
 
@@ -25,21 +25,21 @@ public class TankController implements KeyListener {
         System.out.println(e.paramString());
 
         if (controls.get(e.getKeyCode()) == Key.up) {
-            this.gameObject.toggleUpPressed();
+            this.tank.toggleUpPressed();
         }
         if (controls.get(e.getKeyCode()) == Key.down) {
-            this.gameObject.toggleDownPressed();
+            this.tank.toggleDownPressed();
         }
 
         if (controls.get(e.getKeyCode()) == Key.left) {
-            this.gameObject.toggleLeftPressed();
+            this.tank.toggleLeftPressed();
         }
         if (controls.get(e.getKeyCode()) == Key.right) {
-            this.gameObject.toggleRightPressed();
+            this.tank.toggleRightPressed();
         }
 
         if (controls.get(e.getKeyCode()) == Key.action) {
-            this.gameObject.toggleActionPressed();
+            this.tank.toggleActionPressed();
         }
     }
 
@@ -49,21 +49,21 @@ public class TankController implements KeyListener {
         System.out.println(e.paramString());
 
         if (controls.get(e.getKeyCode()) == Key.up) {
-            this.gameObject.unToggleUpPressed();
+            this.tank.unToggleUpPressed();
         }
         if (controls.get(e.getKeyCode()) == Key.down) {
-            this.gameObject.unToggleDownPressed();
+            this.tank.unToggleDownPressed();
         }
 
         if (controls.get(e.getKeyCode()) == Key.left) {
-            this.gameObject.unToggleLeftPressed();
+            this.tank.unToggleLeftPressed();
         }
         if (controls.get(e.getKeyCode()) == Key.right) {
-            this.gameObject.unToggleRightPressed();
+            this.tank.unToggleRightPressed();
         }
 
         if (controls.get(e.getKeyCode()) == Key.action) {
-            this.gameObject.unToggleActionPressed();
+            this.tank.unToggleActionPressed();
         }
     }
 
