@@ -1,14 +1,13 @@
 
 
-import util.Vector2D;
+import util.Transform;
 
 import java.awt.image.BufferedImage;
 
-public class Tank extends Controllable {
+public class Tank extends Player {
 
     private final float ROTATION_SPEED = 1.2f;
 
-    private Bullet bullet;
     private BufferedImage sprBullet;
 
     private float moveSpeed;
@@ -17,10 +16,9 @@ public class Tank extends Controllable {
     private int armor;
     private int maxBullets;
 
-    Tank(Vector2D pos, float angle, BufferedImage sprite, BufferedImage sprBullet) {
+    Tank(Transform transform, BufferedImage sprite, BufferedImage sprBullet) {
         // Set properties
-        this.position = pos;
-        this.angle = angle;
+        this.transform = transform;
         this.sprite = sprite;
 
         this.sprBullet = sprBullet;
@@ -34,29 +32,25 @@ public class Tank extends Controllable {
     }
 
     private void rotateRight() {
-        this.angle += this.ROTATION_SPEED;
+        this.transform.rotate(this.ROTATION_SPEED);
     }
 
     private void rotateLeft() {
-        this.angle -= this.ROTATION_SPEED;
+        this.transform.rotate(-this.ROTATION_SPEED);
     }
 
     private void moveForwards() {
-        float vx = (float) (this.moveSpeed * Math.cos(Math.toRadians(this.angle)));
-        float vy = (float) (this.moveSpeed * Math.sin(Math.toRadians(this.angle)));
-        this.position.move(vx, vy);
+        this.transform.move(this.moveSpeed);
     }
 
     private void moveBackwards() {
-        float vx = (float) -(this.moveSpeed * Math.cos(Math.toRadians(this.angle)));
-        float vy = (float) -(this.moveSpeed * Math.sin(Math.toRadians(this.angle)));
-        this.position.move(vx, vy);
+        this.transform.move(-this.moveSpeed);
     }
 
     private void fire() {
         if (this.maxBullets > 0) {
-            this.bullet = new Bullet(this.position, this.angle, this.sprBullet, this.damage);
-            Game.add(this.bullet);
+            Bullet bullet = new Bullet(new Transform(this.transform), this.sprBullet, this.damage);
+            Game.add(bullet);
             this.maxBullets--;
         }
     }
@@ -85,7 +79,7 @@ public class Tank extends Controllable {
 
     @Override
     public String toString() {
-        return "Position: " + this.position + ", Angle: " + this.angle;
+        return "Position: " + this.transform.getPosition() + ", Angle: " + this.transform.getRotation();
     }
 
 }
