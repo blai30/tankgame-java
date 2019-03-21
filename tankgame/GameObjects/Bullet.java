@@ -9,7 +9,7 @@ public class Bullet extends GameObject {
     private int damage;
     private float velocity;
 
-    Bullet(Transform transform, BufferedImage sprite, int damage) {
+    public Bullet(Transform transform, BufferedImage sprite, int damage) {
         this.transform = transform;
         this.sprite = sprite;
 
