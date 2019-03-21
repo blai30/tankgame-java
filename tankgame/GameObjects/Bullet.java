@@ -6,14 +6,14 @@ import java.awt.image.BufferedImage;
 
 public class Bullet extends GameObject {
 
-    private int damage;
+    private int baseDamage = 1;
     private float velocity;
 
     public Bullet(BufferedImage sprite, int damage) {
         this.transform = new Transform();
         this.sprite = sprite;
 
-        this.damage = damage;
+        this.baseDamage += damage;
         this.velocity = 3.0f;
     }
 
@@ -21,7 +21,7 @@ public class Bullet extends GameObject {
         this.transform = transform;
         this.sprite = sprite;
 
-        this.damage = damage;
+        this.baseDamage += damage;
         this.velocity = 3.0f;
     }
 

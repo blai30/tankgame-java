@@ -10,9 +10,10 @@ public class Tank extends Player {
 
     private BufferedImage sprBullet;
 
+    private int hitPoints;
     private float moveSpeed;
     private float fireRate;
-    private int damage;
+    private int bonusDamage;
     private int armor;
     private int maxBullets;
 
@@ -24,9 +25,10 @@ public class Tank extends Player {
         this.sprBullet = sprBullet;
 
         // Default stats
+        this.hitPoints = 10;
         this.moveSpeed = 1.4f;
         this.fireRate = 1.0f;
-        this.damage = 1;
+        this.bonusDamage = 0;
         this.armor = 1;
         this.maxBullets = 5;
     }
@@ -39,9 +41,10 @@ public class Tank extends Player {
         this.sprBullet = sprBullet;
 
         // Default stats
+        this.hitPoints = 10;
         this.moveSpeed = 1.4f;
         this.fireRate = 1.0f;
-        this.damage = 1;
+        this.bonusDamage = 0;
         this.armor = 1;
         this.maxBullets = 5;
     }
@@ -64,7 +67,7 @@ public class Tank extends Player {
 
     private void fire() {
         if (this.maxBullets > 0) {
-            this.instantiate(new Bullet(this.sprBullet, this.damage), this.transform);
+            this.instantiate(new Bullet(this.sprBullet, this.bonusDamage), this.transform);
             this.maxBullets--;
         }
     }
