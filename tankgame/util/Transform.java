@@ -11,12 +11,12 @@ public class Transform {
     }
 
     public Transform(Transform transform) {
-        this.position = transform.position;
+        this.position = new Vector2D(transform.getPosition());
         this.rotation = transform.rotation;
     }
 
     public Transform(Vector2D position, float rotation) {
-        this.position = position;
+        this.position = new Vector2D(position);
         this.rotation = rotation;
     }
 

@@ -1,6 +1,7 @@
 package GameObjects;
 
 import util.Transform;
+import util.Vector2D;
 
 import java.awt.image.BufferedImage;
 
@@ -49,7 +50,7 @@ public class Tank extends Player {
 
     private void fire() {
         if (this.maxBullets > 0) {
-            Bullet bullet = new Bullet(new Transform(this.transform), this.sprBullet, this.damage);
+            Bullet bullet = new Bullet(this.transform, this.sprBullet, this.damage);
 //            GamePanel.add(bullet);
             this.maxBullets--;
         }

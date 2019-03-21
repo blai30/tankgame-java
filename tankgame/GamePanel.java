@@ -110,6 +110,9 @@ public class GamePanel extends JPanel implements Runnable {
         try {
             this.tank1.update();
             this.tank2.update();
+            for (GameObject obj : gameObjects) {
+                obj.update();
+            }
             this.repaint();
             System.out.println("[Tank1] " + this.tank1);
             System.out.println("[Tank2] " + this.tank2);
