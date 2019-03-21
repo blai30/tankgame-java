@@ -133,8 +133,8 @@ public class GamePanel extends JPanel implements Runnable {
         buffer = world.createGraphics();
         super.paintComponent(g2);
 
-        this.tank1.drawSprite(buffer);
         this.tank2.drawSprite(buffer);
+        this.tank1.drawSprite(buffer);
         for (GameObject obj : gameObjects) {
             obj.drawSprite(buffer);
         }

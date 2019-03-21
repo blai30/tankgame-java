@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 public class Tank extends Player {
 
-    private final float ROTATION_SPEED = 1.2f;
+    private final float ROTATION_SPEED = 1.4f;
 
     private BufferedImage sprBullet;
 
@@ -25,7 +25,7 @@ public class Tank extends Player {
         this.sprBullet = sprBullet;
 
         // Default stats
-        this.moveSpeed = 1.2f;
+        this.moveSpeed = 1.4f;
         this.fireRate = 1.0f;
         this.damage = 1;
         this.armor = 1;
