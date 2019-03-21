@@ -1,5 +1,7 @@
 
 
+import GameObjects.GameObject;
+import GameObjects.Tank;
 import util.*;
 
 import javax.imageio.ImageIO;
@@ -33,14 +35,14 @@ public class Game extends JPanel {
         controls1 = new HashMap<>();
         controls2 = new HashMap<>();
 
-        // Set Player 1 controls
+        // Set GameObjects.Player 1 controls
         controls1.put(KeyEvent.VK_UP, Key.up);
         controls1.put(KeyEvent.VK_DOWN, Key.down);
         controls1.put(KeyEvent.VK_LEFT, Key.left);
         controls1.put(KeyEvent.VK_RIGHT, Key.right);
         controls1.put(KeyEvent.VK_SLASH, Key.action);
 
-        // Set Player 2 controls
+        // Set GameObjects.Player 2 controls
         controls2.put(KeyEvent.VK_W, Key.up);
         controls2.put(KeyEvent.VK_S, Key.down);
         controls2.put(KeyEvent.VK_A, Key.left);
@@ -53,7 +55,7 @@ public class Game extends JPanel {
         gameObjects = new ArrayList<>();
 
         // Creating game window
-        this.window = new JFrame("Tank Game");
+        this.window = new JFrame("GameObjects.Tank Game");
         this.world = new BufferedImage(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
 
         BufferedImage sprTank1 = null;

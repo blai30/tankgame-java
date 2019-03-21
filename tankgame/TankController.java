@@ -1,3 +1,4 @@
+import GameObjects.Tank;
 import util.Key;
 
 import java.awt.event.KeyEvent;

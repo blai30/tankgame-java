@@ -1,3 +1,5 @@
+package GameObjects;
+
 public abstract class Player extends GameObject {
 
     boolean UpPressed = false;
@@ -6,43 +8,43 @@ public abstract class Player extends GameObject {
     boolean RightPressed = false;
     boolean ActionPressed = false;
 
-    void toggleUpPressed() {
+    public void toggleUpPressed() {
         this.UpPressed = true;
     }
 
-    void toggleDownPressed() {
+    public void toggleDownPressed() {
         this.DownPressed = true;
     }
 
-    void toggleLeftPressed() {
+    public void toggleLeftPressed() {
         this.LeftPressed = true;
     }
 
-    void toggleRightPressed() {
+    public void toggleRightPressed() {
         this.RightPressed = true;
     }
 
-    void toggleActionPressed() {
+    public void toggleActionPressed() {
         this.ActionPressed = true;
     }
 
-    void unToggleUpPressed() {
+    public void unToggleUpPressed() {
         this.UpPressed = false;
     }
 
-    void unToggleDownPressed() {
+    public void unToggleDownPressed() {
         this.DownPressed = false;
     }
 
-    void unToggleLeftPressed() {
+    public void unToggleLeftPressed() {
         this.LeftPressed = false;
     }
 
-    void unToggleRightPressed() {
+    public void unToggleRightPressed() {
         this.RightPressed = false;
     }
 
-    void unToggleActionPressed() {
+    public void unToggleActionPressed() {
         this.ActionPressed = false;
     }
 

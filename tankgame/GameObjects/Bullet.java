@@ -1,7 +1,6 @@
-
+package GameObjects;
 
 import util.Transform;
-import util.Vector2D;
 
 import java.awt.image.BufferedImage;
 

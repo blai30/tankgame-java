@@ -1,4 +1,4 @@
-
+package GameObjects;
 
 import util.Transform;
 
@@ -16,7 +16,7 @@ public class Tank extends Player {
     private int armor;
     private int maxBullets;
 
-    Tank(Transform transform, BufferedImage sprite, BufferedImage sprBullet) {
+    public Tank(Transform transform, BufferedImage sprite, BufferedImage sprBullet) {
         // Set properties
         this.transform = transform;
         this.sprite = sprite;
@@ -50,7 +50,7 @@ public class Tank extends Player {
     private void fire() {
         if (this.maxBullets > 0) {
             Bullet bullet = new Bullet(new Transform(this.transform), this.sprBullet, this.damage);
-            Game.add(bullet);
+//            Game.add(bullet);
             this.maxBullets--;
         }
     }
