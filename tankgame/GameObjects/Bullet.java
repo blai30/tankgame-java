@@ -14,7 +14,7 @@ public class Bullet extends GameObject {
         this.sprite = sprite;
 
         this.damage = damage;
-        this.velocity = 2.0f;
+        this.velocity = 3.0f;
     }
 
     public Bullet(Transform transform, BufferedImage sprite, int damage) {
@@ -22,7 +22,7 @@ public class Bullet extends GameObject {
         this.sprite = sprite;
 
         this.damage = damage;
-        this.velocity = 2.0f;
+        this.velocity = 3.0f;
     }
 
     @Override
