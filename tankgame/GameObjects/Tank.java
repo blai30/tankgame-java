@@ -50,8 +50,7 @@ public class Tank extends Player {
 
     private void fire() {
         if (this.maxBullets > 0) {
-            Bullet bullet = new Bullet(this.transform, this.sprBullet, this.damage);
-//            GamePanel.add(bullet);
+            this.instantiate(new Bullet(this.sprBullet, this.damage), this.transform);
             this.maxBullets--;
         }
     }

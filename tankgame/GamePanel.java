@@ -24,10 +24,6 @@ public class GamePanel extends JPanel implements Runnable {
     private BufferedImage world;
     private Graphics2D buffer;
 
-    public static ArrayList<GameObject> gameObjects;
-
-    private Tank tank1;
-    private Tank tank2;
     private static HashMap<Integer, Key> controls1;
     private static HashMap<Integer, Key> controls2;
 
@@ -68,6 +64,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.running = true;
         this.setControls();
         this.world = new BufferedImage(GamePanel.SCREEN_WIDTH, GamePanel.SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
+        GameObject.init();
 
         BufferedImage sprTank1 = null;
         BufferedImage sprTank2 = null;
@@ -86,15 +83,15 @@ public class GamePanel extends JPanel implements Runnable {
             e.printStackTrace();
         }
 
-        gameObjects = new ArrayList<>();
-
         // Instantiating tanks
-        this.tank1 = new Tank(new Transform(new Vector2D(200, 200), 0f), sprTank1, sprBullet1);
-        this.tank2 = new Tank(new Transform(new Vector2D(400, 400), 0f), sprTank2, sprBullet2);
+        Tank tank1 = new Tank(new Transform(new Vector2D(200, 200), 0f), sprTank1, sprBullet1);
+        Tank tank2 = new Tank(new Transform(new Vector2D(400, 400), 0f), sprTank2, sprBullet2);
         TankController tankController1 = new TankController(tank1, controls1);
         TankController tankController2 = new TankController(tank2, controls2);
         this.addKeyListener(tankController1);
         this.addKeyListener(tankController2);
+        GameObject.spawn(tank1);
+        GameObject.spawn(tank2);
     }
 
     @Override
@@ -108,23 +105,14 @@ public class GamePanel extends JPanel implements Runnable {
 
     private void update() {
         try {
-            this.tank1.update();
-            this.tank2.update();
-            for (GameObject obj : gameObjects) {
-                obj.update();
+            for (int i = 0; i < GameObject.numGameObjects(); i++) {
+                GameObject.getGameObject(i).update();
             }
             this.repaint();
-            System.out.println("[Tank1] " + this.tank1);
-            System.out.println("[Tank2] " + this.tank2);
-            System.out.println();
             Thread.sleep(1000 / 144);
         } catch (InterruptedException ignored) {
 
         }
-    }
-
-    public static void add(GameObject newObj) {
-        gameObjects.add(newObj);
     }
 
     @Override
@@ -133,10 +121,8 @@ public class GamePanel extends JPanel implements Runnable {
         buffer = world.createGraphics();
         super.paintComponent(g2);
 
-        this.tank2.drawSprite(buffer);
-        this.tank1.drawSprite(buffer);
-        for (GameObject obj : gameObjects) {
-            obj.drawSprite(buffer);
+        for (int i = 0; i < GameObject.numGameObjects(); i++) {
+            GameObject.getGameObject(i).drawSprite(buffer);
         }
         g2.drawImage(world,0,0,null);
         buffer.clearRect(0, 0, getWidth(), getHeight());

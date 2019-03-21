@@ -11,12 +11,12 @@ public class Transform {
     }
 
     public Transform(Transform transform) {
-        this.position = new Vector2D(transform.getPosition());
+        this.position = transform.getPosition();
         this.rotation = transform.rotation;
     }
 
     public Transform(Vector2D position, float rotation) {
-        this.position = new Vector2D(position);
+        this.position = position;
         this.rotation = rotation;
     }
 
@@ -34,6 +34,11 @@ public class Transform {
 
     public float getRotation() {
         return this.rotation;
+    }
+
+    public void setTransform(Transform location) {
+        this.position.set(location.getPositionX(), location.getPositionY());
+        this.rotation = location.getRotation();
     }
 
     // Negative scalar for backwards movement

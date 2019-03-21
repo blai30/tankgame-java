@@ -2,11 +2,11 @@ package GameObjects;
 
 public abstract class Player extends GameObject {
 
-    boolean UpPressed = false;
-    boolean DownPressed = false;
-    boolean LeftPressed = false;
-    boolean RightPressed = false;
-    boolean ActionPressed = false;
+    protected boolean UpPressed = false;
+    protected boolean DownPressed = false;
+    protected boolean LeftPressed = false;
+    protected boolean RightPressed = false;
+    protected boolean ActionPressed = false;
 
     public void toggleUpPressed() {
         this.UpPressed = true;

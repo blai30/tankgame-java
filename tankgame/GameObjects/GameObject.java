@@ -6,12 +6,18 @@ import util.Vector2D;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public abstract class GameObject {
 
-    BufferedImage sprite;
-    Transform transform;
+    protected BufferedImage sprite;
+    protected Transform transform;
     // TODO: collider
+
+    public void instantiate(GameObject spawnObj, Transform location) {
+        spawnObj.transform.setTransform(location);
+        add(spawnObj);
+    }
 
     public void drawSprite(Graphics g) {
         AffineTransform rotation = AffineTransform.getTranslateInstance(this.transform.getPositionX(), this.transform.getPositionY());
@@ -21,5 +27,33 @@ public abstract class GameObject {
     }
 
     public abstract void update();
+
+
+
+    private static ArrayList<GameObject> gameObjects;
+
+    public static void init() {
+        gameObjects = new ArrayList<>();
+    }
+
+    private static void add(GameObject instantiatedObj) {
+        gameObjects.add(instantiatedObj);
+    }
+
+    public static void spawn(GameObject obj) {
+        gameObjects.add(obj);
+    }
+
+    public static ArrayList<GameObject> getGameObjects() {
+        return gameObjects;
+    }
+
+    public static int numGameObjects() {
+        return gameObjects.size();
+    }
+
+    public static GameObject getGameObject(int index) {
+        return gameObjects.get(index);
+    }
 
 }

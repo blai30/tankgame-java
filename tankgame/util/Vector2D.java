@@ -12,7 +12,7 @@ public class Vector2D {
         this.y = 0;
     }
 
-    public Vector2D(int xValue, int yValue) {
+    public Vector2D(float xValue, float yValue) {
         this.x = xValue;
         this.y = yValue;
     }
