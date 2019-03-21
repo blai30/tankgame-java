@@ -7,13 +7,8 @@ import java.io.IOException;
 
 public class GameWindow extends JFrame {
 
-    public static final int SCREEN_WIDTH = 1280;
-    public static final int SCREEN_HEIGHT = 960;
-
-    private JPanel gameView;
-
     public GameWindow() {
-        this.setTitle("Tank Game");
+        this.setTitle("Tank GamePanel");
 
         Image icon = null;
         try {
@@ -25,24 +20,12 @@ public class GameWindow extends JFrame {
         }
         this.setIconImage(icon);
 
-        this.setLayout(new BorderLayout());
-        this.gameView = new JPanel(this.getLayout());
-        this.add(this.gameView);
-
-        this.setSize(GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT);
+        this.setContentPane(new GamePanel());
+        this.setSize(GamePanel.SCREEN_WIDTH, GamePanel.SCREEN_HEIGHT);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        GameWindow gameWindow = new GameWindow();
-        Game game = new Game(gameWindow);
-
-        while (game.isRunning()) {
-            game.update();
-        }
     }
 
 }

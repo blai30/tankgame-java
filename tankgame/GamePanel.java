@@ -13,19 +13,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Game extends JPanel {
+public class GamePanel extends JPanel implements Runnable {
 
+    public static final int SCREEN_WIDTH = 1280;
+    public static final int SCREEN_HEIGHT = 960;
+
+    private Thread thread;
     private boolean running = false;
 
     private BufferedImage world;
     private Graphics2D buffer;
+
+    public static ArrayList<GameObject> gameObjects;
 
     private Tank tank1;
     private Tank tank2;
     private static HashMap<Integer, Key> controls1;
     private static HashMap<Integer, Key> controls2;
 
-    public static ArrayList<GameObject> gameObjects;
+    public GamePanel() {
+        this.setFocusable(true);
+        this.requestFocus();
+    }
 
     private void setControls() {
         controls1 = new HashMap<>();
@@ -46,13 +55,19 @@ public class Game extends JPanel {
         controls2.put(KeyEvent.VK_F, Key.action);
     }
 
-    public Game(GameWindow gameWindow) {
-        running = true;
+    public void addNotify() {
+        super.addNotify();
 
+        if (this.thread == null) {
+            this.thread = new Thread(this, "GameThread");
+            this.thread.start();
+        }
+    }
+
+    private void init() {
+        this.running = true;
         this.setControls();
-        gameObjects = new ArrayList<>();
-
-        this.world = new BufferedImage(GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
+        this.world = new BufferedImage(GamePanel.SCREEN_WIDTH, GamePanel.SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
 
         BufferedImage sprTank1 = null;
         BufferedImage sprTank2 = null;
@@ -62,33 +77,36 @@ public class Game extends JPanel {
         // Loading sprites
         try {
             System.out.println(System.getProperty("user.dir"));
-            sprTank1 = ImageIO.read(Game.class.getResourceAsStream("resources/tank1.png"));
-            sprTank2 = ImageIO.read(Game.class.getResourceAsStream("resources/tank2.png"));
-            sprBullet1 = ImageIO.read(Game.class.getResourceAsStream("resources/bullet1.png"));
-            sprBullet2 = ImageIO.read(Game.class.getResourceAsStream("resources/bullet2.png"));
+            sprTank1 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/tank1.png"));
+            sprTank2 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/tank2.png"));
+            sprBullet1 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bullet1.png"));
+            sprBullet2 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bullet2.png"));
         } catch (IOException e) {
             System.out.println("IOException: cannot read image file");
             e.printStackTrace();
         }
+
+        gameObjects = new ArrayList<>();
 
         // Instantiating tanks
         this.tank1 = new Tank(new Transform(new Vector2D(200, 200), 0f), sprTank1, sprBullet1);
         this.tank2 = new Tank(new Transform(new Vector2D(400, 400), 0f), sprTank2, sprBullet2);
         TankController tankController1 = new TankController(tank1, controls1);
         TankController tankController2 = new TankController(tank2, controls2);
-        gameWindow.addKeyListener(tankController1);
-        gameWindow.addKeyListener(tankController2);
+        this.addKeyListener(tankController1);
+        this.addKeyListener(tankController2);
     }
 
-    public static void add(GameObject newObj) {
-        gameObjects.add(newObj);
+    @Override
+    public void run() {
+        this.init();
+
+        while (this.running) {
+            this.update();
+        }
     }
 
-    public boolean isRunning() {
-        return this.running;
-    }
-
-    public void update() {
+    private void update() {
         try {
             this.tank1.update();
             this.tank2.update();
@@ -102,23 +120,9 @@ public class Game extends JPanel {
         }
     }
 
-//    public static void main(String[] args) {
-//        Thread thread;
-//
-//        try {
-//            while (running) {
-//                game.tank1.update();
-//                game.tank2.update();
-//                game.repaint();
-//                System.out.println("[Tank1] " + game.tank1);
-//                System.out.println("[Tank2] " + game.tank2);
-//                System.out.println();
-//                Thread.sleep(1000 / 144);
-//            }
-//        } catch (InterruptedException ignored) {
-//
-//        }
-//    }
+    public static void add(GameObject newObj) {
+        gameObjects.add(newObj);
+    }
 
     @Override
     public void paintComponent(Graphics g) {
