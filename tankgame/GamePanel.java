@@ -85,8 +85,8 @@ public class GamePanel extends JPanel implements Runnable {
         // Instantiating tanks
         Tank tank1 = new Tank(200, 200, 0f, sprTank1, sprBullet1);
         Tank tank2 = new Tank(400, 400, 0f, sprTank2, sprBullet2);
-        TankController tankController1 = new TankController(tank1, controls1);
-        TankController tankController2 = new TankController(tank2, controls2);
+        PlayerController tankController1 = new PlayerController(tank1, controls1);
+        PlayerController tankController2 = new PlayerController(tank2, controls2);
         this.addKeyListener(tankController1);
         this.addKeyListener(tankController2);
         GameObjectCollection.spawn(tank1);
