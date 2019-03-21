@@ -102,7 +102,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    private void update() {
+    private synchronized void update() {
         try {
             for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
                 GameObjectCollection.getGameObject(i).update();

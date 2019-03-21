@@ -12,7 +12,8 @@ public abstract class GameObject {
     protected Transform transform;
     // TODO: collider
 
-    // To be called by other game objects, this method will spawn a game object
+    // To be called by other game objects
+    // This method will spawn a game object at location
     protected void instantiate(GameObject spawnObj, Transform location) {
         spawnObj.transform.setTransform(location);
         GameObjectCollection.add(spawnObj);
