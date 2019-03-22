@@ -19,7 +19,7 @@ public abstract class GameObject {
         GameObjectCollection.spawn(spawnObj);
     }
 
-    public void drawSprite(Graphics g) {
+    public void drawImage(Graphics g) {
         AffineTransform rotation = AffineTransform.getTranslateInstance(this.transform.getPositionX(), this.transform.getPositionY());
         rotation.rotate(Math.toRadians(this.transform.getRotation()), this.sprite.getWidth() / 2.0, this.sprite.getHeight() / 2.0);
         Graphics2D g2d = (Graphics2D) g;

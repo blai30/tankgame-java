@@ -123,7 +123,7 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g2);
 
         for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
-            GameObjectCollection.getGameObject(i).drawSprite(this.buffer);
+            GameObjectCollection.getGameObject(i).drawImage(this.buffer);
         }
         g2.drawImage(this.world,0,0,null);
         this.buffer.clearRect(0, 0, getWidth(), getHeight());
