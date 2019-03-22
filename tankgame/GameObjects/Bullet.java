@@ -2,6 +2,7 @@ package GameObjects;
 
 import util.Transform;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Bullet extends GameObject {
@@ -28,6 +29,11 @@ public class Bullet extends GameObject {
     @Override
     public void update() {
         this.transform.move(this.velocity);
+    }
+
+    @Override
+    public void drawGizmos(Graphics g) {
+        // TODO draw collider box and data members
     }
 
 }

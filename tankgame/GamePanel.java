@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Thread thread;
     private boolean running = false;
+    private boolean drawGizmos = true;
 
     private BufferedImage background;
     private BufferedImage world;
@@ -134,6 +135,9 @@ public class GamePanel extends JPanel implements Runnable {
         // Draw GameObjects
         for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
             GameObjectCollection.getGameObject(i).drawImage(this.buffer);
+            if (this.drawGizmos) {
+                GameObjectCollection.getGameObject(i).drawGizmos(this.buffer);
+            }
         }
 
         g2.drawImage(this.world,0,0,null);
