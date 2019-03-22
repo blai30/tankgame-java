@@ -66,10 +66,10 @@ public class Tank extends Player {
     }
 
     private void fire() {
-        if (this.ammo > 0) {
+//        if (this.ammo > 0) {
             this.instantiate(new Bullet(this.sprBullet, this.bonusDamage), this.transform);
             this.ammo--;
-        }
+//        }
     }
 
     @Override

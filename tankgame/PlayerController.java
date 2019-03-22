@@ -25,21 +25,21 @@ public class PlayerController implements KeyListener {
         // Print key pressed
         System.out.println(e.paramString());
 
-        if (controls.get(e.getKeyCode()) == Key.up) {
+        if (this.controls.get(e.getKeyCode()) == Key.up) {
             this.player.toggleUpPressed();
         }
-        if (controls.get(e.getKeyCode()) == Key.down) {
+        if (this.controls.get(e.getKeyCode()) == Key.down) {
             this.player.toggleDownPressed();
         }
 
-        if (controls.get(e.getKeyCode()) == Key.left) {
+        if (this.controls.get(e.getKeyCode()) == Key.left) {
             this.player.toggleLeftPressed();
         }
-        if (controls.get(e.getKeyCode()) == Key.right) {
+        if (this.controls.get(e.getKeyCode()) == Key.right) {
             this.player.toggleRightPressed();
         }
 
-        if (controls.get(e.getKeyCode()) == Key.action) {
+        if (this.controls.get(e.getKeyCode()) == Key.action) {
             this.player.toggleActionPressed();
         }
     }
@@ -49,21 +49,21 @@ public class PlayerController implements KeyListener {
         // Print key released
         System.out.println(e.paramString());
 
-        if (controls.get(e.getKeyCode()) == Key.up) {
+        if (this.controls.get(e.getKeyCode()) == Key.up) {
             this.player.unToggleUpPressed();
         }
-        if (controls.get(e.getKeyCode()) == Key.down) {
+        if (this.controls.get(e.getKeyCode()) == Key.down) {
             this.player.unToggleDownPressed();
         }
 
-        if (controls.get(e.getKeyCode()) == Key.left) {
+        if (this.controls.get(e.getKeyCode()) == Key.left) {
             this.player.unToggleLeftPressed();
         }
-        if (controls.get(e.getKeyCode()) == Key.right) {
+        if (this.controls.get(e.getKeyCode()) == Key.right) {
             this.player.unToggleRightPressed();
         }
 
-        if (controls.get(e.getKeyCode()) == Key.action) {
+        if (this.controls.get(e.getKeyCode()) == Key.action) {
             this.player.unToggleActionPressed();
         }
     }

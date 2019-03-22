@@ -14,8 +14,8 @@ import java.util.HashMap;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    public static final int SCREEN_WIDTH = 1280;
-    public static final int SCREEN_HEIGHT = 960;
+    public static final int SCREEN_WIDTH = 1600;
+    public static final int SCREEN_HEIGHT = 900;
 
     private Thread thread;
     private boolean running = false;
