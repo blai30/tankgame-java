@@ -99,10 +99,14 @@ public class Tank extends Player {
     @Override
     public void drawGizmos(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-//        g2d.drawLine((int) this.transform.getPositionX(), (int) this.transform.getPositionY(), (int) this.transform.getRotation(), (int) this.transform.getRotation());
-        g2d.drawString(super.toString(), this.transform.getPositionX(), this.transform.getPositionY() - 32);
-        g2d.drawString("Hit Points: " + this.hitPoints, this.transform.getPositionX(), this.transform.getPositionY() - 20);
-        g2d.drawString("Move Speed: " + this.moveSpeed, this.transform.getPositionX(), this.transform.getPositionY() - 8);
+
+        float originX = this.transform.getPositionX() + ((float) this.sprite.getWidth() / 2);
+        float originY = this.transform.getPositionY() + ((float) this.sprite.getHeight() / 2);
+        float toX = (float) (5000 * Math.cos(Math.toRadians(this.transform.getRotation())));
+        float toY = (float) (5000 * Math.sin(Math.toRadians(this.transform.getRotation())));
+        g2d.drawLine((int) originX, (int) originY, (int) (originX + toX), (int) (originY + toY));
+
+        g2d.drawString("hitPoints: " + this.hitPoints, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 60);
     }
 
 }

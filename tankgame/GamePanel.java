@@ -136,6 +136,7 @@ public class GamePanel extends JPanel implements Runnable {
         for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
             GameObjectCollection.getGameObject(i).drawImage(this.buffer);
             if (this.drawGizmos) {
+                GameObjectCollection.getGameObject(i).drawTransform(this.buffer);
                 GameObjectCollection.getGameObject(i).drawGizmos(this.buffer);
             }
         }
