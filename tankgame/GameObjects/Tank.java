@@ -15,7 +15,7 @@ public class Tank extends Player {
     private float fireRate;
     private int bonusDamage;
     private int armor;
-    private int maxBullets;
+    private int ammo;
 
     public Tank(Transform transform, BufferedImage sprite, BufferedImage sprBullet) {
         // Set properties
@@ -30,7 +30,7 @@ public class Tank extends Player {
         this.fireRate = 1.0f;
         this.bonusDamage = 0;
         this.armor = 1;
-        this.maxBullets = 5;
+        this.ammo = 5;
     }
 
     public Tank(float xPosition, float yPosition, float rotation, BufferedImage sprite, BufferedImage sprBullet) {
@@ -46,7 +46,7 @@ public class Tank extends Player {
         this.fireRate = 1.0f;
         this.bonusDamage = 0;
         this.armor = 1;
-        this.maxBullets = 5;
+        this.ammo = 5;
     }
 
     private void rotateRight() {
@@ -66,9 +66,9 @@ public class Tank extends Player {
     }
 
     private void fire() {
-        if (this.maxBullets > 0) {
+        if (this.ammo > 0) {
             this.instantiate(new Bullet(this.sprBullet, this.bonusDamage), this.transform);
-            this.maxBullets--;
+            this.ammo--;
         }
     }
 
