@@ -20,6 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
     private Thread thread;
     private boolean running = false;
 
+    private BufferedImage background;
     private BufferedImage world;
     private Graphics2D buffer;
 
@@ -73,6 +74,7 @@ public class GamePanel extends JPanel implements Runnable {
         // Loading sprites
         try {
             System.out.println(System.getProperty("user.dir"));
+            background = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bg.jpg"));
             sprTank1 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/tank1.png"));
             sprTank2 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/tank2.png"));
             sprBullet1 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bullet1.png"));
@@ -122,9 +124,18 @@ public class GamePanel extends JPanel implements Runnable {
         this.buffer = this.world.createGraphics();
         super.paintComponent(g2);
 
+        // Draw background
+        for (int i = 0; i < SCREEN_WIDTH; i += this.background.getTileWidth()) {
+            for (int j = 0; j < SCREEN_HEIGHT; j += this.background.getTileHeight()) {
+                this.buffer.drawImage(this.background, i, j, null);
+            }
+        }
+
+        // Draw GameObjects
         for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
             GameObjectCollection.getGameObject(i).drawImage(this.buffer);
         }
+
         g2.drawImage(this.world,0,0,null);
         this.buffer.clearRect(0, 0, getWidth(), getHeight());
     }
