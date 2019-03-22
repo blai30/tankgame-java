@@ -78,14 +78,16 @@ public class Tank extends Player {
         // Movement
         if (this.UpPressed) {
             this.moveForwards();
-        } else if (this.DownPressed) {
+        }
+        if (this.DownPressed) {
             this.moveBackwards();
         }
 
         // Rotation
         if (this.LeftPressed) {
             this.rotateLeft();
-        } else if (this.RightPressed) {
+        }
+        if (this.RightPressed) {
             this.rotateRight();
         }
 
@@ -100,6 +102,7 @@ public class Tank extends Player {
     public void drawGizmos(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
+        // Draw aim line
         float originX = this.transform.getPositionX() + ((float) this.sprite.getWidth() / 2);
         float originY = this.transform.getPositionY() + ((float) this.sprite.getHeight() / 2);
         float toX = (float) (5000 * Math.cos(Math.toRadians(this.transform.getRotation())));
