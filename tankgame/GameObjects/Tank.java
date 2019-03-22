@@ -101,8 +101,8 @@ public class Tank extends Player {
         Graphics2D g2d = (Graphics2D) g;
 //        g2d.drawLine((int) this.transform.getPositionX(), (int) this.transform.getPositionY(), (int) this.transform.getRotation(), (int) this.transform.getRotation());
         g2d.drawString(super.toString(), this.transform.getPositionX(), this.transform.getPositionY() - 32);
-        g2d.drawString("Hit Points: " + String.valueOf(this.hitPoints), this.transform.getPositionX(), this.transform.getPositionY() - 20);
-        g2d.drawString("Move Speed: " + String.valueOf(this.moveSpeed), this.transform.getPositionX(), this.transform.getPositionY() - 8);
+        g2d.drawString("Hit Points: " + this.hitPoints, this.transform.getPositionX(), this.transform.getPositionY() - 20);
+        g2d.drawString("Move Speed: " + this.moveSpeed, this.transform.getPositionX(), this.transform.getPositionY() - 8);
     }
 
 }
