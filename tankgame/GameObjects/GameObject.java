@@ -24,6 +24,7 @@ public abstract class GameObject {
         rotation.rotate(Math.toRadians(this.transform.getRotation()), this.sprite.getWidth() / 2.0, this.sprite.getHeight() / 2.0);
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(this.sprite, rotation, null);
+//        g2d.drawLine((int) this.transform.getPositionX(), (int) this.transform.getPositionY(), (int) this.transform.getRotation(), (int) this.transform.getRotation());
     }
 
     @Override
