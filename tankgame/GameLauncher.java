@@ -13,7 +13,7 @@ public class GameLauncher {
 
 class GameWindow extends JFrame {
 
-    public GameWindow() {
+    GameWindow() {
         this.setTitle("Tank Game by Brian Lai");
 
         try {

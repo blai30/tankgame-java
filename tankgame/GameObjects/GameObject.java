@@ -16,7 +16,7 @@ public abstract class GameObject {
     // This method will spawn a game object at location
     protected void instantiate(GameObject spawnObj, Transform location) {
         spawnObj.transform.setTransform(location);
-        GameObjectCollection.add(spawnObj);
+        GameObjectCollection.spawn(spawnObj);
     }
 
     public void drawSprite(Graphics g) {

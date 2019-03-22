@@ -119,14 +119,14 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        buffer = world.createGraphics();
+        this.buffer = this.world.createGraphics();
         super.paintComponent(g2);
 
         for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
-            GameObjectCollection.getGameObject(i).drawSprite(buffer);
+            GameObjectCollection.getGameObject(i).drawSprite(this.buffer);
         }
-        g2.drawImage(world,0,0,null);
-        buffer.clearRect(0, 0, getWidth(), getHeight());
+        g2.drawImage(this.world,0,0,null);
+        this.buffer.clearRect(0, 0, getWidth(), getHeight());
     }
 
 }
