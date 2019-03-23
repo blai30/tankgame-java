@@ -27,7 +27,7 @@ public class Tank extends Player {
 
         // Default stats
         this.hitPoints = 10;
-        this.moveSpeed = 1.4f;
+        this.moveSpeed = 2.2f;
         this.fireRate = 1.0f;
         this.bonusDamage = 0;
         this.armor = 1;
@@ -43,7 +43,7 @@ public class Tank extends Player {
 
         // Default stats
         this.hitPoints = 10;
-        this.moveSpeed = 1.4f;
+        this.moveSpeed = 2.2f;
         this.fireRate = 1.0f;
         this.bonusDamage = 0;
         this.armor = 1;
