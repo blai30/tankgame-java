@@ -31,6 +31,13 @@ public class GamePanel extends JPanel implements Runnable {
     public GamePanel() {
         this.setFocusable(true);
         this.requestFocus();
+
+        try {
+            background = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bg.jpg"));
+        } catch (IOException e) {
+            System.out.println("IOException: cannot read image file");
+            e.printStackTrace();
+        }
     }
 
     private void setControls() {
@@ -75,7 +82,6 @@ public class GamePanel extends JPanel implements Runnable {
         // Loading sprites
         try {
             System.out.println(System.getProperty("user.dir"));
-            background = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bg.jpg"));
             sprTank1 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/tank1.png"));
             sprTank2 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/tank2.png"));
             sprBullet1 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bullet1.png"));
@@ -88,12 +94,12 @@ public class GamePanel extends JPanel implements Runnable {
         // Instantiating tanks
         Tank tank1 = new Tank(200, 200, 0f, sprTank1, sprBullet1);
         Tank tank2 = new Tank(400, 400, 0f, sprTank2, sprBullet2);
+        this.camera1 = new Camera(tank1, this.world);
+        this.camera2 = new Camera(tank2, this.world);
         PlayerController tankController1 = new PlayerController(tank1, controls1);
         PlayerController tankController2 = new PlayerController(tank2, controls2);
         this.addKeyListener(tankController1);
         this.addKeyListener(tankController2);
-//        this.camera1 = new Camera(tank1);
-//        this.camera2 = new Camera(tank2);
         GameObjectCollection.spawn(tank1);
         GameObjectCollection.spawn(tank2);
     }
@@ -128,8 +134,8 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g2);
 
         // Draw background
-        for (int i = 0; i < GameWindow.SCREEN_WIDTH; i += this.background.getTileWidth()) {
-            for (int j = 0; j < GameWindow.SCREEN_HEIGHT; j += this.background.getTileHeight()) {
+        for (int i = 0; i < GameWindow.SCREEN_WIDTH; i += this.background.getWidth()) {
+            for (int j = 0; j < GameWindow.SCREEN_HEIGHT; j += this.background.getHeight()) {
                 this.buffer.drawImage(this.background, i, j, null);
             }
         }
