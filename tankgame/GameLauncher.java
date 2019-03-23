@@ -13,6 +13,9 @@ public class GameLauncher {
 
 class GameWindow extends JFrame {
 
+    public static final int SCREEN_WIDTH = 1600;
+    public static final int SCREEN_HEIGHT = 900;
+
     GameWindow() {
         this.setTitle("Tank Game by Brian Lai");
 
@@ -25,8 +28,10 @@ class GameWindow extends JFrame {
             e.printStackTrace();
         }
 
-        this.setContentPane(new GamePanel());
-        this.setSize(GamePanel.SCREEN_WIDTH, GamePanel.SCREEN_HEIGHT);
+        this.setLayout(new BorderLayout());
+        this.add(new GamePanel(), BorderLayout.CENTER);
+        this.add(new GameHUD(), BorderLayout.PAGE_END);
+        this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

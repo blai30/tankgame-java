@@ -14,9 +14,6 @@ import java.util.HashMap;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    public static final int SCREEN_WIDTH = 1600;
-    public static final int SCREEN_HEIGHT = 900;
-
     private Thread thread;
     private boolean running = false;
     private boolean drawGizmos = true;
@@ -27,6 +24,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     private static HashMap<Integer, Key> controls1;
     private static HashMap<Integer, Key> controls2;
+
+    private Camera camera1;
+    private Camera camera2;
 
     public GamePanel() {
         this.setFocusable(true);
@@ -64,7 +64,7 @@ public class GamePanel extends JPanel implements Runnable {
     private void init() {
         this.running = true;
         this.setControls();
-        this.world = new BufferedImage(GamePanel.SCREEN_WIDTH, GamePanel.SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
+        this.world = new BufferedImage(2048, 2048, BufferedImage.TYPE_INT_RGB);
         GameObjectCollection.init();
 
         BufferedImage sprTank1 = null;
@@ -92,6 +92,8 @@ public class GamePanel extends JPanel implements Runnable {
         PlayerController tankController2 = new PlayerController(tank2, controls2);
         this.addKeyListener(tankController1);
         this.addKeyListener(tankController2);
+//        this.camera1 = new Camera(tank1);
+//        this.camera2 = new Camera(tank2);
         GameObjectCollection.spawn(tank1);
         GameObjectCollection.spawn(tank2);
     }
@@ -126,8 +128,8 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g2);
 
         // Draw background
-        for (int i = 0; i < SCREEN_WIDTH; i += this.background.getTileWidth()) {
-            for (int j = 0; j < SCREEN_HEIGHT; j += this.background.getTileHeight()) {
+        for (int i = 0; i < GameWindow.SCREEN_WIDTH; i += this.background.getTileWidth()) {
+            for (int j = 0; j < GameWindow.SCREEN_HEIGHT; j += this.background.getTileHeight()) {
                 this.buffer.drawImage(this.background, i, j, null);
             }
         }

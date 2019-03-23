@@ -105,8 +105,8 @@ public class Tank extends Player {
         // Draw aim line
         float originX = this.transform.getPositionX() + ((float) this.sprite.getWidth() / 2);
         float originY = this.transform.getPositionY() + ((float) this.sprite.getHeight() / 2);
-        float toX = (float) (5000 * Math.cos(Math.toRadians(this.transform.getRotation())));
-        float toY = (float) (5000 * Math.sin(Math.toRadians(this.transform.getRotation())));
+        float toX = (float) (500 * Math.cos(Math.toRadians(this.transform.getRotation())));
+        float toY = (float) (500 * Math.sin(Math.toRadians(this.transform.getRotation())));
         g2d.drawLine((int) originX, (int) originY, (int) (originX + toX), (int) (originY + toY));
 
         g2d.drawString("hitPoints: " + this.hitPoints, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 60);

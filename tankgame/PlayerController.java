@@ -69,3 +69,10 @@ public class PlayerController implements KeyListener {
     }
 
 }
+
+class Camera {
+
+    private final int WIDTH = 600;
+    private final int HEIGHT = 600;
+
+}
