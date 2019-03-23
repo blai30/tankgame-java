@@ -110,6 +110,11 @@ public class Tank extends Player {
         g2d.drawLine((int) originX, (int) originY, (int) (originX + toX), (int) (originY + toY));
 
         g2d.drawString("hitPoints: " + this.hitPoints, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 60);
+        g2d.drawString("moveSpeed: " + this.moveSpeed, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 72);
+        g2d.drawString("fireRate: " + this.fireRate, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 84);
+        g2d.drawString("bonusDamage: " + this.bonusDamage, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 96);
+        g2d.drawString("armor: " + this.armor, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 108);
+        g2d.drawString("ammo: " + this.ammo, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 120);
     }
 
 }

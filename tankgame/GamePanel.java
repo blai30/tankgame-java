@@ -21,7 +21,7 @@ public class GamePanel extends JPanel implements Runnable {
     private boolean running = false;
     private boolean drawGizmos = true;
 
-    private BufferedImage background;
+    private BufferedImage background = null;
     private BufferedImage world;
     private Graphics2D buffer;
 
@@ -105,7 +105,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    private synchronized void update() {
+    private void update() {
         try {
             for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
                 GameObjectCollection.getGameObject(i).update();
