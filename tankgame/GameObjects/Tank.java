@@ -1,6 +1,7 @@
 package GameObjects;
 
 import util.Transform;
+import util.Vector2D;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,6 +23,7 @@ public class Tank extends Player {
         // Set properties
         this.transform = transform;
         this.sprite = sprite;
+        this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
 
         this.sprBullet = sprBullet;
 
@@ -38,6 +40,7 @@ public class Tank extends Player {
         // Set properties
         this.transform = new Transform(xPosition, yPosition, rotation);
         this.sprite = sprite;
+        this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
         this.transform.setOrigin(this.transform.getPositionX() + ((float) this.sprite.getWidth() / 2), this.transform.getPositionY() + ((float) this.sprite.getHeight() / 2));
 
         this.sprBullet = sprBullet;
@@ -106,7 +109,7 @@ public class Tank extends Player {
         // Draw aim line
         float toX = (float) (500 * Math.cos(Math.toRadians(this.transform.getRotation())));
         float toY = (float) (500 * Math.sin(Math.toRadians(this.transform.getRotation())));
-        g2d.drawLine((int) this.transform.getOriginX(), (int) this.transform.getOriginY(), (int) (this.transform.getOriginX() + toX), (int) (this.transform.getOriginY() + toY));
+        g2d.drawLine((int) (this.transform.getPositionX() + this.originOffset.getX()), (int) (this.transform.getPositionY() + this.originOffset.getY()), (int) (this.transform.getPositionX() + this.originOffset.getX() + toX), (int) (this.transform.getPositionY() + this.originOffset.getY() + toY));
 
         g2d.drawString("hitPoints: " + this.hitPoints, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 60);
         g2d.drawString("moveSpeed: " + this.moveSpeed, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 72);

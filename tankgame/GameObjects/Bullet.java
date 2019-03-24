@@ -1,6 +1,7 @@
 package GameObjects;
 
 import util.Transform;
+import util.Vector2D;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,6 +14,7 @@ public class Bullet extends GameObject {
     public Bullet(BufferedImage sprite, int damage) {
         this.transform = new Transform();
         this.sprite = sprite;
+        this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
         this.transform.setOrigin(this.transform.getPositionX() + ((float) this.sprite.getWidth() / 2), this.transform.getPositionY() + ((float) this.sprite.getHeight() / 2));
 
         this.baseDamage += damage;
@@ -22,6 +24,7 @@ public class Bullet extends GameObject {
     public Bullet(Transform transform, BufferedImage sprite, int damage) {
         this.transform = transform;
         this.sprite = sprite;
+        this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
         this.transform.setOrigin((float) (this.sprite.getWidth()), (float) (this.sprite.getHeight()));
 
         this.baseDamage += damage;
