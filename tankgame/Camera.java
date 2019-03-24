@@ -10,9 +10,8 @@ public class Camera {
     private GameObject trackObject;
     private BufferedImage view;
 
-    public Camera(GameObject obj, BufferedImage world) {
+    public Camera(GameObject obj) {
         this.trackObject = obj;
-        this.view = world.getSubimage((int) this.trackObject.getTransform().getPositionX() - (WIDTH / 2), (int) this.trackObject.getTransform().getPositionY() - (HEIGHT / 2), WIDTH, HEIGHT);
     }
 
     public void update(BufferedImage world) {
