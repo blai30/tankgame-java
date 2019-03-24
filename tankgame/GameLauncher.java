@@ -30,7 +30,6 @@ class GameWindow extends JFrame {
 
         this.setLayout(new BorderLayout());
         this.add(new GamePanel(), BorderLayout.CENTER);
-        this.add(new GameHUD(), BorderLayout.PAGE_END);
         this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
