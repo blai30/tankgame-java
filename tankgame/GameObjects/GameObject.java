@@ -1,6 +1,7 @@
 package GameObjects;
 
 import util.Transform;
+import util.Vector2D;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -9,13 +10,18 @@ import java.awt.image.BufferedImage;
 public abstract class GameObject {
 
     protected BufferedImage sprite;
-    protected Transform transform;
+    public Transform transform;
     // TODO: collider
 
     // To be called by other game objects
-    // This method will spawn a game object at location
-    protected void instantiate(GameObject spawnObj, Transform location) {
-        spawnObj.transform.setTransform(location);
+    // This method will spawn a game object centered at location (ie. tank's origin)
+    protected void instantiate(GameObject spawnObj, Vector2D location, float rotation) {
+        // Offset position by origin to align spawnObj's origin with location before spawning
+        float x = spawnObj.transform.getPositionX() - (spawnObj.transform.getOriginX() - location.getX());
+        float y = spawnObj.transform.getPositionX() - (spawnObj.transform.getOriginY() - location.getY());
+        Vector2D spawnPoint = new Vector2D(x, y);
+        spawnObj.transform.setPosition(spawnPoint);
+        spawnObj.transform.setRotation(rotation);
         GameObjectCollection.spawn(spawnObj);
     }
 
