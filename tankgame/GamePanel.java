@@ -31,14 +31,8 @@ public class GamePanel extends JPanel implements Runnable {
     public GamePanel() {
         this.setFocusable(true);
         this.requestFocus();
-
-        // Background is loaded in here because loading in init gives NullPointerException
-        try {
-            background = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bg.jpg"));
-        } catch (IOException e) {
-            System.out.println("IOException: cannot read image file");
-            e.printStackTrace();
-        }
+        this.setControls();
+        this.init();
     }
 
     private void setControls() {
@@ -70,7 +64,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void init() {
-        this.setControls();
         this.world = new BufferedImage(2048, 2048, BufferedImage.TYPE_INT_RGB);
         GameObjectCollection.init();
 
@@ -82,6 +75,7 @@ public class GamePanel extends JPanel implements Runnable {
         // Loading sprites
         try {
             System.out.println(System.getProperty("user.dir"));
+            this.background = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bg.jpg"));
             sprTank1 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/tank1.png"));
             sprTank2 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/tank2.png"));
             sprBullet1 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bullet1.png"));
@@ -108,8 +102,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        this.init();
-
         while (this.running) {
             this.update();
         }
