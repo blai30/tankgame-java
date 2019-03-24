@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-public class GameLauncher {
+class GameLauncher {
 
     public static void main(String[] args) {
         new GameWindow();
@@ -11,7 +11,7 @@ public class GameLauncher {
 
 }
 
-class GameWindow extends JFrame {
+public class GameWindow extends JFrame {
 
     public static final int SCREEN_WIDTH = 1600;
     public static final int SCREEN_HEIGHT = 900;
@@ -28,8 +28,10 @@ class GameWindow extends JFrame {
             e.printStackTrace();
         }
 
+        GamePanel game = new GamePanel();
+
         this.setLayout(new BorderLayout());
-        this.add(new GamePanel(), BorderLayout.CENTER);
+        this.add(game, BorderLayout.CENTER);
         this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
