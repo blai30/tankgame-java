@@ -22,8 +22,8 @@ public class GamePanel extends JPanel implements Runnable {
     private BufferedImage world;
     private Graphics2D buffer;
 
-    private static HashMap<Integer, Key> controls1;
-    private static HashMap<Integer, Key> controls2;
+    private HashMap<Integer, Key> controls1;
+    private HashMap<Integer, Key> controls2;
 
     private Camera camera1;
     private Camera camera2;
@@ -42,22 +42,22 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void setControls() {
-        controls1 = new HashMap<>();
-        controls2 = new HashMap<>();
+        this.controls1 = new HashMap<>();
+        this.controls2 = new HashMap<>();
 
         // Set GameObjects.Player 1 controls
-        controls1.put(KeyEvent.VK_UP, Key.up);
-        controls1.put(KeyEvent.VK_DOWN, Key.down);
-        controls1.put(KeyEvent.VK_LEFT, Key.left);
-        controls1.put(KeyEvent.VK_RIGHT, Key.right);
-        controls1.put(KeyEvent.VK_SLASH, Key.action);
+        this.controls1.put(KeyEvent.VK_UP, Key.up);
+        this.controls1.put(KeyEvent.VK_DOWN, Key.down);
+        this.controls1.put(KeyEvent.VK_LEFT, Key.left);
+        this.controls1.put(KeyEvent.VK_RIGHT, Key.right);
+        this.controls1.put(KeyEvent.VK_SLASH, Key.action);
 
         // Set GameObjects.Player 2 controls
-        controls2.put(KeyEvent.VK_W, Key.up);
-        controls2.put(KeyEvent.VK_S, Key.down);
-        controls2.put(KeyEvent.VK_A, Key.left);
-        controls2.put(KeyEvent.VK_D, Key.right);
-        controls2.put(KeyEvent.VK_F, Key.action);
+        this.controls2.put(KeyEvent.VK_W, Key.up);
+        this.controls2.put(KeyEvent.VK_S, Key.down);
+        this.controls2.put(KeyEvent.VK_A, Key.left);
+        this.controls2.put(KeyEvent.VK_D, Key.right);
+        this.controls2.put(KeyEvent.VK_F, Key.action);
     }
 
     public void addNotify() {
@@ -95,10 +95,10 @@ public class GamePanel extends JPanel implements Runnable {
         // Instantiating tanks
         Tank tank1 = new Tank(800, 800, 0f, sprTank1, sprBullet1);
         Tank tank2 = new Tank(800, 800, 0f, sprTank2, sprBullet2);
-        this.camera1 = new Camera(tank1, world);
-        this.camera2 = new Camera(tank2, world);
-        PlayerController tankController1 = new PlayerController(tank1, controls1);
-        PlayerController tankController2 = new PlayerController(tank2, controls2);
+        this.camera1 = new Camera(tank1, this.world);
+        this.camera2 = new Camera(tank2, this.world);
+        PlayerController tankController1 = new PlayerController(tank1, this.controls1);
+        PlayerController tankController2 = new PlayerController(tank2, this.controls2);
         this.addKeyListener(tankController1);
         this.addKeyListener(tankController2);
         GameObjectCollection.spawn(tank1);
