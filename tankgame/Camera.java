@@ -1,22 +1,43 @@
-//import GameObjects.GameObject;
-//
-//import java.awt.image.BufferedImage;
-//
-//public class Camera {
-//
-//    private static final int WIDTH = 600;
-//    private static final int HEIGHT = 600;
-//
-//    private GameObject trackObject;
-//    private BufferedImage screen;
-//
-//    public Camera() {
-//
-//    }
-//
-//    public Camera(GameObject obj, BufferedImage world) {
-//        this.trackObject = obj;
-//        this.screen = world.getSubimage()
-//    }
-//
-//}
+import GameObjects.GameObject;
+
+import java.awt.image.BufferedImage;
+
+public class Camera {
+
+    private static final int WIDTH = 798;
+    private static final int HEIGHT = 650;
+
+    private GameObject trackObject;
+    private BufferedImage view;
+
+    public Camera(GameObject obj, BufferedImage world) {
+        this.trackObject = obj;
+        this.view = world.getSubimage((int) this.trackObject.getTransform().getPositionX() - (WIDTH / 2), (int) this.trackObject.getTransform().getPositionY() - (HEIGHT / 2), WIDTH, HEIGHT);
+    }
+
+    public void update(BufferedImage world) {
+        float x = this.trackObject.getTransform().getPositionX() + this.trackObject.getOriginOffset().getX() - (WIDTH / 2);
+        float y = this.trackObject.getTransform().getPositionY() + this.trackObject.getOriginOffset().getY() - (HEIGHT / 2);
+
+        // Stop scrolling when left or right edge of the map is reached
+        if (x <= 0) {
+            x = 0;
+        } else if (x >= world.getWidth() - WIDTH) {
+            x = world.getWidth() - WIDTH;
+        }
+
+        // Stop scrolling when top or bottom edge of the map is reached
+        if (y <= 0) {
+            y = 0;
+        } else if (y >= world.getHeight() - HEIGHT) {
+            y = world.getHeight() - HEIGHT;
+        }
+
+        this.view = world.getSubimage((int) x, (int) y, WIDTH, HEIGHT);
+    }
+
+    public BufferedImage getScreen() {
+        return this.view;
+    }
+
+}

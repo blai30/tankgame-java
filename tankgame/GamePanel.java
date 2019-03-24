@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
         this.requestFocus();
 
+        // Background is loaded in here because loading in init gives NullPointerException
         try {
             background = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bg.jpg"));
         } catch (IOException e) {
@@ -92,10 +93,10 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         // Instantiating tanks
-        Tank tank1 = new Tank(200, 200, 0f, sprTank1, sprBullet1);
-        Tank tank2 = new Tank(400, 400, 0f, sprTank2, sprBullet2);
-        this.camera1 = new Camera(tank1, this.world);
-        this.camera2 = new Camera(tank2, this.world);
+        Tank tank1 = new Tank(800, 800, 0f, sprTank1, sprBullet1);
+        Tank tank2 = new Tank(800, 800, 0f, sprTank2, sprBullet2);
+        this.camera1 = new Camera(tank1, world);
+        this.camera2 = new Camera(tank2, world);
         PlayerController tankController1 = new PlayerController(tank1, controls1);
         PlayerController tankController2 = new PlayerController(tank2, controls2);
         this.addKeyListener(tankController1);
@@ -120,6 +121,8 @@ public class GamePanel extends JPanel implements Runnable {
                 System.out.println(GameObjectCollection.getGameObject(i));
             }
             System.out.println();
+            this.camera1.update(this.world);
+            this.camera2.update(this.world);
             this.repaint();
             Thread.sleep(1000 / 144);
         } catch (InterruptedException ignored) {
@@ -134,8 +137,8 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g2);
 
         // Draw background
-        for (int i = 0; i < GameWindow.SCREEN_WIDTH; i += this.background.getWidth()) {
-            for (int j = 0; j < GameWindow.SCREEN_HEIGHT; j += this.background.getHeight()) {
+        for (int i = 0; i < this.world.getWidth(); i += this.background.getWidth()) {
+            for (int j = 0; j < this.world.getHeight(); j += this.background.getHeight()) {
                 this.buffer.drawImage(this.background, i, j, null);
             }
         }
@@ -149,7 +152,10 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
-        g2.drawImage(this.world,0,0,null);
+        g2.drawImage(camera1.getScreen(), 0, 0, null);
+        g2.drawImage(camera2.getScreen(), 800, 0, null);
+//        g2.drawImage(this.world, 0, 0, null);
+        g2.dispose();
         this.buffer.clearRect(0, 0, getWidth(), getHeight());
     }
 
