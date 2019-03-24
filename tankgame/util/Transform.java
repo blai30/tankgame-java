@@ -3,25 +3,30 @@ package util;
 public class Transform {
 
     private Vector2D position;
+    private Vector2D origin;
     private float rotation;
 
     public Transform() {
         this.position = new Vector2D();
+        this.origin = new Vector2D();
         this.rotation = 0f;
     }
 
     public Transform(Transform transform) {
         this.position = transform.getPosition();
+        this.origin = transform.getOrigin();
         this.rotation = transform.rotation;
     }
 
-    public Transform(Vector2D position, float rotation) {
+    public Transform(Vector2D position, Vector2D origin, float rotation) {
         this.position = position;
+        this.origin = origin;
         this.rotation = rotation;
     }
 
-    public Transform(float xPosition, float yPosition, float rotation) {
+    public Transform(float xPosition, float yPosition, float originX, float originY, float rotation) {
         this.position = new Vector2D(xPosition, yPosition);
+        this.origin = new Vector2D(originX, originY);
         this.rotation = rotation;
     }
 
@@ -35,6 +40,18 @@ public class Transform {
 
     public float getPositionY() {
         return this.position.getY();
+    }
+
+    public Vector2D getOrigin() {
+        return this.origin;
+    }
+
+    public float getOriginX() {
+        return this.origin.getX();
+    }
+
+    public float getOriginY() {
+        return this.origin.getY();
     }
 
     public float getRotation() {
