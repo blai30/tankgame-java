@@ -24,9 +24,9 @@ public class Transform {
         this.rotation = rotation;
     }
 
-    public Transform(float xPosition, float yPosition, float originX, float originY, float rotation) {
+    public Transform(float xPosition, float yPosition, float rotation) {
         this.position = new Vector2D(xPosition, yPosition);
-        this.origin = new Vector2D(originX, originY);
+        this.origin = new Vector2D();
         this.rotation = rotation;
     }
 
@@ -63,11 +63,34 @@ public class Transform {
         this.rotation = location.getRotation();
     }
 
+    public void setPosition(Vector2D position) {
+        this.position.set(position);
+    }
+
+    public void setRotation(float rotation) {
+        this.rotation = rotation;
+    }
+
+    public void setOrigin(float x, float y) {
+        this.origin.setX(x);
+        this.origin.setY(y);
+    }
+
+    public void move(Vector2D vec) {
+        this.position.move(vec);
+    }
+
     // Negative scalar for backwards movement
     public void move(float scalar) {
         float vx = (float) (scalar * Math.cos(Math.toRadians(this.rotation)));
         float vy = (float) (scalar * Math.sin(Math.toRadians(this.rotation)));
         this.position.move(vx, vy);
+        this.origin.move(vx, vy);
+    }
+
+    public void move(float x, float y) {
+        this.position.move(x, y);
+        this.origin.move(x, y);
     }
 
     // Negative scalar for left rotation
