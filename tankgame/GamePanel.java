@@ -21,6 +21,7 @@ public class GamePanel extends JPanel implements Runnable {
     private BufferedImage background = null;
     private BufferedImage world;
     private Graphics2D buffer;
+    private GameHUD gameHUD;
 
     private HashMap<Integer, Key> controls1;
     private HashMap<Integer, Key> controls2;
@@ -65,6 +66,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private void init() {
         this.world = new BufferedImage(2048, 2048, BufferedImage.TYPE_INT_RGB);
+        this.gameHUD = new GameHUD();
         GameObjectCollection.init();
 
         BufferedImage sprTank1 = null;
@@ -116,6 +118,7 @@ public class GamePanel extends JPanel implements Runnable {
             System.out.println();
             this.camera1.update(this.world);
             this.camera2.update(this.world);
+            this.gameHUD.update(this.world);
             this.repaint();
             Thread.sleep(1000 / 144);
         } catch (InterruptedException ignored) {
@@ -147,6 +150,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         g2.drawImage(this.camera1.getScreen(), 0, 0, null);
         g2.drawImage(this.camera2.getScreen(), 800, 0, null);
+        g2.drawImage(this.gameHUD.getMinimap(), (GameWindow.SCREEN_WIDTH / 2) - (GameHUD.WIDTH / 2), 652, null);
 //        g2.drawImage(this.world, 0, 0, null);
         g2.dispose();
         this.buffer.clearRect(0, 0, getWidth(), getHeight());
