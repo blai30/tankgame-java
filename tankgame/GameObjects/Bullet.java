@@ -13,6 +13,7 @@ public class Bullet extends GameObject {
     public Bullet(BufferedImage sprite, int damage) {
         this.transform = new Transform();
         this.sprite = sprite;
+        this.transform.setOrigin(this.transform.getPositionX() + ((float) this.sprite.getWidth() / 2), this.transform.getPositionY() + ((float) this.sprite.getHeight() / 2));
 
         this.baseDamage += damage;
         this.velocity = 8.0f;
@@ -21,6 +22,7 @@ public class Bullet extends GameObject {
     public Bullet(Transform transform, BufferedImage sprite, int damage) {
         this.transform = transform;
         this.sprite = sprite;
+        this.transform.setOrigin((float) (this.sprite.getWidth()), (float) (this.sprite.getHeight()));
 
         this.baseDamage += damage;
         this.velocity = 8.0f;
@@ -36,7 +38,7 @@ public class Bullet extends GameObject {
         Graphics2D g2d = (Graphics2D) g;
         // TODO draw collider box and data members
         g2d.drawString("baseDamage: " + this.baseDamage, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 60);
-        g2d.drawString("velocity: " + this.velocity, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 60);
+        g2d.drawString("velocity: " + this.velocity, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 72);
     }
 
 }

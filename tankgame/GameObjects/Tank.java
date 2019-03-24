@@ -38,6 +38,7 @@ public class Tank extends Player {
         // Set properties
         this.transform = new Transform(xPosition, yPosition, rotation);
         this.sprite = sprite;
+        this.transform.setOrigin(this.transform.getPositionX() + ((float) this.sprite.getWidth() / 2), this.transform.getPositionY() + ((float) this.sprite.getHeight() / 2));
 
         this.sprBullet = sprBullet;
 
@@ -68,7 +69,7 @@ public class Tank extends Player {
 
     private void fire() {
 //        if (this.ammo > 0) {
-            this.instantiate(new Bullet(this.sprBullet, this.bonusDamage), this.transform);
+            this.instantiate(new Bullet(this.sprBullet, this.bonusDamage), this.transform.getOrigin(), this.transform.getRotation());
             this.ammo--;
 //        }
     }
@@ -103,11 +104,9 @@ public class Tank extends Player {
         Graphics2D g2d = (Graphics2D) g;
 
         // Draw aim line
-        float originX = this.transform.getPositionX() + ((float) this.sprite.getWidth() / 2);
-        float originY = this.transform.getPositionY() + ((float) this.sprite.getHeight() / 2);
         float toX = (float) (500 * Math.cos(Math.toRadians(this.transform.getRotation())));
         float toY = (float) (500 * Math.sin(Math.toRadians(this.transform.getRotation())));
-        g2d.drawLine((int) originX, (int) originY, (int) (originX + toX), (int) (originY + toY));
+        g2d.drawLine((int) this.transform.getOriginX(), (int) this.transform.getOriginY(), (int) (this.transform.getOriginX() + toX), (int) (this.transform.getOriginY() + toY));
 
         g2d.drawString("hitPoints: " + this.hitPoints, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 60);
         g2d.drawString("moveSpeed: " + this.moveSpeed, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 72);
