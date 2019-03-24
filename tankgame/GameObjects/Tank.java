@@ -41,7 +41,6 @@ public class Tank extends Player {
         this.transform = new Transform(xPosition, yPosition, rotation);
         this.sprite = sprite;
         this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
-        this.transform.setOrigin(this.transform.getPositionX() + ((float) this.sprite.getWidth() / 2), this.transform.getPositionY() + ((float) this.sprite.getHeight() / 2));
 
         this.sprBullet = sprBullet;
 
@@ -72,7 +71,7 @@ public class Tank extends Player {
 
     private void fire() {
 //        if (this.ammo > 0) {
-            this.instantiate(new Bullet(this.sprBullet, this.bonusDamage), this.transform.getOrigin(), this.transform.getRotation());
+            this.instantiate(new Bullet(this.sprBullet, this.bonusDamage), this.transform.getPosition().add(this.originOffset), this.transform.getRotation());
             this.ammo--;
 //        }
     }

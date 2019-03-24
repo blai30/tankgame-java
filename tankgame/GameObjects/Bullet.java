@@ -15,7 +15,6 @@ public class Bullet extends GameObject {
         this.transform = new Transform();
         this.sprite = sprite;
         this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
-        this.transform.setOrigin(this.transform.getPositionX() + ((float) this.sprite.getWidth() / 2), this.transform.getPositionY() + ((float) this.sprite.getHeight() / 2));
 
         this.baseDamage += damage;
         this.velocity = 8.0f;
@@ -25,7 +24,6 @@ public class Bullet extends GameObject {
         this.transform = transform;
         this.sprite = sprite;
         this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
-        this.transform.setOrigin((float) (this.sprite.getWidth()), (float) (this.sprite.getHeight()));
 
         this.baseDamage += damage;
         this.velocity = 8.0f;

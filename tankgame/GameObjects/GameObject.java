@@ -10,19 +10,32 @@ import java.awt.image.BufferedImage;
 public abstract class GameObject {
 
     protected BufferedImage sprite;
-    public Transform transform;
+    protected Transform transform;
+    protected Vector2D originOffset;
     // TODO: collider
 
     // To be called by other game objects
     // This method will spawn a game object centered at location (ie. tank's origin)
     protected void instantiate(GameObject spawnObj, Vector2D location, float rotation) {
         // Offset position by origin to align spawnObj's origin with location before spawning
-        float x = spawnObj.transform.getPositionX() - (spawnObj.transform.getOriginX() - location.getX());
-        float y = spawnObj.transform.getPositionX() - (spawnObj.transform.getOriginY() - location.getY());
+        float x = location.getX() - spawnObj.originOffset.getX();
+        float y = location.getY() - spawnObj.originOffset.getY();
         Vector2D spawnPoint = new Vector2D(x, y);
         spawnObj.transform.setPosition(spawnPoint);
         spawnObj.transform.setRotation(rotation);
         GameObjectCollection.spawn(spawnObj);
+    }
+
+    public BufferedImage getSprite() {
+        return this.sprite;
+    }
+
+    public Transform getTransform() {
+        return this.transform;
+    }
+
+    public Vector2D getOriginOffset() {
+        return this.originOffset;
     }
 
     public void drawImage(Graphics g) {

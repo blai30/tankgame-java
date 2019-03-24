@@ -48,6 +48,13 @@ public class Vector2D {
         this.y = vec.y;
     }
 
+    // Pseudo operator overloading
+    public Vector2D add(Vector2D vec) {
+        float x = this.x + vec.x;
+        float y = this.y + vec.y;
+        return new Vector2D(x, y);
+    }
+
     public void move(float scalar) {
         this.x += scalar;
         this.y += scalar;
