@@ -130,14 +130,15 @@ public class GamePanel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         this.buffer = this.world.createGraphics();
+        this.buffer.clearRect(0, 0, this.world.getWidth(), this.world.getHeight());
         super.paintComponent(g2);
 
         // Draw background
-//        for (int i = 0; i < this.world.getWidth(); i += this.background.getWidth()) {
-//            for (int j = 0; j < this.world.getHeight(); j += this.background.getHeight()) {
-//                this.buffer.drawImage(this.background, i, j, null);
-//            }
-//        }
+        for (int i = 0; i < this.world.getWidth(); i += this.background.getWidth()) {
+            for (int j = 0; j < this.world.getHeight(); j += this.background.getHeight()) {
+                this.buffer.drawImage(this.background, i, j, null);
+            }
+        }
 
         // Draw GameObjects
         for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
@@ -153,7 +154,7 @@ public class GamePanel extends JPanel implements Runnable {
         g2.drawImage(this.gameHUD.getMinimap(), (GameWindow.SCREEN_WIDTH / 2) - (GameHUD.WIDTH / 2), 652, null);
 //        g2.drawImage(this.world, 0, 0, null);
         g2.dispose();
-//        this.buffer.clearRect(0, 0, getWidth(), getHeight());
+        this.buffer.dispose();
     }
 
 }
