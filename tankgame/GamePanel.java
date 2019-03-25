@@ -65,7 +65,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void init() {
-        this.world = new BufferedImage(2048, 2048, BufferedImage.TYPE_INT_RGB);
+        this.world = new BufferedImage(2024, 2048, BufferedImage.TYPE_INT_RGB);
         this.gameHUD = new GameHUD();
         GameObjectCollection.init();
 
@@ -133,11 +133,11 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g2);
 
         // Draw background
-        for (int i = 0; i < this.world.getWidth(); i += this.background.getWidth()) {
-            for (int j = 0; j < this.world.getHeight(); j += this.background.getHeight()) {
-                this.buffer.drawImage(this.background, i, j, null);
-            }
-        }
+//        for (int i = 0; i < this.world.getWidth(); i += this.background.getWidth()) {
+//            for (int j = 0; j < this.world.getHeight(); j += this.background.getHeight()) {
+//                this.buffer.drawImage(this.background, i, j, null);
+//            }
+//        }
 
         // Draw GameObjects
         for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
@@ -153,7 +153,7 @@ public class GamePanel extends JPanel implements Runnable {
         g2.drawImage(this.gameHUD.getMinimap(), (GameWindow.SCREEN_WIDTH / 2) - (GameHUD.WIDTH / 2), 652, null);
 //        g2.drawImage(this.world, 0, 0, null);
         g2.dispose();
-        this.buffer.clearRect(0, 0, getWidth(), getHeight());
+//        this.buffer.clearRect(0, 0, getWidth(), getHeight());
     }
 
 }
