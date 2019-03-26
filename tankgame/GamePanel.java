@@ -191,7 +191,7 @@ public class GamePanel extends JPanel implements Runnable {
         try {
             for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
                 GameObjectCollection.getGameObject(i).update();
-                System.out.println(GameObjectCollection.getGameObject(i));
+//                System.out.println(GameObjectCollection.getGameObject(i));
             }
             System.out.println();
             this.camera1.update(this.world);
