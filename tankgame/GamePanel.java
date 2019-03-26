@@ -102,7 +102,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void init() {
-        this.world = new BufferedImage(2048 , 1024, BufferedImage.TYPE_INT_RGB);
+        this.world = new BufferedImage(1024 , 2024, BufferedImage.TYPE_INT_RGB);
         this.gameHUD = new GameHUD(this.world);
         this.setControls();
         GameObjectCollection.init();
