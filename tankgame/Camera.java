@@ -15,8 +15,8 @@ public class Camera {
     }
 
     public void update(BufferedImage world) {
-        float x = this.trackObject.getTransform().getPositionX() + this.trackObject.getOriginOffset().getX() - (WIDTH / 2);
-        float y = this.trackObject.getTransform().getPositionY() + this.trackObject.getOriginOffset().getY() - (HEIGHT / 2);
+        float x = this.trackObject.getTransform().getPositionX() + this.trackObject.getOriginOffset().getX() - ((float) WIDTH / 2);
+        float y = this.trackObject.getTransform().getPositionY() + this.trackObject.getOriginOffset().getY() - ((float) HEIGHT / 2);
 
         // Stop scrolling when left or right edge of the map is reached
         if (x <= 0) {

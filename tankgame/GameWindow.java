@@ -6,7 +6,8 @@ import java.io.IOException;
 class GameLauncher {
 
     public static void main(String[] args) {
-        new GameWindow();
+        GamePanel game = new GamePanel();
+        new GameWindow(game);
     }
 
 }
@@ -16,7 +17,7 @@ public class GameWindow extends JFrame {
     public static final int SCREEN_WIDTH = 1280;
     public static final int SCREEN_HEIGHT = 960;
 
-    GameWindow() {
+    GameWindow(GamePanel game) {
         this.setTitle("Tank Game by Brian Lai");
 
         try {
@@ -27,8 +28,6 @@ public class GameWindow extends JFrame {
             System.out.println("IOException: cannot read image file");
             e.printStackTrace();
         }
-
-        GamePanel game = new GamePanel();
 
         this.setLayout(new BorderLayout());
         this.add(game, BorderLayout.CENTER);
