@@ -193,7 +193,7 @@ public class GamePanel extends JPanel implements Runnable {
                 GameObjectCollection.getGameObject(i).update();
 //                System.out.println(GameObjectCollection.getGameObject(i));
             }
-            System.out.println();
+//            System.out.println();
             this.camera1.update(this.world);
             this.camera2.update(this.world);
             this.gameHUD.update(this.world);
