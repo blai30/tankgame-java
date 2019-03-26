@@ -74,8 +74,8 @@ public class GamePanel extends JPanel implements Runnable {
             this.world = new BufferedImage(1024, 1024, BufferedImage.TYPE_INT_RGB);
             this.gameHUD = new GameHUD(this.world);
 
-            Tank tank1 = new Tank(128, 128, 0f, sprTank1, sprBullet1);
-            Tank tank2 = new Tank(846, 846, 0f, sprTank2, sprBullet2);
+            Tank tank1 = new Tank(128, 128, 90f, sprTank1, sprBullet1);
+            Tank tank2 = new Tank(846, 846, 270f, sprTank2, sprBullet2);
             this.camera1 = new Camera(tank1);
             this.camera2 = new Camera(tank2);
             PlayerController tankController1 = new PlayerController(tank1, this.controls1);
@@ -131,14 +131,14 @@ public class GamePanel extends JPanel implements Runnable {
                             GameObjectCollection.spawn(hardWall);
                             break;
                         case ((int) '1'):
-                            Tank tank1 = new Tank(x * 32, y * 32, 0f, sprTank1, sprBullet1);
+                            Tank tank1 = new Tank(x * 32, y * 32, 90f, sprTank1, sprBullet1);
                             this.camera1 = new Camera(tank1);
                             PlayerController tankController1 = new PlayerController(tank1, this.controls1);
                             this.addKeyListener(tankController1);
                             GameObjectCollection.spawn(tank1);
                             break;
                         case ((int) '2'):
-                            Tank tank2 = new Tank(x * 32, y * 32, 0f, sprTank2, sprBullet2);
+                            Tank tank2 = new Tank(x * 32, y * 32, 270f, sprTank2, sprBullet2);
                             this.camera2 = new Camera(tank2);
                             PlayerController tankController2 = new PlayerController(tank2, this.controls2);
                             this.addKeyListener(tankController2);
