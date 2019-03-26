@@ -1,6 +1,8 @@
 
 
 import GameObjects.GameObjectCollection;
+import GameObjects.HardWall;
+import GameObjects.SoftWall;
 import GameObjects.Tank;
 import util.*;
 
@@ -70,6 +72,8 @@ public class GamePanel extends JPanel implements Runnable {
         BufferedImage sprTank2 = null;
         BufferedImage sprBullet1 = null;
         BufferedImage sprBullet2 = null;
+        BufferedImage sprSoftWall = null;
+        BufferedImage sprHardWall = null;
 
         // Loading sprites
         try {
@@ -79,6 +83,8 @@ public class GamePanel extends JPanel implements Runnable {
             sprTank2 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/tank2.png"));
             sprBullet1 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bullet1.png"));
             sprBullet2 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bullet2.png"));
+            sprSoftWall = ImageIO.read(GamePanel.class.getResourceAsStream("resources/wall1.png"));
+            sprHardWall = ImageIO.read(GamePanel.class.getResourceAsStream("resources/wall2.png"));
         } catch (IOException e) {
             System.out.println("IOException: cannot read image file");
             e.printStackTrace();
@@ -95,6 +101,11 @@ public class GamePanel extends JPanel implements Runnable {
         this.addKeyListener(tankController2);
         GameObjectCollection.spawn(tank1);
         GameObjectCollection.spawn(tank2);
+
+        SoftWall wall1 = new SoftWall(0, 0, sprSoftWall);
+        GameObjectCollection.spawn(wall1);
+        HardWall wall2 = new HardWall(32, 32, sprHardWall);
+        GameObjectCollection.spawn(wall2);
 
         this.running = true;
     }
