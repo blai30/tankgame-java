@@ -5,8 +5,8 @@ import java.awt.image.BufferedImage;
 
 public class GameHUD {
 
-    public static final int WIDTH = 248;
-    public static final int HEIGHT = 248;
+    public static final int WIDTH = 280;
+    public static final int HEIGHT = 280;
 
     private BufferedImage minimap;
 

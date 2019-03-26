@@ -13,8 +13,8 @@ class GameLauncher {
 
 public class GameWindow extends JFrame {
 
-    public static final int SCREEN_WIDTH = 1600;
-    public static final int SCREEN_HEIGHT = 900;
+    public static final int SCREEN_WIDTH = 1280;
+    public static final int SCREEN_HEIGHT = 960;
 
     GameWindow() {
         this.setTitle("Tank Game by Brian Lai");
