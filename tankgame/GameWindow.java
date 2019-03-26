@@ -6,7 +6,14 @@ import java.io.IOException;
 class GameLauncher {
 
     public static void main(String[] args) {
-        GamePanel game = new GamePanel(args[0]);
+        GamePanel game = new GamePanel();
+        game.init();
+        try {
+            game.loadMap(args[0]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Program args not given");
+            game.loadMap(null);
+        }
         new GameWindow(game);
     }
 

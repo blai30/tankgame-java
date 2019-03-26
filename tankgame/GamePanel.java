@@ -35,23 +35,26 @@ public class GamePanel extends JPanel implements Runnable {
     private Camera camera1;
     private Camera camera2;
 
-    public GamePanel(String mapData) {
+    public GamePanel() {
         this.setFocusable(true);
         this.requestFocus();
-
-        this.init();
-        this.loadMap(mapData);
     }
 
-    private void loadMap(String mapFile) {
+    public void init() {
+        this.setControls();
+        GameObjectCollection.init();
+
+        this.running = true;
+    }
+
+    public void loadMap(String mapFile) {
+        // Loading sprites
         BufferedImage sprTank1 = null;
         BufferedImage sprTank2 = null;
         BufferedImage sprBullet1 = null;
         BufferedImage sprBullet2 = null;
         BufferedImage sprSoftWall = null;
         BufferedImage sprHardWall = null;
-
-        // Loading sprites
         try {
             System.out.println(System.getProperty("user.dir"));
             this.background = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bg.jpg"));
@@ -66,67 +69,84 @@ public class GamePanel extends JPanel implements Runnable {
             e.printStackTrace();
         }
 
-        // Loading map data
-        ArrayList<ArrayList<Integer>> mapLayout = new ArrayList<>();
-        try {
-            this.bufferedReader = new BufferedReader(new FileReader(mapFile));
+        // No map file was provided, generate empty 1024x1024 map
+        if (mapFile == null) {
+            this.world = new BufferedImage(1024, 1024, BufferedImage.TYPE_INT_RGB);
+            this.gameHUD = new GameHUD(this.world);
 
-            String currentLine;
-            while ((currentLine = bufferedReader.readLine()) != null) {
-                if (currentLine.isEmpty()) {
-                    continue;
-                }
+            Tank tank1 = new Tank(128, 128, 0f, sprTank1, sprBullet1);
+            Tank tank2 = new Tank(846, 846, 0f, sprTank2, sprBullet2);
+            this.camera1 = new Camera(tank1);
+            this.camera2 = new Camera(tank2);
+            PlayerController tankController1 = new PlayerController(tank1, this.controls1);
+            PlayerController tankController2 = new PlayerController(tank2, this.controls2);
+            this.addKeyListener(tankController1);
+            this.addKeyListener(tankController2);
+            GameObjectCollection.spawn(tank1);
+            GameObjectCollection.spawn(tank2);
+        } else {
+            // Loading map data from file
+            ArrayList<ArrayList<Integer>> mapLayout = new ArrayList<>();
+            try {
+                this.bufferedReader = new BufferedReader(new FileReader(mapFile));
 
-                ArrayList<Integer> row = new ArrayList<>();
-                byte[] tiles = currentLine.getBytes();
-                for (byte tile : tiles) {
-                    if (tile != ' ') {
-                        row.add((int) tile);
-                    }
-                }
-                mapLayout.add(row);
-            }
-        } catch (IOException e) {
-            System.err.println("Error loading map data");
-            e.printStackTrace();
-        }
-
-        int mapWidth = mapLayout.get(0).size();
-        int mapHeight = mapLayout.size();
-
-        this.world = new BufferedImage(mapWidth * 32, mapHeight * 32, BufferedImage.TYPE_INT_RGB);
-        this.gameHUD = new GameHUD(this.world);
-
-        // Generate entire map
-        for (int y = 0; y < mapHeight; y++) {
-            for (int x = 0; x < mapWidth; x++) {
-                switch (mapLayout.get(y).get(x)) {
-                    case ((int) '.'):
+                String currentLine;
+                while ((currentLine = bufferedReader.readLine()) != null) {
+                    if (currentLine.isEmpty()) {
                         continue;
-                    case ((int) 'S'):
-                        SoftWall softWall = new SoftWall(x * 32, y * 32, sprSoftWall);
-                        GameObjectCollection.spawn(softWall);
-                        break;
-                    case ((int) 'H'):
-                        HardWall hardWall = new HardWall(x * 32, y * 32, sprHardWall);
-                        GameObjectCollection.spawn(hardWall);
-                        break;
-                    case ((int) '1'):
-                        Tank tank1 = new Tank(x * 32, y * 32, 0f, sprTank1, sprBullet1);
-                        this.camera1 = new Camera(tank1);
-                        PlayerController tankController1 = new PlayerController(tank1, this.controls1);
-                        this.addKeyListener(tankController1);
-                        GameObjectCollection.spawn(tank1);
-                        break;
-                    case ((int) '2'):
-                        Tank tank2 = new Tank(x * 32, y * 32, 0f, sprTank2, sprBullet2);
-                        this.camera2 = new Camera(tank2);
-                        PlayerController tankController2 = new PlayerController(tank2, this.controls2);
-                        this.addKeyListener(tankController2);
-                        GameObjectCollection.spawn(tank2);
-                        break;
-                    default:
-                        break;
+                    }
+
+                    ArrayList<Integer> row = new ArrayList<>();
+                    byte[] tiles = currentLine.getBytes();
+                    for (byte tile : tiles) {
+                        if (tile != ' ') {
+                            row.add((int) tile);
+                        }
+                    }
+                    mapLayout.add(row);
+                }
+            } catch (IOException | NullPointerException e) {
+                System.out.println("Error loading map data");
+                e.printStackTrace();
+            }
+
+            int mapWidth = mapLayout.get(0).size();
+            int mapHeight = mapLayout.size();
+
+            this.world = new BufferedImage(mapWidth * 32, mapHeight * 32, BufferedImage.TYPE_INT_RGB);
+            this.gameHUD = new GameHUD(this.world);
+
+            // Generate entire map
+            for (int y = 0; y < mapHeight; y++) {
+                for (int x = 0; x < mapWidth; x++) {
+                    switch (mapLayout.get(y).get(x)) {
+                        case ((int) '.'):
+                            continue;
+                        case ((int) 'S'):
+                            SoftWall softWall = new SoftWall(x * 32, y * 32, sprSoftWall);
+                            GameObjectCollection.spawn(softWall);
+                            break;
+                        case ((int) 'H'):
+                            HardWall hardWall = new HardWall(x * 32, y * 32, sprHardWall);
+                            GameObjectCollection.spawn(hardWall);
+                            break;
+                        case ((int) '1'):
+                            Tank tank1 = new Tank(x * 32, y * 32, 0f, sprTank1, sprBullet1);
+                            this.camera1 = new Camera(tank1);
+                            PlayerController tankController1 = new PlayerController(tank1, this.controls1);
+                            this.addKeyListener(tankController1);
+                            GameObjectCollection.spawn(tank1);
+                            break;
+                        case ((int) '2'):
+                            Tank tank2 = new Tank(x * 32, y * 32, 0f, sprTank2, sprBullet2);
+                            this.camera2 = new Camera(tank2);
+                            PlayerController tankController2 = new PlayerController(tank2, this.controls2);
+                            this.addKeyListener(tankController2);
+                            GameObjectCollection.spawn(tank2);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
@@ -149,13 +169,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.controls2.put(KeyEvent.VK_A, Key.left);
         this.controls2.put(KeyEvent.VK_D, Key.right);
         this.controls2.put(KeyEvent.VK_F, Key.action);
-    }
-
-    private void init() {
-        this.setControls();
-        GameObjectCollection.init();
-
-        this.running = true;
     }
 
     public void addNotify() {
