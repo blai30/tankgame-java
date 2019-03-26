@@ -4,8 +4,8 @@ import java.awt.image.BufferedImage;
 
 public class Camera {
 
-    private static final int WIDTH = (int) (GameWindow.SCREEN_WIDTH / (float) 2) - 2;
-    private static final int HEIGHT = (int) (GameWindow.SCREEN_HEIGHT * (float) 2 / (float) 3) - 2;
+    private static final int WIDTH = (GameWindow.SCREEN_WIDTH / 2) - 2;
+    private static final int HEIGHT = (GameWindow.SCREEN_HEIGHT * 2 / 3) - 2;
 
     private GameObject trackObject;
     private BufferedImage view;
