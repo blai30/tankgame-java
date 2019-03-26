@@ -5,8 +5,8 @@ import java.awt.image.BufferedImage;
 
 public class GameHUD {
 
-    public static final int WIDTH = 280;
-    public static final int HEIGHT = 280;
+    public static final int WIDTH = (int) (GameWindow.SCREEN_HEIGHT * (float) 1 / (float) 3) - 40;
+    public static final int HEIGHT = (int) (GameWindow.SCREEN_HEIGHT * (float) 1 / (float) 3) - 40;
 
     private BufferedImage minimap;
 
