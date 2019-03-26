@@ -29,11 +29,17 @@ public class GamePanel extends JPanel implements Runnable {
     private Camera camera1;
     private Camera camera2;
 
-    public GamePanel() {
+    public GamePanel(String mapData) {
         this.setFocusable(true);
         this.requestFocus();
+
+        this.loadMap(mapData);
         this.setControls();
         this.init();
+    }
+
+    private void loadMap(String mapFile) {
+
     }
 
     private void setControls() {
@@ -53,15 +59,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.controls2.put(KeyEvent.VK_A, Key.left);
         this.controls2.put(KeyEvent.VK_D, Key.right);
         this.controls2.put(KeyEvent.VK_F, Key.action);
-    }
-
-    public void addNotify() {
-        super.addNotify();
-
-        if (this.thread == null) {
-            this.thread = new Thread(this, "GameThread");
-            this.thread.start();
-        }
     }
 
     private void init() {
@@ -100,6 +97,15 @@ public class GamePanel extends JPanel implements Runnable {
         GameObjectCollection.spawn(tank2);
 
         this.running = true;
+    }
+
+    public void addNotify() {
+        super.addNotify();
+
+        if (this.thread == null) {
+            this.thread = new Thread(this, "GameThread");
+            this.thread.start();
+        }
     }
 
     @Override

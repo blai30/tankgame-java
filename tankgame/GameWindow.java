@@ -6,7 +6,7 @@ import java.io.IOException;
 class GameLauncher {
 
     public static void main(String[] args) {
-        GamePanel game = new GamePanel();
+        GamePanel game = new GamePanel(args[0]);
         new GameWindow(game);
     }
 
