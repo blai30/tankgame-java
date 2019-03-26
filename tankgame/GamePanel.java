@@ -35,38 +35,12 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
         this.requestFocus();
 
-        this.loadMap(mapData);
-        this.setControls();
         this.init();
+        this.loadMap(mapData);
     }
 
     private void loadMap(String mapFile) {
-
-    }
-
-    private void setControls() {
-        this.controls1 = new HashMap<>();
-        this.controls2 = new HashMap<>();
-
-        // Set GameObjects.Player 1 controls
-        this.controls1.put(KeyEvent.VK_UP, Key.up);
-        this.controls1.put(KeyEvent.VK_DOWN, Key.down);
-        this.controls1.put(KeyEvent.VK_LEFT, Key.left);
-        this.controls1.put(KeyEvent.VK_RIGHT, Key.right);
-        this.controls1.put(KeyEvent.VK_SLASH, Key.action);
-
-        // Set GameObjects.Player 2 controls
-        this.controls2.put(KeyEvent.VK_W, Key.up);
-        this.controls2.put(KeyEvent.VK_S, Key.down);
-        this.controls2.put(KeyEvent.VK_A, Key.left);
-        this.controls2.put(KeyEvent.VK_D, Key.right);
-        this.controls2.put(KeyEvent.VK_F, Key.action);
-    }
-
-    private void init() {
-        this.world = new BufferedImage(2048, 2048, BufferedImage.TYPE_INT_RGB);
-        this.gameHUD = new GameHUD();
-        GameObjectCollection.init();
+//        BufferedReader br = new BufferedReader(mapFile);
 
         BufferedImage sprTank1 = null;
         BufferedImage sprTank2 = null;
@@ -92,7 +66,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         // Instantiating tanks
         Tank tank1 = new Tank(200, 200, 0f, sprTank1, sprBullet1);
-        Tank tank2 = new Tank(1800, 1800, 0f, sprTank2, sprBullet2);
+        Tank tank2 = new Tank(600, 600, 0f, sprTank2, sprBullet2);
         this.camera1 = new Camera(tank1);
         this.camera2 = new Camera(tank2);
         PlayerController tankController1 = new PlayerController(tank1, this.controls1);
@@ -106,6 +80,32 @@ public class GamePanel extends JPanel implements Runnable {
         GameObjectCollection.spawn(wall1);
         HardWall wall2 = new HardWall(32, 32, sprHardWall);
         GameObjectCollection.spawn(wall2);
+    }
+
+    private void setControls() {
+        this.controls1 = new HashMap<>();
+        this.controls2 = new HashMap<>();
+
+        // Set GameObjects.Player 1 controls
+        this.controls1.put(KeyEvent.VK_UP, Key.up);
+        this.controls1.put(KeyEvent.VK_DOWN, Key.down);
+        this.controls1.put(KeyEvent.VK_LEFT, Key.left);
+        this.controls1.put(KeyEvent.VK_RIGHT, Key.right);
+        this.controls1.put(KeyEvent.VK_SLASH, Key.action);
+
+        // Set GameObjects.Player 2 controls
+        this.controls2.put(KeyEvent.VK_W, Key.up);
+        this.controls2.put(KeyEvent.VK_S, Key.down);
+        this.controls2.put(KeyEvent.VK_A, Key.left);
+        this.controls2.put(KeyEvent.VK_D, Key.right);
+        this.controls2.put(KeyEvent.VK_F, Key.action);
+    }
+
+    private void init() {
+        this.world = new BufferedImage(2048 , 1024, BufferedImage.TYPE_INT_RGB);
+        this.gameHUD = new GameHUD(this.world);
+        this.setControls();
+        GameObjectCollection.init();
 
         this.running = true;
     }
@@ -172,7 +172,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         g2.drawImage(this.camera1.getScreen(), 0, 0, null);
         g2.drawImage(this.camera2.getScreen(), GameWindow.SCREEN_WIDTH / 2, 0, null);
-        g2.drawImage(this.gameHUD.getMinimap(), (GameWindow.SCREEN_WIDTH / 2) - (GameHUD.WIDTH / 2), GameWindow.SCREEN_HEIGHT - (GameWindow.SCREEN_HEIGHT / 3), null);
+        g2.drawImage(this.gameHUD.getMinimap(), (GameWindow.SCREEN_WIDTH / 2) - (gameHUD.getMapWidth() / 2), GameWindow.SCREEN_HEIGHT - (GameWindow.SCREEN_HEIGHT / 3), null);
 //        g2.drawImage(this.world, 0, 0, null);
         g2.dispose();
         this.buffer.dispose();
