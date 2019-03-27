@@ -17,9 +17,6 @@ public abstract class GameObject {
     protected Vector2D originOffset;
     protected Rectangle2D.Double collider;
 
-    // To be called by other game objects
-    // This method will spawn a game object centered at location (ie. tank's origin)
-
     /**
      * To be called by other game objects. This method will spawn a game object
      * centered at location (ie. the tank's origin)
@@ -75,6 +72,10 @@ public abstract class GameObject {
         g2d.drawString("angle: " + this.transform.getRotation(), this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 48);
     }
 
+    /**
+     * Prints the position and rotation of the game object.
+     * @return The position and rotation of the game object as a string
+     */
     @Override
     public String toString() {
         return "[" + this.getClass().getSimpleName() + "] " + "Position: " + this.transform.getPosition() + ", Angle: " + this.transform.getRotation();
