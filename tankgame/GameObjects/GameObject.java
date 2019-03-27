@@ -7,6 +7,9 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
+/**
+ * The base class for all game objects with properties that allow it to exist in the game world.
+ */
 public abstract class GameObject {
 
     protected BufferedImage sprite;
@@ -16,6 +19,14 @@ public abstract class GameObject {
 
     // To be called by other game objects
     // This method will spawn a game object centered at location (ie. tank's origin)
+
+    /**
+     * To be called by other game objects. This method will spawn a game object
+     * centered at location (ie. the tank's origin)
+     * @param spawnObj Game object to be created
+     * @param location The location in world coordinates where the game object will be created
+     * @param rotation The initial rotation of the game object to be created
+     */
     protected void instantiate(GameObject spawnObj, Vector2D location, float rotation) {
         // Offset position by origin to align spawnObj's origin with location before spawning
         float x = location.getX() - spawnObj.originOffset.getX();
@@ -38,6 +49,11 @@ public abstract class GameObject {
         return this.originOffset;
     }
 
+    /**
+     * Draws the game object in the game world to g.
+     * (ie. the buffer which will be drawn to the screen)
+     * @param g Graphics object that is passed in for the game object to draw to
+     */
     public void drawImage(Graphics g) {
         AffineTransform rotation = AffineTransform.getTranslateInstance(this.transform.getPositionX(), this.transform.getPositionY());
         rotation.rotate(Math.toRadians(this.transform.getRotation()), this.sprite.getWidth() / 2.0, this.sprite.getHeight() / 2.0);
@@ -45,7 +61,11 @@ public abstract class GameObject {
         g2d.drawImage(this.sprite, rotation, null);
     }
 
-    // General GameObject information used in drawGizmos
+    /**
+     * Draws general information about the game object in the game world to g.
+     * This method is called when drawGizmos is true in GamePanel.
+     * @param g Graphics object that is passed in for the game object to draw to
+     */
     public void drawTransform(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawRect((int) this.transform.getPositionX(), (int) this.transform.getPositionY(), this.sprite.getWidth(), this.sprite.getHeight());
@@ -60,8 +80,17 @@ public abstract class GameObject {
         return "[" + this.getClass().getSimpleName() + "] " + "Position: " + this.transform.getPosition() + ", Angle: " + this.transform.getRotation();
     }
 
+    /**
+     * Constantly called in the update method in GamePanel for every game object.
+     */
     public abstract void update();
 
+    /**
+     * Draws additional information about the game object in the game world to g.
+     * (ie. the aim line for tanks)
+     * This method is called when drawGizmos is true in GamePanel.
+     * @param g Graphics object that is passed in for the game object to draw to
+     */
     public abstract void drawGizmos(Graphics g);
 
 }

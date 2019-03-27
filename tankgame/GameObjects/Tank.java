@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
+/**
+ * Tank object to be controlled by a player.
+ */
 public class Tank extends Player {
 
     private final float ROTATION_SPEED = 1.4f;

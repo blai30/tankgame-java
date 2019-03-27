@@ -2,6 +2,10 @@ package util;
 
 
 
+/**
+ * Used for position of game objects, coordinates, or other properties that require
+ * two values x and y.
+ */
 public class Vector2D {
 
     private float x;

@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * JPanel object that contains the entire game.
+ */
 public class GamePanel extends JPanel implements Runnable {
 
     private Thread thread;
@@ -35,11 +38,17 @@ public class GamePanel extends JPanel implements Runnable {
     private Camera camera1;
     private Camera camera2;
 
+    /**
+     * Constructor used to initialize the JPanel of the game for the JFrame.
+     */
     public GamePanel() {
         this.setFocusable(true);
         this.requestFocus();
     }
 
+    /**
+     * Initializer that sets the game into a running state and enables the update method.
+     */
     public void init() {
         this.setControls();
         GameObjectCollection.init();
@@ -47,6 +56,13 @@ public class GamePanel extends JPanel implements Runnable {
         this.running = true;
     }
 
+    /**
+     * Loads data from a file to generate a map based on tiles.
+     * '.' = empty space
+     * 'S' = SoftWall
+     * 'H' = HardWall
+     * @param mapFile Name of the file to generate map from
+     */
     public void loadMap(String mapFile) {
         // Loading sprites
         BufferedImage sprTank1 = null;
@@ -152,6 +168,10 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Initialize key bindings for player 1 and player 2.
+     * TODO: load controls from file
+     */
     private void setControls() {
         this.controls1 = new HashMap<>();
         this.controls2 = new HashMap<>();
@@ -180,6 +200,9 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Game starts running and keeps running.
+     */
     @Override
     public void run() {
         while (this.running) {
@@ -187,6 +210,10 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Updates the state of the game by calling the update method from all game objects
+     * in the collection, the cameras, the game HUD, and repaint.
+     */
     private void update() {
         try {
             for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
@@ -204,6 +231,10 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Constantly redraws the screen according to the game state.
+     * @param g What is shown on the screen
+     */
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
