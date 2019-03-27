@@ -4,6 +4,7 @@ import util.Transform;
 import util.Vector2D;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 public class Tank extends Player {
@@ -24,6 +25,7 @@ public class Tank extends Player {
         this.transform = transform;
         this.sprite = sprite;
         this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
+        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.sprite.getWidth(), this.sprite.getHeight());
 
         this.sprBullet = sprBullet;
 
@@ -41,6 +43,7 @@ public class Tank extends Player {
         this.transform = new Transform(xPosition, yPosition, rotation);
         this.sprite = sprite;
         this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
+        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.sprite.getWidth(), this.sprite.getHeight());
 
         this.sprBullet = sprBullet;
 

@@ -4,6 +4,7 @@ import util.Transform;
 import util.Vector2D;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 public class Bullet extends GameObject {
@@ -15,6 +16,7 @@ public class Bullet extends GameObject {
         this.transform = new Transform();
         this.sprite = sprite;
         this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
+        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.sprite.getWidth(), this.sprite.getHeight());
 
         this.baseDamage += damage;
         this.velocity = 8.0f;
@@ -24,6 +26,7 @@ public class Bullet extends GameObject {
         this.transform = transform;
         this.sprite = sprite;
         this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
+        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.sprite.getWidth(), this.sprite.getHeight());
 
         this.baseDamage += damage;
         this.velocity = 8.0f;

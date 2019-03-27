@@ -1,10 +1,10 @@
 package GameObjects;
 
-import util.Transform;
-import util.Vector2D;
+import util.*;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 public abstract class GameObject {
@@ -12,7 +12,7 @@ public abstract class GameObject {
     protected BufferedImage sprite;
     protected Transform transform;
     protected Vector2D originOffset;
-    // TODO: collider
+    protected Rectangle2D.Double collider;
 
     // To be called by other game objects
     // This method will spawn a game object centered at location (ie. tank's origin)
