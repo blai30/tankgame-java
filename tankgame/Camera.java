@@ -25,7 +25,7 @@ public class Camera {
      * Continuously crops the game world to the dimensions of the camera.
      * @param world The game world passed in by GamePanel that this camera will crop
      */
-    public void update(BufferedImage world) {
+    public void redraw(BufferedImage world) {
         float x = this.trackObject.getTransform().getPositionX() + this.trackObject.getOriginOffset().getX() - ((float) WIDTH / 2);
         float y = this.trackObject.getTransform().getPositionY() + this.trackObject.getOriginOffset().getY() - ((float) HEIGHT / 2);
 

@@ -8,6 +8,8 @@ import java.io.IOException;
  */
 class GameLauncher {
 
+    public static GameWindow window;
+
     public static void main(String[] args) {
         GamePanel game = new GamePanel();
         game.init();
@@ -17,7 +19,7 @@ class GameLauncher {
             System.out.println("Program args not given");
             game.loadMap(null);
         }
-        new GameWindow(game);
+        window = new GameWindow(game);
     }
 
 }
@@ -29,13 +31,14 @@ public class GameWindow extends JFrame {
 
     public static final int SCREEN_WIDTH = 1280;
     public static final int SCREEN_HEIGHT = 960;
+    public static final String title = "Tank Game by Brian Lai";
 
     /**
      * Constructs a game window with the necessary configurations.
      * @param game Game panel that will be contained inside the game window
      */
     GameWindow(GamePanel game) {
-        this.setTitle("Tank Game by Brian Lai");
+        this.setTitle(title);
 
         try {
             System.out.println(System.getProperty("user.dir"));

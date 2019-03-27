@@ -205,8 +205,31 @@ public class GamePanel extends JPanel implements Runnable {
      */
     @Override
     public void run() {
+        long timer = System.currentTimeMillis();
+        long lastTime = System.nanoTime();
+        final double NANOSECOND = 1000000000.0 / 60.0;
+        double delta = 0;
+        int fps = 0;        // Frames per second
+        int ups = 0;    // Updates per second; should be 60 at all times
         while (this.running) {
-            this.update();
+            long currentTime = System.nanoTime();
+            delta += (currentTime - lastTime) / NANOSECOND;
+            lastTime = currentTime;
+            while (delta >= 1) {
+                this.update();
+                ups++;
+                delta--;
+            }
+            this.repaint();
+            fps++;
+
+            if (System.currentTimeMillis() - timer > 1000) {
+                timer += 1000;
+                System.out.println("UPS: " + ups + ", FPS: " + fps);
+                GameLauncher.window.setTitle(GameWindow.title + " | " + "UPS: " + ups + ", FPS: " + fps);
+                fps = 0;
+                ups = 0;
+            }
         }
     }
 
@@ -221,10 +244,6 @@ public class GamePanel extends JPanel implements Runnable {
 //                System.out.println(GameObjectCollection.getGameObject(i));
             }
 //            System.out.println();
-            this.camera1.update(this.world);
-            this.camera2.update(this.world);
-            this.gameHUD.update(this.world);
-            this.repaint();
             Thread.sleep(1000 / 144);
         } catch (InterruptedException ignored) {
 
@@ -262,6 +281,10 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
+        // Update the cameras and minimap then redraw them on the screen
+        this.camera1.redraw(this.world);
+        this.camera2.redraw(this.world);
+        this.gameHUD.redraw(this.world);
         g2.drawImage(this.camera1.getScreen(), 0, 0, null);
         g2.drawImage(this.camera2.getScreen(), GameWindow.SCREEN_WIDTH / 2, 0, null);
         g2.drawImage(this.gameHUD.getMinimap(), (GameWindow.SCREEN_WIDTH / 2) - (gameHUD.getMinimapWidth() / 2), GameWindow.SCREEN_HEIGHT - (GameWindow.SCREEN_HEIGHT / 3), null);

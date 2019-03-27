@@ -32,10 +32,10 @@ public class GameHUD {
     }
 
     /**
-     * Continuously update the view of the minimap to be based on the game world.
+     * Continuously redraw the view of the minimap to be based on the game world.
      * @param world The game world drawn to the screen
      */
-    public void update(BufferedImage world) {
+    public void redraw(BufferedImage world) {
         Graphics g = this.minimap.createGraphics();
         g.drawImage(world, 0, 0, minimapWidth, minimapHeight, null);
         g.dispose();
