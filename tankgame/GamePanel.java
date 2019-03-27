@@ -213,6 +213,7 @@ public class GamePanel extends JPanel implements Runnable {
         int fps = 0;    // Frames per second
         int ups = 0;    // Updates per second; should be 60 at all times
 
+        // Count FPS, UPS, and execute updates
         while (this.running) {
             long currentTime = System.nanoTime();
 
@@ -229,8 +230,8 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (System.currentTimeMillis() - timer > 1000) {
                 timer = System.currentTimeMillis();
-                System.out.println("UPS: " + ups + ", FPS: " + fps);
-                GameLauncher.window.setTitle(GameWindow.title + " | " + "UPS: " + ups + ", FPS: " + fps);
+                System.out.println("FPS: " + fps + ", UPS: " + ups);
+                GameLauncher.window.setTitle(GameWindow.title + " | " + "FPS: " + fps + ", UPS: " + ups);
                 fps = 0;
                 ups = 0;
             }
