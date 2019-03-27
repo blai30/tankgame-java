@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 /**
  * The base class for all game objects with properties that allow it to exist in the game world.
  */
-public abstract class GameObject {
+public abstract class GameObject implements CollisionHandling {
 
     protected BufferedImage sprite;
     protected Transform transform;
@@ -18,6 +18,8 @@ public abstract class GameObject {
     protected float height;
     protected Vector2D originOffset;
     protected Rectangle2D.Double collider;
+
+    private boolean destroyed = false;
 
     /**
      * To be called by other game objects. This method will spawn a game object
@@ -36,6 +38,10 @@ public abstract class GameObject {
         GameObjectCollection.spawn(spawnObj);
     }
 
+    protected void destroy() {
+        this.destroyed = true;
+    }
+
     public BufferedImage getSprite() {
         return this.sprite;
     }
@@ -46,6 +52,14 @@ public abstract class GameObject {
 
     public Vector2D getOriginOffset() {
         return this.originOffset;
+    }
+
+    public Rectangle2D.Double getCollider() {
+        return this.collider;
+    }
+
+    public boolean isDestroyed() {
+        return destroyed;
     }
 
     /**
@@ -100,5 +114,14 @@ public abstract class GameObject {
      * @param g Graphics object that is passed in for the game object to draw to
      */
     public abstract void drawGizmos(Graphics g);
+
+}
+
+interface CollisionHandling {
+
+    void visit(GameObject collidingObj);
+    void handleCollision(Bullet collidingObj);
+    void handleCollision(Wall collidingObj);
+    void handleCollision(Tank collidingObj);
 
 }

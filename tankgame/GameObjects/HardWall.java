@@ -29,11 +29,31 @@ public class HardWall extends Wall {
 
     @Override
     public void update() {
-
+        this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
     }
 
     @Override
     public void checkCollision() {
+
+    }
+
+    @Override
+    public void visit(GameObject collidingObj) {
+        collidingObj.handleCollision(this);
+    }
+
+    @Override
+    public void handleCollision(Bullet collidingObj) {
+
+    }
+
+    @Override
+    public void handleCollision(Wall collidingObj) {
+
+    }
+
+    @Override
+    public void handleCollision(Tank collidingObj) {
 
     }
 

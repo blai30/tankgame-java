@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * JPanel object that contains the entire game.
@@ -241,15 +242,25 @@ public class GamePanel extends JPanel implements Runnable {
      */
     private void update() {
         try {
-            for (GameObject obj1 : GameObjectCollection.getGameObjects()) {
-                obj1.update();
-                obj1.checkCollision();
-                for (GameObject obj2 : GameObjectCollection.getGameObjects()) {
-                    if (obj1 == obj2) {
-                        continue;
-                    }
+            for (int i = 0; i < GameObjectCollection.numGameObjects(); ) {
+                GameObject obj = GameObjectCollection.getGameObject(i);
+                obj.update();
+                if (obj.isDestroyed()) {
+                    GameObjectCollection.destroy(obj);
+                } else {
+                    for (int j = 0; j < GameObjectCollection.numGameObjects(); j++) {
+                        GameObject colliding = GameObjectCollection.getGameObject(j);
+                        // Skip detecting collision on the same object as itself
+                        if (obj == colliding) {
+                            continue;
+                        }
 
-                    // TODO: collision detection in one place!!
+                        // Visitor pattern
+                        if (obj.getCollider().intersects(colliding.getCollider())) {
+                            obj.visit(colliding);
+                        }
+                    }
+                    i++;
                 }
             }
             Thread.sleep(1000 / 144);
@@ -281,7 +292,8 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         // Draw GameObjects
-        for (GameObject obj : GameObjectCollection.getGameObjects()) {
+        for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
+            GameObject obj = GameObjectCollection.getGameObject(i);
             obj.drawImage(this.buffer);
             if (this.drawGizmos) {
                 obj.drawTransform(this.buffer);

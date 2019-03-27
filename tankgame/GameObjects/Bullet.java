@@ -55,11 +55,32 @@ public class Bullet extends GameObject {
      */
     @Override
     public void update() {
+        this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
         this.transform.move(this.velocity);
     }
 
     @Override
     public void checkCollision() {
+
+    }
+
+    @Override
+    public void visit(GameObject collidingObj) {
+        collidingObj.handleCollision(this);
+    }
+
+    @Override
+    public void handleCollision(Bullet collidingObj) {
+
+    }
+
+    @Override
+    public void handleCollision(Wall collidingObj) {
+        this.destroy();
+    }
+
+    @Override
+    public void handleCollision(Tank collidingObj) {
 
     }
 

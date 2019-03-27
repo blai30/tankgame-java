@@ -24,6 +24,10 @@ public class GameObjectCollection {
         gameObjects.add(obj);
     }
 
+    public static void destroy(GameObject obj) {
+        gameObjects.remove(obj);
+    }
+
     /**
      * Counts the number of game objects present in the game world.
      * @return Number of game objects in the array list
@@ -39,10 +43,6 @@ public class GameObjectCollection {
      */
     public static GameObject getGameObject(int index) {
         return gameObjects.get(index);
-    }
-
-    public static ArrayList<GameObject> getGameObjects() {
-        return gameObjects;
     }
 
 }

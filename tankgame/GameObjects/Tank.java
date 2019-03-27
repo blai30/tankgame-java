@@ -130,23 +130,43 @@ public class Tank extends Player {
 
     @Override
     public void checkCollision() {
-        for (GameObject obj : GameObjectCollection.getGameObjects()) {
-            if (this.collider.intersects(obj.collider) && obj != this) {
-                System.out.println("COLLISION DETECTED");
+//        for (GameObject obj : GameObjectCollection.getGameObjects()) {
+//            if (this.collider.intersects(obj.collider) && obj != this) {
+//                System.out.println("COLLISION DETECTED");
+//
+//                if (obj instanceof Wall) {
+//                    System.out.println("Tank on Wall");
+//                }
+//
+//                if (obj instanceof Tank) {
+//                    System.out.println("Tank on Tank");
+//                }
+//
+//                if (obj instanceof Bullet) {
+//                    System.out.println("Tank on Bullet");
+//                }
+//            }
+//        }
+    }
 
-                if (obj instanceof Wall) {
-                    System.out.println("Tank on Wall");
-                }
+    @Override
+    public void visit(GameObject collidingObj) {
+        collidingObj.handleCollision(this);
+    }
 
-                if (obj instanceof Tank) {
-                    System.out.println("Tank on Tank");
-                }
+    @Override
+    public void handleCollision(Bullet collidingObj) {
+        System.out.println("Tank on Bullet");
+    }
 
-                if (obj instanceof Bullet) {
-                    System.out.println("Tank on Bullet");
-                }
-            }
-        }
+    @Override
+    public void handleCollision(Wall collidingObj) {
+        System.out.println("Tank on Wall");
+    }
+
+    @Override
+    public void handleCollision(Tank collidingObj) {
+        System.out.println("Tank on Tank");
     }
 
     /**

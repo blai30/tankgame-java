@@ -33,11 +33,34 @@ public class SoftWall extends Wall {
 
     @Override
     public void update() {
-
+        this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
     }
 
     @Override
     public void checkCollision() {
+
+    }
+
+    @Override
+    public void visit(GameObject collidingObj) {
+        collidingObj.handleCollision(this);
+    }
+
+    @Override
+    public void handleCollision(Bullet collidingObj) {
+        this.hitPoints--;
+        if (this.hitPoints <= 0) {
+            this.destroy();
+        }
+    }
+
+    @Override
+    public void handleCollision(Wall collidingObj) {
+
+    }
+
+    @Override
+    public void handleCollision(Tank collidingObj) {
 
     }
 
