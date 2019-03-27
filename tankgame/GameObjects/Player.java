@@ -1,5 +1,8 @@
 package GameObjects;
 
+/**
+ * A game object that extends this class is allowed to be controlled by a player.
+ */
 public abstract class Player extends GameObject {
 
     protected boolean UpPressed = false;

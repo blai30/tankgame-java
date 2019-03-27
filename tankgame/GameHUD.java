@@ -3,6 +3,9 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Displays various game information on the screen such as a minimap of the game world.
+ */
 public class GameHUD {
 
     private int minimapWidth;
@@ -10,6 +13,10 @@ public class GameHUD {
 
     private BufferedImage minimap;
 
+    /**
+     * Constructs the game HUD with the minimap being a third of the window size.
+     * @param world The game world drawn to the screen
+     */
     public GameHUD(BufferedImage world) {
         this.minimapWidth = (int) (((GameWindow.SCREEN_HEIGHT / 3) - 40) * ((float) world.getWidth() / (float) world.getHeight()));
         this.minimapHeight = (GameWindow.SCREEN_HEIGHT / 3) - 40;
@@ -24,12 +31,20 @@ public class GameHUD {
         return this.minimapHeight;
     }
 
+    /**
+     * Continuously update the view of the minimap to be based on the game world.
+     * @param world The game world drawn to the screen
+     */
     public void update(BufferedImage world) {
         Graphics g = this.minimap.createGraphics();
         g.drawImage(world, 0, 0, minimapWidth, minimapHeight, null);
         g.dispose();
     }
 
+    /**
+     * Called by GamePanel to draw the minimap on the screen.
+     * @return The view of the minimap of the game world
+     */
     public BufferedImage getMinimap() {
         return minimap;
     }

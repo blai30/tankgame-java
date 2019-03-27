@@ -3,6 +3,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * Contains the main method to launch the game.
+ */
 class GameLauncher {
 
     public static void main(String[] args) {
@@ -19,11 +22,18 @@ class GameLauncher {
 
 }
 
+/**
+ * The game window seen by the user that contains everything.
+ */
 public class GameWindow extends JFrame {
 
     public static final int SCREEN_WIDTH = 1280;
     public static final int SCREEN_HEIGHT = 960;
 
+    /**
+     * Constructs a game window with the necessary configurations.
+     * @param game Game panel that will be contained inside the game window
+     */
     GameWindow(GamePanel game) {
         this.setTitle("Tank Game by Brian Lai");
 

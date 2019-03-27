@@ -7,8 +7,17 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
+/**
+ * An unbreakable wall.
+ */
 public class HardWall extends Wall {
 
+    /**
+     * Constructs a hard wall at a coordinate in the game world
+     * @param xPosition The x coordinate of the hard wall in the game world
+     * @param yPosition The y coordinate of the hard wall in the game world
+     * @param sprite The image of this hard wall drawn to the screen
+     */
     public HardWall(float xPosition, float yPosition, BufferedImage sprite) {
         this.transform = new Transform(xPosition, yPosition, 0);
         this.sprite = sprite;
@@ -26,6 +35,10 @@ public class HardWall extends Wall {
 
     }
 
+    /**
+     * Determines if the wall is allowed to be destroyed by other game elements.
+     * @return This wall is unbreakable
+     */
     @Override
     public boolean isBreakable() {
         return false;
