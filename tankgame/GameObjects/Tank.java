@@ -23,13 +23,18 @@ public class Tank extends Player {
     private int armor;
     private int ammo;
 
+    /**
+     * Constructs a tank by passing in a Transform object that the tank will now own.
+     * @param transform The tank will take control of this Transform
+     * @param sprite The image of this tank drawn to the screen
+     * @param sprBullet The image of the bullet that this tank object will fire drawn to the screen
+     */
     public Tank(Transform transform, BufferedImage sprite, BufferedImage sprBullet) {
         // Set properties
         this.transform = transform;
         this.sprite = sprite;
         this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
         this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.sprite.getWidth(), this.sprite.getHeight());
-
         this.sprBullet = sprBullet;
 
         // Default stats
@@ -41,13 +46,20 @@ public class Tank extends Player {
         this.ammo = 5;
     }
 
+    /**
+     * Constructs a tank from values to be constructed into a new Transform object.
+     * @param xPosition The x coordinate of the tank in the game world
+     * @param yPosition The y coordinate of the tank in the game world
+     * @param rotation The rotation of the tank in degrees
+     * @param sprite The image of this tank drawn to the screen
+     * @param sprBullet The image of the bullet that this tank object will fire drawn to the screen
+     */
     public Tank(float xPosition, float yPosition, float rotation, BufferedImage sprite, BufferedImage sprBullet) {
         // Set properties
         this.transform = new Transform(xPosition, yPosition, rotation);
         this.sprite = sprite;
         this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
         this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.sprite.getWidth(), this.sprite.getHeight());
-
         this.sprBullet = sprBullet;
 
         // Default stats
@@ -82,6 +94,9 @@ public class Tank extends Player {
 //        }
     }
 
+    /**
+     * Controls tank movement and other key inputs such as fire.
+     */
     @Override
     public void update() {
         // Movement
@@ -107,6 +122,11 @@ public class Tank extends Player {
         }
     }
 
+    /**
+     * Draws additional information about the tank object to the game world such as aim line.
+     * This method is called when drawGizmos is true in GamePanel.
+     * @param g Graphics object that is passed in for the game object to draw to
+     */
     @Override
     public void drawGizmos(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
