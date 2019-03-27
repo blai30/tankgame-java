@@ -207,15 +207,19 @@ public class GamePanel extends JPanel implements Runnable {
     public void run() {
         long timer = System.currentTimeMillis();
         long lastTime = System.nanoTime();
-        final double NANOSECOND = 1000000000.0 / 60.0;
+
+        final double NS = 1000000000.0 / 120.0;
         double delta = 0;
-        int fps = 0;        // Frames per second
+        int fps = 0;    // Frames per second
         int ups = 0;    // Updates per second; should be 60 at all times
+
         while (this.running) {
             long currentTime = System.nanoTime();
-            delta += (currentTime - lastTime) / NANOSECOND;
+
+            delta += (currentTime - lastTime) / NS;
             lastTime = currentTime;
-            while (delta >= 1) {
+
+            if (delta >= 1) {
                 this.update();
                 ups++;
                 delta--;
@@ -224,7 +228,7 @@ public class GamePanel extends JPanel implements Runnable {
             fps++;
 
             if (System.currentTimeMillis() - timer > 1000) {
-                timer += 1000;
+                timer = System.currentTimeMillis();
                 System.out.println("UPS: " + ups + ", FPS: " + fps);
                 GameLauncher.window.setTitle(GameWindow.title + " | " + "UPS: " + ups + ", FPS: " + fps);
                 fps = 0;
