@@ -14,6 +14,8 @@ public abstract class GameObject {
 
     protected BufferedImage sprite;
     protected Transform transform;
+    protected float width;
+    protected float height;
     protected Vector2D originOffset;
     protected Rectangle2D.Double collider;
 
@@ -85,6 +87,11 @@ public abstract class GameObject {
      * Constantly called in the update method in GamePanel for every game object.
      */
     public abstract void update();
+
+    /**
+     * Constantly called in the update method in GamePanel for every game object.
+     */
+    public abstract void checkCollision();
 
     /**
      * Draws additional information about the game object in the game world to g.

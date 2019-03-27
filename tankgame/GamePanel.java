@@ -1,9 +1,6 @@
 
 
-import GameObjects.GameObjectCollection;
-import GameObjects.HardWall;
-import GameObjects.SoftWall;
-import GameObjects.Tank;
+import GameObjects.*;
 import util.*;
 
 import javax.imageio.ImageIO;
@@ -244,8 +241,9 @@ public class GamePanel extends JPanel implements Runnable {
      */
     private void update() {
         try {
-            for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
-                GameObjectCollection.getGameObject(i).update();
+            for (GameObject obj : GameObjectCollection.getGameObjects()) {
+                obj.update();
+                obj.checkCollision();
             }
             Thread.sleep(1000 / 144);
         } catch (InterruptedException ignored) {
@@ -276,11 +274,11 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         // Draw GameObjects
-        for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
-            GameObjectCollection.getGameObject(i).drawImage(this.buffer);
+        for (GameObject obj : GameObjectCollection.getGameObjects()) {
+            obj.drawImage(this.buffer);
             if (this.drawGizmos) {
-                GameObjectCollection.getGameObject(i).drawTransform(this.buffer);
-                GameObjectCollection.getGameObject(i).drawGizmos(this.buffer);
+                obj.drawTransform(this.buffer);
+                obj.drawGizmos(this.buffer);
             }
         }
 

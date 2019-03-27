@@ -41,4 +41,8 @@ public class GameObjectCollection {
         return gameObjects.get(index);
     }
 
+    public static ArrayList<GameObject> getGameObjects() {
+        return gameObjects;
+    }
+
 }

@@ -23,14 +23,21 @@ public class SoftWall extends Wall {
     public SoftWall(float xPosition, float yPosition, BufferedImage sprite) {
         this.transform = new Transform(xPosition, yPosition, 0);
         this.sprite = sprite;
-        this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
-        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.sprite.getWidth(), this.sprite.getHeight());
+        this.width = this.sprite.getWidth();
+        this.height = this.sprite.getHeight();
+        this.originOffset = new Vector2D(this.width / 2, this.height / 2);
+        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
 
         this.hitPoints = 3;
     }
 
     @Override
     public void update() {
+
+    }
+
+    @Override
+    public void checkCollision() {
 
     }
 

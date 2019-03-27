@@ -33,8 +33,10 @@ public class Tank extends Player {
         // Set properties
         this.transform = transform;
         this.sprite = sprite;
-        this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
-        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.sprite.getWidth(), this.sprite.getHeight());
+        this.width = this.sprite.getWidth();
+        this.height = this.sprite.getHeight();
+        this.originOffset = new Vector2D(this.width / 2, this.height / 2);
+        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
         this.sprBullet = sprBullet;
 
         // Default stats
@@ -58,8 +60,10 @@ public class Tank extends Player {
         // Set properties
         this.transform = new Transform(xPosition, yPosition, rotation);
         this.sprite = sprite;
-        this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
-        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.sprite.getWidth(), this.sprite.getHeight());
+        this.width = this.sprite.getWidth();
+        this.height = this.sprite.getHeight();
+        this.originOffset = new Vector2D(this.width / 2, this.height / 2);
+        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
         this.sprBullet = sprBullet;
 
         // Default stats
@@ -99,6 +103,8 @@ public class Tank extends Player {
      */
     @Override
     public void update() {
+        this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
+
         // Movement
         if (this.UpPressed) {
             this.moveForwards();
@@ -122,6 +128,27 @@ public class Tank extends Player {
         }
     }
 
+    @Override
+    public void checkCollision() {
+        for (GameObject obj : GameObjectCollection.getGameObjects()) {
+            if (this.collider.intersects(obj.collider) && obj != this) {
+                System.out.println("COLLISION DETECTED");
+
+                if (obj instanceof Wall) {
+                    System.out.println("Tank on Wall");
+                }
+
+                if (obj instanceof Tank) {
+                    System.out.println("Tank on Tank");
+                }
+
+                if (obj instanceof Bullet) {
+                    System.out.println("Tank on Bullet");
+                }
+            }
+        }
+    }
+
     /**
      * Draws additional information about the tank object to the game world such as aim line.
      * This method is called when drawGizmos is true in GamePanel.
@@ -136,12 +163,12 @@ public class Tank extends Player {
         float toY = (float) (500 * Math.sin(Math.toRadians(this.transform.getRotation())));
         g2d.drawLine((int) (this.transform.getPositionX() + this.originOffset.getX()), (int) (this.transform.getPositionY() + this.originOffset.getY()), (int) (this.transform.getPositionX() + this.originOffset.getX() + toX), (int) (this.transform.getPositionY() + this.originOffset.getY() + toY));
 
-        g2d.drawString("hitPoints: " + this.hitPoints, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 60);
-        g2d.drawString("moveSpeed: " + this.moveSpeed, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 72);
-        g2d.drawString("fireRate: " + this.fireRate, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 84);
-        g2d.drawString("bonusDamage: " + this.bonusDamage, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 96);
-        g2d.drawString("armor: " + this.armor, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 108);
-        g2d.drawString("ammo: " + this.ammo, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 120);
+        g2d.drawString("hitPoints: " + this.hitPoints, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 60);
+        g2d.drawString("moveSpeed: " + this.moveSpeed, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 72);
+        g2d.drawString("fireRate: " + this.fireRate, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 84);
+        g2d.drawString("bonusDamage: " + this.bonusDamage, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 96);
+        g2d.drawString("armor: " + this.armor, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 108);
+        g2d.drawString("ammo: " + this.ammo, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 120);
     }
 
 }

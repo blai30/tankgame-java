@@ -23,8 +23,10 @@ public class Bullet extends GameObject {
     public Bullet(BufferedImage sprite, int damage) {
         this.transform = new Transform();
         this.sprite = sprite;
-        this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
-        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.sprite.getWidth(), this.sprite.getHeight());
+        this.width = this.sprite.getWidth();
+        this.height = this.sprite.getHeight();
+        this.originOffset = new Vector2D(this.width / 2, this.height / 2);
+        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
 
         this.baseDamage += damage;
         this.velocity = 8.0f;
@@ -39,8 +41,10 @@ public class Bullet extends GameObject {
     public Bullet(Transform transform, BufferedImage sprite, int damage) {
         this.transform = transform;
         this.sprite = sprite;
-        this.originOffset = new Vector2D((float) this.sprite.getWidth() / 2, (float) this.sprite.getHeight() / 2);
-        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.sprite.getWidth(), this.sprite.getHeight());
+        this.width = this.sprite.getWidth();
+        this.height = this.sprite.getHeight();
+        this.originOffset = new Vector2D(this.width / 2, this.height / 2);
+        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
 
         this.baseDamage += damage;
         this.velocity = 8.0f;
@@ -52,6 +56,11 @@ public class Bullet extends GameObject {
     @Override
     public void update() {
         this.transform.move(this.velocity);
+    }
+
+    @Override
+    public void checkCollision() {
+
     }
 
     /**
