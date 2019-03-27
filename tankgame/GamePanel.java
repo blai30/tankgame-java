@@ -241,9 +241,16 @@ public class GamePanel extends JPanel implements Runnable {
      */
     private void update() {
         try {
-            for (GameObject obj : GameObjectCollection.getGameObjects()) {
-                obj.update();
-                obj.checkCollision();
+            for (GameObject obj1 : GameObjectCollection.getGameObjects()) {
+                obj1.update();
+                obj1.checkCollision();
+                for (GameObject obj2 : GameObjectCollection.getGameObjects()) {
+                    if (obj1 == obj2) {
+                        continue;
+                    }
+
+                    // TODO: collision detection in one place!!
+                }
             }
             Thread.sleep(1000 / 144);
         } catch (InterruptedException ignored) {
