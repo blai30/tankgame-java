@@ -13,7 +13,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 /**
  * JPanel object that contains the entire game.
@@ -22,7 +21,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Thread thread;
     private boolean running = false;
-    private boolean drawGizmos = false;
+    private boolean drawGizmos = true;
 
     private BufferedReader bufferedReader;
     private BufferedImage background = null;
@@ -209,7 +208,7 @@ public class GamePanel extends JPanel implements Runnable {
         final double NS = 1000000000.0 / 120.0; // Locked UPS to 120
         double delta = 0;
         int fps = 0;    // Frames per second
-        int ups = 0;    // Updates per second; should be 120 at all times
+        int ticks = 0;    // Updates per second; should be 120 at all times
 
         // Count FPS, UPS, and execute updates
         while (this.running) {
@@ -219,7 +218,7 @@ public class GamePanel extends JPanel implements Runnable {
             lastTime = currentTime;
             if (delta >= 1) {
                 this.update();
-                ups++;
+                ticks++;
                 delta--;
             }
             this.repaint();
@@ -228,10 +227,10 @@ public class GamePanel extends JPanel implements Runnable {
             // Update FPS and UPS counter every second
             if (System.currentTimeMillis() - timer > 1000) {
                 timer = System.currentTimeMillis();
-                System.out.println("FPS: " + fps + ", UPS: " + ups);
-                GameLauncher.window.setTitle(GameWindow.title + " | " + "FPS: " + fps + ", UPS: " + ups);
+                System.out.println("FPS: " + fps + ", Ticks: " + ticks);
+                GameLauncher.window.setTitle(GameWindow.title + " | " + "FPS: " + fps + ", Ticks: " + ticks);
                 fps = 0;
-                ups = 0;
+                ticks = 0;
             }
         }
     }
@@ -255,9 +254,9 @@ public class GamePanel extends JPanel implements Runnable {
                             continue;
                         }
 
-                        // Visitor pattern
+                        // Visitor pattern collision handling
                         if (obj.getCollider().intersects(colliding.getCollider())) {
-                            obj.visit(colliding);
+                            obj.colliding(colliding);
                         }
                     }
                     i++;
