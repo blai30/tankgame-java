@@ -145,7 +145,7 @@ public class Tank extends Player implements SolidObject {
 
     @Override
     public void handleCollision(Bullet collidingBullet) {
-        System.out.println("Tank on Bullet");
+
     }
 
     /**
