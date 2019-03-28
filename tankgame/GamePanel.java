@@ -205,7 +205,7 @@ public class GamePanel extends JPanel implements Runnable {
         long timer = System.currentTimeMillis();
         long lastTime = System.nanoTime();
 
-        final double NS = 1000000000.0 / 120.0; // Locked UPS to 120
+        final double NS = 1000000000.0 / 60.0; // Locked UPS to 120
         double delta = 0;
         int fps = 0;    // Frames per second
         int ticks = 0;    // Updates per second; should be 120 at all times
