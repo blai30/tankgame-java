@@ -129,44 +129,44 @@ public class Tank extends Player {
     }
 
     @Override
-    public void checkCollision() {
-//        for (GameObject obj : GameObjectCollection.getGameObjects()) {
-//            if (this.collider.intersects(obj.collider) && obj != this) {
-//                System.out.println("COLLISION DETECTED");
-//
-//                if (obj instanceof Wall) {
-//                    System.out.println("Tank on Wall");
-//                }
-//
-//                if (obj instanceof Tank) {
-//                    System.out.println("Tank on Tank");
-//                }
-//
-//                if (obj instanceof Bullet) {
-//                    System.out.println("Tank on Bullet");
-//                }
-//            }
-//        }
-    }
-
-    @Override
-    public void visit(GameObject collidingObj) {
+    public void colliding(GameObject collidingObj) {
         collidingObj.handleCollision(this);
     }
 
     @Override
-    public void handleCollision(Bullet collidingObj) {
-        System.out.println("Tank on Bullet");
-    }
-
-    @Override
-    public void handleCollision(Wall collidingObj) {
-        System.out.println("Tank on Wall");
-    }
-
-    @Override
-    public void handleCollision(Tank collidingObj) {
+    public void handleCollision(Tank collidingTank) {
         System.out.println("Tank on Tank");
+    }
+
+    @Override
+    public void handleCollision(Wall collidingWall) {
+        Rectangle2D intersection = this.collider.createIntersection(collidingWall.collider);
+
+        boolean fromTop = intersection.getMaxY() >= this.collider.getMaxY();
+        boolean fromBottom = intersection.getMaxY() >= collidingWall.collider.getMaxY();
+        boolean fromLeft = intersection.getMaxX() >= this.collider.getMaxX();
+        boolean fromRight = intersection.getMaxX() >= collidingWall.collider.getMaxX();
+
+        if (intersection.getWidth() > intersection.getHeight()) {
+            if (fromTop) {
+                this.transform.move(0, -(float) intersection.getHeight());
+            }
+            if (fromBottom) {
+                this.transform.move(0, (float) intersection.getHeight());
+            }
+        } else if (intersection.getHeight() > intersection.getWidth()) {
+            if (fromLeft) {
+                this.transform.move(-(float) intersection.getWidth(), 0);
+            }
+            if (fromRight) {
+                this.transform.move((float) intersection.getWidth(), 0);
+            }
+        }
+    }
+
+    @Override
+    public void handleCollision(Bullet collidingBullet) {
+        System.out.println("Tank on Bullet");
     }
 
     /**
