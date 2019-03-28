@@ -42,6 +42,34 @@ public abstract class GameObject implements CollisionHandling {
         this.destroyed = true;
     }
 
+    protected void solidCollision(GameObject obj) {
+        if (obj instanceof SolidObject) {
+            Rectangle2D intersection = this.collider.createIntersection(obj.collider);
+
+            if (intersection.getWidth() >= intersection.getHeight()) {
+                // From the top
+                if (intersection.getMaxY() >= this.collider.getMaxY()) {
+                    this.transform.move(0, -(float) intersection.getHeight());
+                }
+                // From the bottom
+                if (intersection.getMaxY() >= obj.collider.getMaxY()) {
+                    this.transform.move(0, (float) intersection.getHeight());
+                }
+            }
+
+            if (intersection.getHeight() >= intersection.getWidth()) {
+                // From the left
+                if (intersection.getMaxX() >= this.collider.getMaxX()) {
+                    this.transform.move(-(float) intersection.getWidth(), 0);
+                }
+                // From the right
+                if (intersection.getMaxX() >= obj.collider.getMaxX()) {
+                    this.transform.move((float) intersection.getWidth(), 0);
+                }
+            }
+        }
+    }
+
     public BufferedImage getSprite() {
         return this.sprite;
     }
@@ -81,11 +109,11 @@ public abstract class GameObject implements CollisionHandling {
      */
     public void drawTransform(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawRect((int) this.transform.getPositionX(), (int) this.transform.getPositionY(), this.sprite.getWidth(), this.sprite.getHeight());
-        g2d.drawString("[" + this.getClass().getSimpleName() + "]", this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 12);
-        g2d.drawString("x: " + this.transform.getPositionX(), this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 24);
-        g2d.drawString("y: " + this.transform.getPositionY(), this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 36);
-        g2d.drawString("angle: " + this.transform.getRotation(), this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 48);
+        g2d.draw(this.collider);
+//        g2d.drawString("[" + this.getClass().getSimpleName() + "]", this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 12);
+//        g2d.drawString("x: " + this.transform.getPositionX(), this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 24);
+//        g2d.drawString("y: " + this.transform.getPositionY(), this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 36);
+//        g2d.drawString("angle: " + this.transform.getRotation(), this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 48);
     }
 
     /**

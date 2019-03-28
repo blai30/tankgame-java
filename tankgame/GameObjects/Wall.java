@@ -3,7 +3,7 @@ package GameObjects;
 /**
  * The base class for various types of walls.
  */
-public abstract class Wall extends GameObject {
+public abstract class Wall extends GameObject implements SolidObject {
 
     /**
      * Determines if the wall is allowed to be destroyed by other game elements.
