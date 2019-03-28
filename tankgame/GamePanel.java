@@ -205,12 +205,12 @@ public class GamePanel extends JPanel implements Runnable {
         long timer = System.currentTimeMillis();
         long lastTime = System.nanoTime();
 
-        final double NS = 1000000000.0 / 60.0; // Locked UPS to 120
+        final double NS = 1000000000.0 / 60.0; // Locked ticks per second to 60
         double delta = 0;
         int fps = 0;    // Frames per second
-        int ticks = 0;    // Updates per second; should be 120 at all times
+        int ticks = 0;    // Ticks/Updates per second; should be 60 at all times
 
-        // Count FPS, UPS, and execute updates
+        // Count FPS, Ticks, and execute updates
         while (this.running) {
             long currentTime = System.nanoTime();
 
@@ -224,7 +224,7 @@ public class GamePanel extends JPanel implements Runnable {
             this.repaint();
             fps++;
 
-            // Update FPS and UPS counter every second
+            // Update FPS and Ticks counter every second
             if (System.currentTimeMillis() - timer > 1000) {
                 timer = System.currentTimeMillis();
                 System.out.println("FPS: " + fps + ", Ticks: " + ticks);
