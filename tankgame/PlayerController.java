@@ -35,7 +35,7 @@ public class PlayerController implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         // Print key pressed
-        System.out.println(e.paramString());
+//        System.out.println(e.paramString());
 
         if (this.controls.get(e.getKeyCode()) == Key.up) {
             this.player.toggleUpPressed();
@@ -63,7 +63,7 @@ public class PlayerController implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         // Print key released
-        System.out.println(e.paramString());
+//        System.out.println(e.paramString());
 
         if (this.controls.get(e.getKeyCode()) == Key.up) {
             this.player.unToggleUpPressed();
