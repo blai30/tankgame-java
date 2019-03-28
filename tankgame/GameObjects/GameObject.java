@@ -103,11 +103,6 @@ public abstract class GameObject implements CollisionHandling {
     public abstract void update();
 
     /**
-     * Constantly called in the update method in GamePanel for every game object.
-     */
-    public abstract void checkCollision();
-
-    /**
      * Draws additional information about the game object in the game world to g.
      * (ie. the aim line for tanks)
      * This method is called when drawGizmos is true in GamePanel.
@@ -117,11 +112,14 @@ public abstract class GameObject implements CollisionHandling {
 
 }
 
+/**
+ * Visitor pattern.
+ */
 interface CollisionHandling {
 
-    void visit(GameObject collidingObj);
-    void handleCollision(Bullet collidingObj);
-    void handleCollision(Wall collidingObj);
-    void handleCollision(Tank collidingObj);
+    void colliding(GameObject collidingObj);
+    void handleCollision(Tank collidingTank);
+    void handleCollision(Wall collidingWall);
+    void handleCollision(Bullet collidingBullet);
 
 }
