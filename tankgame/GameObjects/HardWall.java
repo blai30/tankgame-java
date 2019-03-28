@@ -27,41 +27,6 @@ public class HardWall extends Wall {
         this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
     }
 
-    @Override
-    public void update() {
-        this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
-    }
-
-    @Override
-    public void checkCollision() {
-
-    }
-
-    @Override
-    public void visit(GameObject collidingObj) {
-        collidingObj.handleCollision(this);
-    }
-
-    @Override
-    public void handleCollision(Bullet collidingObj) {
-
-    }
-
-    @Override
-    public void handleCollision(Wall collidingObj) {
-
-    }
-
-    @Override
-    public void handleCollision(Tank collidingObj) {
-
-    }
-
-    @Override
-    public void drawGizmos(Graphics g) {
-
-    }
-
     /**
      * Determines if the wall is allowed to be destroyed by other game elements.
      * @return This wall is unbreakable
@@ -70,4 +35,40 @@ public class HardWall extends Wall {
     public boolean isBreakable() {
         return false;
     }
+
+    @Override
+    public void takeDamage(int damageDealt) {
+
+    }
+
+    @Override
+    public void update() {
+        this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
+    }
+
+    @Override
+    public void colliding(GameObject collidingObj) {
+        collidingObj.handleCollision(this);
+    }
+
+    @Override
+    public void handleCollision(Tank collidingTank) {
+
+    }
+
+    @Override
+    public void handleCollision(Wall collidingWall) {
+
+    }
+
+    @Override
+    public void handleCollision(Bullet collidingBullet) {
+
+    }
+
+    @Override
+    public void drawGizmos(Graphics g) {
+
+    }
+
 }

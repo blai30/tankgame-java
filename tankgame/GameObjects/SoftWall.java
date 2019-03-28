@@ -28,45 +28,7 @@ public class SoftWall extends Wall {
         this.originOffset = new Vector2D(this.width / 2, this.height / 2);
         this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
 
-        this.hitPoints = 3;
-    }
-
-    @Override
-    public void update() {
-        this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
-    }
-
-    @Override
-    public void checkCollision() {
-
-    }
-
-    @Override
-    public void visit(GameObject collidingObj) {
-        collidingObj.handleCollision(this);
-    }
-
-    @Override
-    public void handleCollision(Bullet collidingObj) {
-        this.hitPoints--;
-        if (this.hitPoints <= 0) {
-            this.destroy();
-        }
-    }
-
-    @Override
-    public void handleCollision(Wall collidingObj) {
-
-    }
-
-    @Override
-    public void handleCollision(Tank collidingObj) {
-
-    }
-
-    @Override
-    public void drawGizmos(Graphics g) {
-
+        this.hitPoints = 1;
     }
 
     /**
@@ -77,4 +39,43 @@ public class SoftWall extends Wall {
     public boolean isBreakable() {
         return true;
     }
+
+    @Override
+    public void takeDamage(int damageDealt) {
+        this.hitPoints -= damageDealt;
+        if (this.hitPoints <= 0) {
+            this.destroy();
+        }
+    }
+
+    @Override
+    public void update() {
+        this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
+    }
+
+    @Override
+    public void colliding(GameObject collidingObj) {
+        collidingObj.handleCollision(this);
+    }
+
+    @Override
+    public void handleCollision(Tank collidingTank) {
+
+    }
+
+    @Override
+    public void handleCollision(Wall collidingWall) {
+
+    }
+
+    @Override
+    public void handleCollision(Bullet collidingBullet) {
+
+    }
+
+    @Override
+    public void drawGizmos(Graphics g) {
+
+    }
+
 }

@@ -11,4 +11,6 @@ public abstract class Wall extends GameObject {
      */
     public abstract boolean isBreakable();
 
+    public abstract void takeDamage(int damageDealt);
+
 }
