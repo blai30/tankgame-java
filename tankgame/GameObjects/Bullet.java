@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
  */
 public class Bullet extends GameObject {
 
-    private int baseDamage = 1;
+    private int totalDamage = 1;
     private float velocity;
 
     /**
@@ -28,7 +28,7 @@ public class Bullet extends GameObject {
         this.originOffset = new Vector2D(this.width / 2, this.height / 2);
         this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
 
-        this.baseDamage += damage;
+        this.totalDamage += damage;
         this.velocity = 8.0f;
     }
 
@@ -46,7 +46,7 @@ public class Bullet extends GameObject {
         this.originOffset = new Vector2D(this.width / 2, this.height / 2);
         this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
 
-        this.baseDamage += damage;
+        this.totalDamage += damage;
         this.velocity = 8.0f;
     }
 
@@ -60,27 +60,25 @@ public class Bullet extends GameObject {
     }
 
     @Override
-    public void checkCollision() {
-
-    }
-
-    @Override
-    public void visit(GameObject collidingObj) {
+    public void colliding(GameObject collidingObj) {
         collidingObj.handleCollision(this);
     }
 
     @Override
-    public void handleCollision(Bullet collidingObj) {
+    public void handleCollision(Tank collidingTank) {
 
     }
 
     @Override
-    public void handleCollision(Wall collidingObj) {
+    public void handleCollision(Wall collidingWall) {
+        if (collidingWall.isBreakable()) {
+            collidingWall.takeDamage(this.totalDamage);
+        }
         this.destroy();
     }
 
     @Override
-    public void handleCollision(Tank collidingObj) {
+    public void handleCollision(Bullet collidingBullet) {
 
     }
 
@@ -92,7 +90,7 @@ public class Bullet extends GameObject {
     public void drawGizmos(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         // TODO draw collider box and data members
-        g2d.drawString("baseDamage: " + this.baseDamage, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 60);
+        g2d.drawString("totalDamage: " + this.totalDamage, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 60);
         g2d.drawString("velocity: " + this.velocity, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 72);
     }
 
