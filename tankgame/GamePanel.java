@@ -18,6 +18,8 @@ import java.util.HashMap;
  */
 public class GamePanel extends JPanel implements Runnable {
 
+    private GameWindow gameWindow;
+
     private Thread thread;
     private boolean running = false;
     private boolean drawDebug = false;
@@ -50,6 +52,10 @@ public class GamePanel extends JPanel implements Runnable {
         GameObjectCollection.init();
 
         this.running = true;
+    }
+
+    public void launch() {
+        this.gameWindow = new GameWindow(this);
     }
 
     /**
@@ -132,6 +138,7 @@ public class GamePanel extends JPanel implements Runnable {
                         this.camera1 = new Camera(tank1);
                         PlayerController tankController1 = new PlayerController(tank1, this.controls1);
                         this.addKeyListener(tankController1);
+                        this.gameHUD.assignPlayer(0, tank1);
                         GameObjectCollection.spawn(tank1);
                         break;
                     case ("2"):     // Player 2 tank
@@ -139,6 +146,7 @@ public class GamePanel extends JPanel implements Runnable {
                         this.camera2 = new Camera(tank2);
                         PlayerController tankController2 = new PlayerController(tank2, this.controls2);
                         this.addKeyListener(tankController2);
+                        this.gameHUD.assignPlayer(1, tank2);
                         GameObjectCollection.spawn(tank2);
                         break;
                     default:
@@ -211,7 +219,7 @@ public class GamePanel extends JPanel implements Runnable {
             if (System.currentTimeMillis() - timer > 1000) {
                 timer = System.currentTimeMillis();
                 System.out.println("FPS: " + fps + ", Ticks: " + ticks);
-                GameLauncher.window.setTitle(GameWindow.title + " | " + "FPS: " + fps + ", Ticks: " + ticks);
+                gameWindow.setTitle(GameWindow.title + " | " + "FPS: " + fps + ", Ticks: " + ticks);
                 fps = 0;
                 ticks = 0;
             }

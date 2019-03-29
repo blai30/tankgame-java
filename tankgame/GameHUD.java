@@ -1,5 +1,7 @@
 
 
+import GameObjects.Player;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -8,9 +10,10 @@ import java.awt.image.BufferedImage;
  */
 public class GameHUD {
 
+    private Player[] players;
+
     private int minimapWidth;
     private int minimapHeight;
-
     private BufferedImage minimap;
 
     /**
@@ -18,9 +21,15 @@ public class GameHUD {
      * @param world The game world drawn to the screen
      */
     public GameHUD(BufferedImage world) {
+        this.players = new Player[2];
+
         this.minimapWidth = (int) (((GameWindow.SCREEN_HEIGHT / 3) - 40) * ((float) world.getWidth() / (float) world.getHeight()));
         this.minimapHeight = (GameWindow.SCREEN_HEIGHT / 3) - 40;
         this.minimap = new BufferedImage(minimapWidth, minimapHeight, BufferedImage.TYPE_INT_RGB);
+    }
+
+    public void assignPlayer(int player, Player playerObj) {
+        this.players[player] = playerObj;
     }
 
     public int getMinimapWidth() {

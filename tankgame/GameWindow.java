@@ -8,8 +8,6 @@ import java.io.IOException;
  */
 class GameLauncher {
 
-    public static GameWindow window;
-
     public static void main(String[] args) {
         GamePanel game = new GamePanel();
         game.init();
@@ -19,7 +17,7 @@ class GameLauncher {
             System.err.println(e + ": Program args not given");
             game.loadMap(null);
         }
-        window = new GameWindow(game);
+        game.launch();
     }
 
 }
