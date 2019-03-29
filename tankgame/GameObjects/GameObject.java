@@ -102,6 +102,12 @@ public abstract class GameObject implements CollisionHandling {
         g2d.drawImage(this.sprite, rotation, null);
     }
 
+    public void drawCollider(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+
+        g2d.draw(this.collider);
+    }
+
     /**
      * Draws general information about the game object in the game world to g.
      * This method is called when drawGizmos is true in GamePanel.
@@ -109,11 +115,11 @@ public abstract class GameObject implements CollisionHandling {
      */
     public void drawTransform(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.draw(this.collider);
-//        g2d.drawString("[" + this.getClass().getSimpleName() + "]", this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 12);
-//        g2d.drawString("x: " + this.transform.getPositionX(), this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 24);
-//        g2d.drawString("y: " + this.transform.getPositionY(), this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 36);
-//        g2d.drawString("angle: " + this.transform.getRotation(), this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 48);
+
+        g2d.drawString("[" + this.getClass().getSimpleName() + "]", this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 12);
+        g2d.drawString("x: " + this.transform.getPositionX(), this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 24);
+        g2d.drawString("y: " + this.transform.getPositionY(), this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 36);
+        g2d.drawString("angle: " + this.transform.getRotation(), this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 48);
     }
 
     /**
@@ -137,6 +143,8 @@ public abstract class GameObject implements CollisionHandling {
      * @param g Graphics object that is passed in for the game object to draw to
      */
     public abstract void drawGizmos(Graphics g);
+
+    public abstract void drawVariables(Graphics g);
 
 }
 

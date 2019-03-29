@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Thread thread;
     private boolean running = false;
-    private boolean drawGizmos = true;
+    private boolean drawDebug = false;
 
     private BufferedReader bufferedReader;
     private BufferedImage background = null;
@@ -277,9 +277,11 @@ public class GamePanel extends JPanel implements Runnable {
         for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
             GameObject obj = GameObjectCollection.getGameObject(i);
             obj.drawImage(this.buffer);
-            if (this.drawGizmos) {
+            obj.drawCollider(this.buffer);
+            obj.drawGizmos(this.buffer);
+            if (this.drawDebug) {
                 obj.drawTransform(this.buffer);
-                obj.drawGizmos(this.buffer);
+                obj.drawVariables(this.buffer);
             }
         }
 

@@ -78,4 +78,9 @@ public class SoftWall extends Wall {
 
     }
 
+    @Override
+    public void drawVariables(Graphics g) {
+
+    }
+
 }

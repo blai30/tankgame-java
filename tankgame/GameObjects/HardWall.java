@@ -71,4 +71,9 @@ public class HardWall extends Wall {
 
     }
 
+    @Override
+    public void drawVariables(Graphics g) {
+
+    }
+
 }

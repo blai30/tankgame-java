@@ -88,10 +88,15 @@ public class Bullet extends GameObject {
      */
     @Override
     public void drawGizmos(Graphics g) {
-//        Graphics2D g2d = (Graphics2D) g;
-//
-//        g2d.drawString("totalDamage: " + this.totalDamage, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 60);
-//        g2d.drawString("velocity: " + this.velocity, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 72);
+
+    }
+
+    @Override
+    public void drawVariables(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+
+        g2d.drawString("totalDamage: " + this.totalDamage, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 60);
+        g2d.drawString("velocity: " + this.velocity, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 72);
     }
 
 }
