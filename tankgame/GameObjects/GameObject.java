@@ -145,7 +145,7 @@ public abstract class GameObject implements CollisionHandling {
  */
 interface CollisionHandling {
 
-    void colliding(GameObject collidingObj);
+    void collides(GameObject collidingObj);
     void handleCollision(Tank collidingTank);
     void handleCollision(Wall collidingWall);
     void handleCollision(Bullet collidingBullet);

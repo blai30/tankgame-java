@@ -16,7 +16,7 @@ class GameLauncher {
         try {
             game.loadMap(args[0]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Program args not given");
+            System.err.println(e + ": Program args not given");
             game.loadMap(null);
         }
         window = new GameWindow(game);

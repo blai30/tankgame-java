@@ -8,10 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -55,9 +54,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     /**
      * Loads data from a file to generate a map based on tiles.
-     * '.' = empty space
-     * 'S' = SoftWall
-     * 'H' = HardWall
+     * "-1" = empty space
+     * "S" = SoftWall
+     * "H" = HardWall
      * @param mapFile Name of the file to generate map from
      */
     public void loadMap(String mapFile) {
@@ -78,88 +77,72 @@ public class GamePanel extends JPanel implements Runnable {
             sprSoftWall = ImageIO.read(GamePanel.class.getResourceAsStream("resources/wall1.png"));
             sprHardWall = ImageIO.read(GamePanel.class.getResourceAsStream("resources/wall2.png"));
         } catch (IOException e) {
-            System.out.println("IOException: cannot read image file");
+            System.err.println(e + ": Cannot read image file");
+        }
+
+        // Loading map file
+        InputStream defaultMap = null;
+        try {
+            defaultMap = GamePanel.class.getResourceAsStream("resources/defaultmap.csv");
+            this.bufferedReader = new BufferedReader(new FileReader(mapFile));
+        } catch (IOException | NullPointerException e) {
+            System.err.println(e + ": Cannot load map file, loading default map");
+            this.bufferedReader = new BufferedReader(new InputStreamReader(defaultMap));
+        }
+
+        // Parsing map data from file
+        ArrayList<ArrayList<String>> mapLayout = new ArrayList<>();
+        try {
+            String currentLine;
+            while ((currentLine = bufferedReader.readLine()) != null) {
+                if (currentLine.isEmpty()) {
+                    continue;
+                }
+                // Split row into array of strings and add to array list
+                mapLayout.add(new ArrayList<>(Arrays.asList(currentLine.split(","))));
+            }
+        } catch (IOException | NullPointerException e) {
+            System.out.println(e + ": Error parsing map data");
             e.printStackTrace();
         }
 
-        // No map file was provided, generate empty 1024x1024 map with two player tanks
-        if (mapFile == null) {
-            this.world = new BufferedImage(1024, 1024, BufferedImage.TYPE_INT_RGB);
-            this.gameHUD = new GameHUD(this.world);
+        // Map dimensions
+        int mapWidth = mapLayout.get(0).size();
+        int mapHeight = mapLayout.size();
 
-            Tank tank1 = new Tank(128, 128, 90f, sprTank1, sprBullet1);
-            Tank tank2 = new Tank(846, 846, 270f, sprTank2, sprBullet2);
-            this.camera1 = new Camera(tank1);
-            this.camera2 = new Camera(tank2);
-            PlayerController tankController1 = new PlayerController(tank1, this.controls1);
-            PlayerController tankController2 = new PlayerController(tank2, this.controls2);
-            this.addKeyListener(tankController1);
-            this.addKeyListener(tankController2);
-            GameObjectCollection.spawn(tank1);
-            GameObjectCollection.spawn(tank2);
-        } else {
-            // Loading map data from file
-            ArrayList<ArrayList<Integer>> mapLayout = new ArrayList<>();
-            try {
-                this.bufferedReader = new BufferedReader(new FileReader(mapFile));
+        this.world = new BufferedImage(mapWidth * 32, mapHeight * 32, BufferedImage.TYPE_INT_RGB);
+        this.gameHUD = new GameHUD(this.world);
 
-                String currentLine;
-                while ((currentLine = bufferedReader.readLine()) != null) {
-                    if (currentLine.isEmpty()) {
+        // Generate entire map
+        for (int y = 0; y < mapHeight; y++) {
+            for (int x = 0; x < mapWidth; x++) {
+                switch (mapLayout.get(y).get(x)) {
+                    case ("-1"):    // Blank tile; no game object
                         continue;
-                    }
-
-                    ArrayList<Integer> row = new ArrayList<>();
-                    byte[] tiles = currentLine.getBytes();
-                    for (byte tile : tiles) {
-                        if (tile != ' ') {
-                            row.add((int) tile);
-                        }
-                    }
-                    mapLayout.add(row);
-                }
-            } catch (IOException | NullPointerException e) {
-                System.out.println("Error loading map data");
-                e.printStackTrace();
-            }
-
-            int mapWidth = mapLayout.get(0).size();
-            int mapHeight = mapLayout.size();
-
-            this.world = new BufferedImage(mapWidth * 32, mapHeight * 32, BufferedImage.TYPE_INT_RGB);
-            this.gameHUD = new GameHUD(this.world);
-
-            // Generate entire map
-            for (int y = 0; y < mapHeight; y++) {
-                for (int x = 0; x < mapWidth; x++) {
-                    switch (mapLayout.get(y).get(x)) {
-                        case ((int) '.'):   // Blank tile; no game object
-                            continue;
-                        case ((int) 'S'):   // Soft wall; breakable wall
-                            SoftWall softWall = new SoftWall(x * 32, y * 32, sprSoftWall);
-                            GameObjectCollection.spawn(softWall);
-                            break;
-                        case ((int) 'H'):   // Hard wall; unbreakable wall
-                            HardWall hardWall = new HardWall(x * 32, y * 32, sprHardWall);
-                            GameObjectCollection.spawn(hardWall);
-                            break;
-                        case ((int) '1'):   // Player 1 tank
-                            Tank tank1 = new Tank(x * 32, y * 32, 90f, sprTank1, sprBullet1);
-                            this.camera1 = new Camera(tank1);
-                            PlayerController tankController1 = new PlayerController(tank1, this.controls1);
-                            this.addKeyListener(tankController1);
-                            GameObjectCollection.spawn(tank1);
-                            break;
-                        case ((int) '2'):   // Player 2 tank
-                            Tank tank2 = new Tank(x * 32, y * 32, 270f, sprTank2, sprBullet2);
-                            this.camera2 = new Camera(tank2);
-                            PlayerController tankController2 = new PlayerController(tank2, this.controls2);
-                            this.addKeyListener(tankController2);
-                            GameObjectCollection.spawn(tank2);
-                            break;
-                        default:
-                            break;
-                    }
+                    case ("S"):     // Soft wall; breakable wall
+                        SoftWall softWall = new SoftWall(x * 32, y * 32, sprSoftWall);
+                        GameObjectCollection.spawn(softWall);
+                        break;
+                    case ("H"):     // Hard wall; unbreakable wall
+                        HardWall hardWall = new HardWall(x * 32, y * 32, sprHardWall);
+                        GameObjectCollection.spawn(hardWall);
+                        break;
+                    case ("1"):     // Player 1 tank
+                        Tank tank1 = new Tank(x * 32, y * 32, 90f, sprTank1, sprBullet1);
+                        this.camera1 = new Camera(tank1);
+                        PlayerController tankController1 = new PlayerController(tank1, this.controls1);
+                        this.addKeyListener(tankController1);
+                        GameObjectCollection.spawn(tank1);
+                        break;
+                    case ("2"):     // Player 2 tank
+                        Tank tank2 = new Tank(x * 32, y * 32, 270f, sprTank2, sprBullet2);
+                        this.camera2 = new Camera(tank2);
+                        PlayerController tankController2 = new PlayerController(tank2, this.controls2);
+                        this.addKeyListener(tankController2);
+                        GameObjectCollection.spawn(tank2);
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -248,15 +231,15 @@ public class GamePanel extends JPanel implements Runnable {
                     GameObjectCollection.destroy(obj);
                 } else {
                     for (int j = 0; j < GameObjectCollection.numGameObjects(); j++) {
-                        GameObject colliding = GameObjectCollection.getGameObject(j);
+                        GameObject collidingObj = GameObjectCollection.getGameObject(j);
                         // Skip detecting collision on the same object as itself
-                        if (obj == colliding) {
+                        if (obj == collidingObj) {
                             continue;
                         }
 
                         // Visitor pattern collision handling
-                        if (obj.getCollider().intersects(colliding.getCollider())) {
-                            obj.colliding(colliding);
+                        if (obj.getCollider().intersects(collidingObj.getCollider())) {
+                            obj.collides(collidingObj);
                         }
                     }
                     i++;

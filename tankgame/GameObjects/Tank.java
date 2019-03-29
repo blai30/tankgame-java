@@ -129,7 +129,7 @@ public class Tank extends Player implements SolidObject {
     }
 
     @Override
-    public void colliding(GameObject collidingObj) {
+    public void collides(GameObject collidingObj) {
         collidingObj.handleCollision(this);
     }
 

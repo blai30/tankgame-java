@@ -60,7 +60,7 @@ public class Bullet extends GameObject {
     }
 
     @Override
-    public void colliding(GameObject collidingObj) {
+    public void collides(GameObject collidingObj) {
         collidingObj.handleCollision(this);
     }
 
