@@ -150,7 +150,6 @@ public class Tank extends Player implements SolidObject {
 
     /**
      * Draws additional information about the tank object to the game world such as aim line.
-     * This method is called when drawGizmos is true in GamePanel.
      * @param g Graphics object that is passed in for the game object to draw to
      */
     @Override
@@ -163,6 +162,11 @@ public class Tank extends Player implements SolidObject {
         g2d.drawLine((int) (this.transform.getPositionX() + this.originOffset.getX()), (int) (this.transform.getPositionY() + this.originOffset.getY()), (int) (this.transform.getPositionX() + this.originOffset.getX() + toX), (int) (this.transform.getPositionY() + this.originOffset.getY() + toY));
     }
 
+    /**
+     * Draws the game object's variables in the game world to g.
+     * This method is called when drawDebug is true in GamePanel.
+     * @param g Graphics object that is passed in for the game object to draw to
+     */
     @Override
     public void drawVariables(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;

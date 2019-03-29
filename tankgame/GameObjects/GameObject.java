@@ -139,11 +139,15 @@ public abstract class GameObject implements CollisionHandling {
     /**
      * Draws additional information about the game object in the game world to g.
      * (ie. the aim line for tanks)
-     * This method is called when drawGizmos is true in GamePanel.
      * @param g Graphics object that is passed in for the game object to draw to
      */
     public abstract void drawGizmos(Graphics g);
 
+    /**
+     * Draws the game object's variables in the game world to g.
+     * This method is called when drawDebug is true in GamePanel.
+     * @param g Graphics object that is passed in for the game object to draw to
+     */
     public abstract void drawVariables(Graphics g);
 
 }

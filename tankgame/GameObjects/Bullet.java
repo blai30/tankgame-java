@@ -91,6 +91,11 @@ public class Bullet extends GameObject {
 
     }
 
+    /**
+     * Draws the game object's variables in the game world to g.
+     * This method is called when drawDebug is true in GamePanel.
+     * @param g Graphics object that is passed in for the game object to draw to
+     */
     @Override
     public void drawVariables(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;

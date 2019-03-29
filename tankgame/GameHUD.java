@@ -32,6 +32,14 @@ public class GameHUD {
     }
 
     /**
+     * Called by GamePanel to draw the minimap on the screen.
+     * @return The view of the minimap of the game world
+     */
+    public BufferedImage getMinimap() {
+        return minimap;
+    }
+
+    /**
      * Continuously redraw the view of the minimap to be based on the game world.
      * @param world The game world drawn to the screen
      */
@@ -39,14 +47,6 @@ public class GameHUD {
         Graphics g = this.minimap.createGraphics();
         g.drawImage(world, 0, 0, minimapWidth, minimapHeight, null);
         g.dispose();
-    }
-
-    /**
-     * Called by GamePanel to draw the minimap on the screen.
-     * @return The view of the minimap of the game world
-     */
-    public BufferedImage getMinimap() {
-        return minimap;
     }
 
 }

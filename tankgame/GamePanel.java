@@ -279,6 +279,8 @@ public class GamePanel extends JPanel implements Runnable {
             obj.drawImage(this.buffer);
             obj.drawCollider(this.buffer);
             obj.drawGizmos(this.buffer);
+
+            // Draw debug information
             if (this.drawDebug) {
                 obj.drawTransform(this.buffer);
                 obj.drawVariables(this.buffer);
