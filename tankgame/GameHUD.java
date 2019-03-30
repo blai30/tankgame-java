@@ -75,31 +75,40 @@ public class GameHUD {
         Graphics p1graphics = this.p1info.createGraphics();
         Graphics p2graphics = this.p2info.createGraphics();
         Graphics map = this.minimap.createGraphics();
+
+        p1graphics.clearRect(0, 0, p1info.getWidth(), p1info.getHeight());
+        p2graphics.clearRect(0, 0, p2info.getWidth(), p2info.getHeight());
+        map.clearRect(0, 0, minimap.getWidth(), minimap.getHeight());
+
         Font font = new Font("Courier New", Font.PLAIN,18);
 
-        p1graphics.setFont(font);
+        // Draw Player 1 information
         p1graphics.setColor(Color.RED);
         p1graphics.drawRect(4, 2, this.p1info.getWidth() - 8, this.p1info.getHeight() - 6);
         p1graphics.drawImage(this.players[0].getSprite(), 32, 32, null);
+
         p1graphics.setColor(Color.WHITE);
+        p1graphics.setFont(font);
         int separator = 0;
         for (Map.Entry<String, Number> entry : this.players[0].getStats().entrySet()) {
-            p1graphics.drawString(entry.getKey(), 128, 44 + separator);
-            p1graphics.drawString(":", 256, 44 + separator);
-            p1graphics.drawString(entry.getValue().toString(), 288, 44 + separator);
+            p1graphics.drawString(entry.getKey(), 150, 96 + separator);
+            p1graphics.drawString(":", 290, 96 + separator);
+            p1graphics.drawString(entry.getValue().toString(), 320, 96 + separator);
             separator += 24;
         }
 
-        p2graphics.setFont(font);
+        // Draw Player 2 information
         p2graphics.setColor(Color.BLUE);
         p2graphics.drawRect(4, 2, this.p2info.getWidth() - 26, this.p2info.getHeight() - 6);
         p2graphics.drawImage(this.players[1].getSprite(), 32, 32, null);
+
         p2graphics.setColor(Color.WHITE);
+        p2graphics.setFont(font);
         separator = 0;
         for (Map.Entry<String, Number> entry : this.players[1].getStats().entrySet()) {
-            p2graphics.drawString(entry.getKey(), 128, 44 + separator);
-            p2graphics.drawString(":", 256, 44 + separator);
-            p2graphics.drawString(entry.getValue().toString(), 288, 44 + separator);
+            p2graphics.drawString(entry.getKey(), 150, 96 + separator);
+            p2graphics.drawString(":", 290, 96 + separator);
+            p2graphics.drawString(entry.getValue().toString(), 320, 96 + separator);
             separator += 24;
         }
 
