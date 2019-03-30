@@ -72,8 +72,8 @@ public class Wall extends GameObject implements SolidObject {
     public void handleCollision(Bullet collidingBullet) {
         if (this.isBreakable) {
             this.takeDamage(collidingBullet.dealDamage());
-            collidingBullet.destroy();
         }
+        collidingBullet.destroy();
     }
 
     @Override

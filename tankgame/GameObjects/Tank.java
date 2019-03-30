@@ -78,11 +78,11 @@ public class Tank extends Player implements SolidObject {
         this.moveSpeed = 4.2f;
         this.fireRate = 1.0f;
         this.bonusDamage = 0;
-        this.armor = 2;
+        this.armor = 0;
         this.ammo = 5;
 
-        this.fireCooldown = 20f;
-        this.fireDelay = 20f;
+        this.fireCooldown = 30f;
+        this.fireDelay = 30f;
     }
 
     private void rotateRight() {
