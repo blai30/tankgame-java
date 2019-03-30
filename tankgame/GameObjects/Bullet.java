@@ -15,7 +15,7 @@ public class Bullet extends GameObject {
     private int totalDamage = 1;
     private float velocity;
 
-    private float timePassed;
+    private boolean exitBarrel;
 
     /**
      * Constructs a new bullet object with generic data.
@@ -55,7 +55,11 @@ public class Bullet extends GameObject {
     private void init() {
         this.velocity = 12.0f;
 
-        this.timePassed = 0f;
+        this.exitBarrel = false;
+    }
+
+    public int dealDamage() {
+        return this.totalDamage;
     }
 
     /**
@@ -65,8 +69,6 @@ public class Bullet extends GameObject {
     public void update() {
         this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
         this.transform.move(this.velocity);
-
-        this.timePassed += 1f;
     }
 
     @Override
@@ -76,11 +78,7 @@ public class Bullet extends GameObject {
 
     @Override
     public void handleCollision(Tank collidingTank) {
-        // Prevent bullet from getting destroyed immediately when spawning
-        if (this.timePassed >= 7f) {
-            collidingTank.takeDamage(this.totalDamage);
-            this.destroy();
-        }
+
     }
 
     @Override
@@ -93,7 +91,7 @@ public class Bullet extends GameObject {
 
     @Override
     public void handleCollision(Bullet collidingBullet) {
-
+        collidingBullet.destroy();
     }
 
     /**

@@ -16,8 +16,10 @@ public class Tank extends Player implements SolidObject {
     private final float ROTATION_SPEED = 3.2f;
 
     private BufferedImage sprBullet;
+    private Bullet bullet;
 
-    private int hitPoints;
+    private int maxHP;
+    private int currentHP;
     private int lives;
     private float moveSpeed;
     private float fireRate;
@@ -70,7 +72,8 @@ public class Tank extends Player implements SolidObject {
 
     private void init() {
         // Default stats
-        this.hitPoints = 10;
+        this.maxHP = 10;
+        this.currentHP = this.maxHP;
         this.lives = 5;
         this.moveSpeed = 4.2f;
         this.fireRate = 1.0f;
@@ -100,7 +103,8 @@ public class Tank extends Player implements SolidObject {
 
     private void fire() {
         if (this.fireCooldown >= this.fireDelay) {
-            this.instantiate(new Bullet(this.sprBullet, this.bonusDamage), this.transform.getPosition().add(this.originOffset), this.transform.getRotation());
+            this.bullet = new Bullet(this.sprBullet, this.bonusDamage);
+            this.instantiate(this.bullet, this.transform.getPosition().add(this.originOffset), this.transform.getRotation());
             this.ammo--;
             this.fireCooldown = 0;
         }
@@ -108,14 +112,14 @@ public class Tank extends Player implements SolidObject {
 
     private void respawn() {
         this.lives--;
-        this.hitPoints = 10;
+        this.currentHP = this.maxHP;
         // TODO: respawn at new location
     }
 
-    public void takeDamage(int damageDealt) {
+    private void takeDamage(int damageDealt) {
         // Always deal at least 1 damage regardless of armor
-        this.hitPoints -= Math.max(1, damageDealt - this.armor);
-        if (this.hitPoints <= 0) {
+        this.currentHP -= Math.max(1, damageDealt - this.armor);
+        if (this.currentHP <= 0) {
             this.respawn();
         }
     }
@@ -124,7 +128,7 @@ public class Tank extends Player implements SolidObject {
     public LinkedHashMap<String, Number> getStats() {
         LinkedHashMap<String, Number> statsCollection = new LinkedHashMap<>();
 
-        statsCollection.put("Health", this.hitPoints);
+        statsCollection.put("Health", this.currentHP);
         statsCollection.put("Lives", this.lives);
         statsCollection.put("Speed", this.moveSpeed);
         statsCollection.put("Fire Rate", this.fireRate);
@@ -185,7 +189,11 @@ public class Tank extends Player implements SolidObject {
 
     @Override
     public void handleCollision(Bullet collidingBullet) {
-
+        // Prevent bullet from dealing damage to the tank that fires it
+        if (this.bullet != collidingBullet) {
+            this.takeDamage(collidingBullet.dealDamage());
+            collidingBullet.destroy();
+        }
     }
 
     /**
@@ -211,7 +219,7 @@ public class Tank extends Player implements SolidObject {
     public void drawVariables(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.drawString("hitPoints: " + this.hitPoints, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 60);
+        g2d.drawString("currentHP: " + this.currentHP, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 60);
         g2d.drawString("moveSpeed: " + this.moveSpeed, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 72);
         g2d.drawString("fireRate: " + this.fireRate, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 84);
         g2d.drawString("bonusDamage: " + this.bonusDamage, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 96);
