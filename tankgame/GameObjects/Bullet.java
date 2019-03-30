@@ -15,6 +15,8 @@ public class Bullet extends GameObject {
     private int totalDamage = 1;
     private float velocity;
 
+    private float timePassed;
+
     /**
      * Constructs a new bullet object with generic data.
      * @param sprite The image of this bullet passed in by a tank object drawn to the screen
@@ -52,6 +54,8 @@ public class Bullet extends GameObject {
 
     private void init() {
         this.velocity = 12.0f;
+
+        this.timePassed = 0f;
     }
 
     /**
@@ -61,6 +65,8 @@ public class Bullet extends GameObject {
     public void update() {
         this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
         this.transform.move(this.velocity);
+
+        this.timePassed += 1f;
     }
 
     @Override
@@ -70,7 +76,9 @@ public class Bullet extends GameObject {
 
     @Override
     public void handleCollision(Tank collidingTank) {
-
+        if (this.timePassed >= 10f) {
+            this.destroy();
+        }
     }
 
     @Override
