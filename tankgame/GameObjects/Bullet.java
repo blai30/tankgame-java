@@ -83,10 +83,7 @@ public class Bullet extends GameObject {
 
     @Override
     public void handleCollision(Wall collidingWall) {
-        if (collidingWall.isBreakable()) {
-            collidingWall.takeDamage(this.totalDamage);
-        }
-        this.destroy();
+
     }
 
     @Override

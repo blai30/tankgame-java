@@ -41,7 +41,7 @@ public class Wall extends GameObject implements SolidObject {
         this.hitPoints = 1;
     }
 
-    public void takeDamage(int damageDealt) {
+    private void takeDamage(int damageDealt) {
         this.hitPoints -= damageDealt;
         if (this.hitPoints <= 0) {
             this.destroy();
@@ -70,7 +70,10 @@ public class Wall extends GameObject implements SolidObject {
 
     @Override
     public void handleCollision(Bullet collidingBullet) {
-
+        if (this.isBreakable) {
+            this.takeDamage(collidingBullet.dealDamage());
+            collidingBullet.destroy();
+        }
     }
 
     @Override
