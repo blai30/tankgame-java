@@ -24,6 +24,9 @@ public class Tank extends Player implements SolidObject {
     private int armor;
     private int ammo;
 
+    private float fireCooldown;
+    private float fireDelay;
+
     /**
      * Constructs a tank by passing in a Transform object that the tank will now own.
      * @param transform The tank will take control of this Transform
@@ -72,6 +75,9 @@ public class Tank extends Player implements SolidObject {
         this.bonusDamage = 0;
         this.armor = 1;
         this.ammo = 5;
+
+        this.fireCooldown = 20f;
+        this.fireDelay = 20f;
     }
 
     private void rotateRight() {
@@ -91,10 +97,11 @@ public class Tank extends Player implements SolidObject {
     }
 
     private void fire() {
-//        if (this.ammo > 0) {
+        if (this.fireCooldown >= this.fireDelay) {
             this.instantiate(new Bullet(this.sprBullet, this.bonusDamage), this.transform.getPosition().add(this.originOffset), this.transform.getRotation());
             this.ammo--;
-//        }
+            this.fireCooldown = 0;
+        }
     }
 
     @Override
@@ -118,6 +125,10 @@ public class Tank extends Player implements SolidObject {
     public void update() {
         this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
 
+        if (this.fireCooldown <= this.fireDelay) {
+            this.fireCooldown += this.fireRate;
+        }
+
         // Movement
         if (this.UpPressed) {
             this.moveForwards();
@@ -137,7 +148,6 @@ public class Tank extends Player implements SolidObject {
         // Weapon
         if (this.ActionPressed) {
             this.fire();
-            this.ActionPressed = false;
         }
     }
 
