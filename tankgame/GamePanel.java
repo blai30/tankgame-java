@@ -80,8 +80,8 @@ public class GamePanel extends JPanel implements Runnable {
             sprTank2 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/tank2.png"));
             sprBullet1 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bullet1.png"));
             sprBullet2 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bullet2.png"));
-            sprSoftWall = ImageIO.read(GamePanel.class.getResourceAsStream("resources/wall1.png"));
-            sprHardWall = ImageIO.read(GamePanel.class.getResourceAsStream("resources/wall2.png"));
+            sprSoftWall = ImageIO.read(GamePanel.class.getResourceAsStream("resources/wallS.png"));
+            sprHardWall = ImageIO.read(GamePanel.class.getResourceAsStream("resources/wallH.png"));
         } catch (IOException e) {
             System.err.println(e + ": Cannot read image file");
         }
