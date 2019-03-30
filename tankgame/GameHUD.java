@@ -4,6 +4,7 @@ import GameObjects.Player;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Map;
 
 /**
  * Displays various game information on the screen such as a minimap of the game world.
@@ -12,9 +13,14 @@ public class GameHUD {
 
     private Player[] players;
 
+    private int HUDHeight;
+
     private int minimapWidth;
-    private int minimapHeight;
     private BufferedImage minimap;
+
+    private int infoWidth;
+    private BufferedImage p1info;
+    private BufferedImage p2info;
 
     /**
      * Constructs the game HUD with the minimap being a third of the window size.
@@ -23,21 +29,34 @@ public class GameHUD {
     public GameHUD(BufferedImage world) {
         this.players = new Player[2];
 
+        this.HUDHeight = (GameWindow.SCREEN_HEIGHT / 3) - 40;
+
         this.minimapWidth = (int) (((GameWindow.SCREEN_HEIGHT / 3) - 40) * ((float) world.getWidth() / (float) world.getHeight()));
-        this.minimapHeight = (GameWindow.SCREEN_HEIGHT / 3) - 40;
-        this.minimap = new BufferedImage(minimapWidth, minimapHeight, BufferedImage.TYPE_INT_RGB);
+        this.minimap = new BufferedImage(this.minimapWidth, this.HUDHeight, BufferedImage.TYPE_INT_RGB);
+
+        this.infoWidth = (GameWindow.SCREEN_WIDTH / 2) - (this.minimapWidth / 2);
+        this.p1info = new BufferedImage(this.infoWidth, this.HUDHeight, BufferedImage.TYPE_INT_RGB);
+        this.p2info = new BufferedImage(this.infoWidth, this.HUDHeight, BufferedImage.TYPE_INT_RGB);
     }
 
     public void assignPlayer(int player, Player playerObj) {
         this.players[player] = playerObj;
     }
 
+    public int getHUDHeight() {
+        return this.HUDHeight;
+    }
+
     public int getMinimapWidth() {
         return this.minimapWidth;
     }
 
-    public int getMinimapHeight() {
-        return this.minimapHeight;
+    public BufferedImage getP1info() {
+        return this.p1info;
+    }
+
+    public BufferedImage getP2info() {
+        return this.p2info;
     }
 
     /**
@@ -53,9 +72,42 @@ public class GameHUD {
      * @param world The game world drawn to the screen
      */
     public void redraw(BufferedImage world) {
-        Graphics g = this.minimap.createGraphics();
-        g.drawImage(world, 0, 0, minimapWidth, minimapHeight, null);
-        g.dispose();
+        Graphics p1graphics = this.p1info.createGraphics();
+        Graphics p2graphics = this.p2info.createGraphics();
+        Graphics map = this.minimap.createGraphics();
+        Font font = new Font("Courier New", Font.PLAIN,18);
+
+        p1graphics.setFont(font);
+        p1graphics.setColor(Color.RED);
+        p1graphics.drawRect(4, 2, this.p1info.getWidth() - 8, this.p1info.getHeight() - 6);
+        p1graphics.drawImage(this.players[0].getSprite(), 32, 32, null);
+        p1graphics.setColor(Color.WHITE);
+        int separator = 0;
+        for (Map.Entry<String, Number> entry : this.players[0].getStats().entrySet()) {
+            p1graphics.drawString(entry.getKey(), 128, 44 + separator);
+            p1graphics.drawString(":", 256, 44 + separator);
+            p1graphics.drawString(entry.getValue().toString(), 288, 44 + separator);
+            separator += 24;
+        }
+
+        p2graphics.setFont(font);
+        p2graphics.setColor(Color.BLUE);
+        p2graphics.drawRect(4, 2, this.p2info.getWidth() - 26, this.p2info.getHeight() - 6);
+        p2graphics.drawImage(this.players[1].getSprite(), 32, 32, null);
+        p2graphics.setColor(Color.WHITE);
+        separator = 0;
+        for (Map.Entry<String, Number> entry : this.players[1].getStats().entrySet()) {
+            p2graphics.drawString(entry.getKey(), 128, 44 + separator);
+            p2graphics.drawString(":", 256, 44 + separator);
+            p2graphics.drawString(entry.getValue().toString(), 288, 44 + separator);
+            separator += 24;
+        }
+
+        map.drawImage(world, 0, 0, this.minimapWidth, this.HUDHeight, null);
+
+        p1graphics.dispose();
+        p2graphics.dispose();
+        map.dispose();
     }
 
 }

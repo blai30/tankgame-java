@@ -1,5 +1,7 @@
 package GameObjects;
 
+import java.util.HashMap;
+
 /**
  * A game object that extends this class is allowed to be controlled by a player.
  */
@@ -50,5 +52,7 @@ public abstract class Player extends GameObject {
     public void unToggleActionPressed() {
         this.ActionPressed = false;
     }
+
+    public abstract HashMap<String, Number> getStats();
 
 }

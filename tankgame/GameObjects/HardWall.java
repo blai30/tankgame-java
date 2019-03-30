@@ -6,6 +6,7 @@ import util.Vector2D;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 /**
  * An unbreakable wall.

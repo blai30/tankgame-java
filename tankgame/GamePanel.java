@@ -301,7 +301,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.gameHUD.redraw(this.world);
         g2.drawImage(this.camera1.getScreen(), 0, 0, null);
         g2.drawImage(this.camera2.getScreen(), GameWindow.SCREEN_WIDTH / 2, 0, null);
-        g2.drawImage(this.gameHUD.getMinimap(), (GameWindow.SCREEN_WIDTH / 2) - (gameHUD.getMinimapWidth() / 2), GameWindow.SCREEN_HEIGHT - (GameWindow.SCREEN_HEIGHT / 3), null);
+        g2.drawImage(this.gameHUD.getMinimap(), (GameWindow.SCREEN_WIDTH / 2) - (this.gameHUD.getMinimapWidth() / 2), GameWindow.SCREEN_HEIGHT - (GameWindow.SCREEN_HEIGHT / 3), null);
+        g2.drawImage(this.gameHUD.getP1info(), 0, GameWindow.SCREEN_HEIGHT - (GameWindow.SCREEN_HEIGHT / 3), null);
+        g2.drawImage(this.gameHUD.getP2info(), (GameWindow.SCREEN_WIDTH / 2) + (this.gameHUD.getMinimapWidth() / 2), GameWindow.SCREEN_HEIGHT - (GameWindow.SCREEN_HEIGHT / 3), null);
 
         g2.dispose();
         this.buffer.dispose();

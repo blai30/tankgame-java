@@ -29,7 +29,7 @@ public class Bullet extends GameObject {
         this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
 
         this.totalDamage += damage;
-        this.velocity = 12.0f;
+        this.init();
     }
 
     /**
@@ -47,6 +47,10 @@ public class Bullet extends GameObject {
         this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
 
         this.totalDamage += damage;
+        this.init();
+    }
+
+    private void init() {
         this.velocity = 12.0f;
     }
 

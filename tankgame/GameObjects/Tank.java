@@ -6,6 +6,7 @@ import util.Vector2D;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.LinkedHashMap;
 
 /**
  * Tank object to be controlled by a player.
@@ -39,13 +40,7 @@ public class Tank extends Player implements SolidObject {
         this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
         this.sprBullet = sprBullet;
 
-        // Default stats
-        this.hitPoints = 10;
-        this.moveSpeed = 4.2f;
-        this.fireRate = 1.0f;
-        this.bonusDamage = 0;
-        this.armor = 1;
-        this.ammo = 5;
+        this.init();
     }
 
     /**
@@ -66,6 +61,10 @@ public class Tank extends Player implements SolidObject {
         this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
         this.sprBullet = sprBullet;
 
+        this.init();
+    }
+
+    private void init() {
         // Default stats
         this.hitPoints = 10;
         this.moveSpeed = 4.2f;
@@ -96,6 +95,20 @@ public class Tank extends Player implements SolidObject {
             this.instantiate(new Bullet(this.sprBullet, this.bonusDamage), this.transform.getPosition().add(this.originOffset), this.transform.getRotation());
             this.ammo--;
 //        }
+    }
+
+    @Override
+    public LinkedHashMap<String, Number> getStats() {
+        LinkedHashMap<String, Number> statsCollection = new LinkedHashMap<>();
+
+        statsCollection.put("Health", this.hitPoints);
+        statsCollection.put("Speed", this.moveSpeed);
+        statsCollection.put("Fire Rate", this.fireRate);
+        statsCollection.put("Damage", this.bonusDamage);
+        statsCollection.put("Armor", this.armor);
+        statsCollection.put("Ammo", this.ammo);
+
+        return statsCollection;
     }
 
     /**
