@@ -76,7 +76,9 @@ public class Bullet extends GameObject {
 
     @Override
     public void handleCollision(Tank collidingTank) {
-        if (this.timePassed >= 10f) {
+        // Prevent bullet from getting destroyed immediately when spawning
+        if (this.timePassed >= 7f) {
+            collidingTank.takeDamage(this.totalDamage);
             this.destroy();
         }
     }

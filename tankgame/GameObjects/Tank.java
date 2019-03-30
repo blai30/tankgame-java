@@ -18,6 +18,7 @@ public class Tank extends Player implements SolidObject {
     private BufferedImage sprBullet;
 
     private int hitPoints;
+    private int lives;
     private float moveSpeed;
     private float fireRate;
     private int bonusDamage;
@@ -70,10 +71,11 @@ public class Tank extends Player implements SolidObject {
     private void init() {
         // Default stats
         this.hitPoints = 10;
+        this.lives = 5;
         this.moveSpeed = 4.2f;
         this.fireRate = 1.0f;
         this.bonusDamage = 0;
-        this.armor = 1;
+        this.armor = 2;
         this.ammo = 5;
 
         this.fireCooldown = 20f;
@@ -104,11 +106,26 @@ public class Tank extends Player implements SolidObject {
         }
     }
 
+    private void respawn() {
+        this.lives--;
+        this.hitPoints = 10;
+        // TODO: respawn at new location
+    }
+
+    public void takeDamage(int damageDealt) {
+        // Always deal at least 1 damage regardless of armor
+        this.hitPoints -= Math.max(1, damageDealt - this.armor);
+        if (this.hitPoints <= 0) {
+            this.respawn();
+        }
+    }
+
     @Override
     public LinkedHashMap<String, Number> getStats() {
         LinkedHashMap<String, Number> statsCollection = new LinkedHashMap<>();
 
         statsCollection.put("Health", this.hitPoints);
+        statsCollection.put("Lives", this.lives);
         statsCollection.put("Speed", this.moveSpeed);
         statsCollection.put("Fire Rate", this.fireRate);
         statsCollection.put("Damage", this.bonusDamage);
