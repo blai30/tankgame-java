@@ -42,6 +42,10 @@ public abstract class GameObject implements CollisionHandling {
         this.destroyed = true;
     }
 
+    /**
+     * Handle collision with solid objects such as walls.
+     * @param obj A solid object such as a wall
+     */
     protected void solidCollision(GameObject obj) {
         if (obj instanceof SolidObject) {
             Rectangle2D intersection = this.collider.createIntersection(obj.collider);
@@ -102,9 +106,12 @@ public abstract class GameObject implements CollisionHandling {
         g2d.drawImage(this.sprite, rotation, null);
     }
 
+    /**
+     * Draw the game object's collider to the game world for debugging.
+     * @param g Graphics object that is passed in for the game object to draw to
+     */
     public void drawCollider(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-
         g2d.draw(this.collider);
     }
 
@@ -115,7 +122,6 @@ public abstract class GameObject implements CollisionHandling {
      */
     public void drawTransform(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-
         g2d.drawString("[" + this.getClass().getSimpleName() + "]", this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 12);
         g2d.drawString("x: " + this.transform.getPositionX(), this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 24);
         g2d.drawString("y: " + this.transform.getPositionY(), this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 36);
