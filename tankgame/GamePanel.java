@@ -137,10 +137,12 @@ public class GamePanel extends JPanel implements Runnable {
                 switch (mapLayout.get(y).get(x)) {
                     case ("-1"):    // Blank tile; no game object
                         continue;
+
                     case ("S"):     // Soft wall; breakable wall
                         Wall softWall = new Wall(x * 32, y * 32, sprSoftWall, true);
                         GameObjectCollection.spawn(softWall);
                         break;
+
                     case ("H"):     // Hard wall; unbreakable wall
                         // Code used to choose tile based on adjacent tiles
                         byte code = 0;
@@ -160,6 +162,7 @@ public class GamePanel extends JPanel implements Runnable {
                         Wall hardWall = new Wall(x * 32, y * 32, this.tileMap.get(code), false);
                         GameObjectCollection.spawn(hardWall);
                         break;
+
                     case ("1"):     // Player 1 tank
                         Tank tank1 = new Tank(x * 32, y * 32, 90f, sprTank1, sprBullet1);
                         this.camera1 = new Camera(tank1);
@@ -168,6 +171,7 @@ public class GamePanel extends JPanel implements Runnable {
                         this.gameHUD.assignPlayer(0, tank1);
                         GameObjectCollection.spawn(tank1);
                         break;
+
                     case ("2"):     // Player 2 tank
                         Tank tank2 = new Tank(x * 32, y * 32, 270f, sprTank2, sprBullet2);
                         this.camera2 = new Camera(tank2);
@@ -176,6 +180,7 @@ public class GamePanel extends JPanel implements Runnable {
                         this.gameHUD.assignPlayer(1, tank2);
                         GameObjectCollection.spawn(tank2);
                         break;
+
                     default:
                         break;
                 }
