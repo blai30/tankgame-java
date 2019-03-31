@@ -356,9 +356,9 @@ public class GamePanel extends JPanel implements Runnable {
         // Draw GameObjects
         for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
             GameObject obj = GameObjectCollection.getGameObject(i);
+            obj.drawGizmos(this.buffer);    // Draw gizmos under game objects
             obj.drawImage(this.buffer);
 //            obj.drawCollider(this.buffer);
-            obj.drawGizmos(this.buffer);
 
             // Draw debug information
             if (this.drawDebug) {

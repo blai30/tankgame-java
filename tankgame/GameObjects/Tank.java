@@ -203,6 +203,7 @@ public class Tank extends Player implements SolidObject {
     @Override
     public void drawGizmos(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.GREEN);
 
         // Draw aim line
         float toX = (float) (500 * Math.cos(Math.toRadians(this.transform.getRotation())));
