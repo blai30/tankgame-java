@@ -159,7 +159,7 @@ public abstract class GameObject implements CollisionHandling {
 }
 
 /**
- * Visitor pattern.
+ * Visitor pattern collision detection for game objects.
  */
 interface CollisionHandling {
 
