@@ -19,8 +19,7 @@ public class GameHUD {
     private BufferedImage minimap;
 
     private int infoWidth;
-    private BufferedImage p1info;
-    private BufferedImage p2info;
+    private BufferedImage playerInfo[];
 
     /**
      * Constructs the game HUD with the minimap being a third of the window size.
@@ -35,8 +34,10 @@ public class GameHUD {
         this.minimap = new BufferedImage(this.minimapWidth, this.HUDHeight, BufferedImage.TYPE_INT_RGB);
 
         this.infoWidth = (GameWindow.SCREEN_WIDTH / 2) - (this.minimapWidth / 2);
-        this.p1info = new BufferedImage(this.infoWidth, this.HUDHeight, BufferedImage.TYPE_INT_RGB);
-        this.p2info = new BufferedImage(this.infoWidth, this.HUDHeight, BufferedImage.TYPE_INT_RGB);
+
+        this.playerInfo = new BufferedImage[2];
+        this.playerInfo[0] = new BufferedImage(this.infoWidth, this.HUDHeight, BufferedImage.TYPE_INT_RGB);
+        this.playerInfo[1] = new BufferedImage(this.infoWidth, this.HUDHeight, BufferedImage.TYPE_INT_RGB);
     }
 
     public void assignPlayer(int player, Player playerObj) {
@@ -52,11 +53,11 @@ public class GameHUD {
     }
 
     public BufferedImage getP1info() {
-        return this.p1info;
+        return this.playerInfo[0];
     }
 
     public BufferedImage getP2info() {
-        return this.p2info;
+        return this.playerInfo[1];
     }
 
     /**
@@ -73,60 +74,43 @@ public class GameHUD {
      * @param world The game world drawn to the screen
      */
     public void redraw(BufferedImage world) {
-        Graphics p1graphics = this.p1info.createGraphics();
-        Graphics p2graphics = this.p2info.createGraphics();
+        Graphics[] playerGraphics = { this.playerInfo[0].createGraphics(), this.playerInfo[1].createGraphics() };
         Graphics map = this.minimap.createGraphics();
 
-        p1graphics.clearRect(0, 0, p1info.getWidth(), p1info.getHeight());
-        p2graphics.clearRect(0, 0, p2info.getWidth(), p2info.getHeight());
+        playerGraphics[0].clearRect(0, 0, playerInfo[0].getWidth(), playerInfo[0].getHeight());
+        playerGraphics[1].clearRect(0, 0, playerInfo[1].getWidth(), playerInfo[1].getHeight());
         map.clearRect(0, 0, minimap.getWidth(), minimap.getHeight());
 
         Font font = new Font("Courier New", Font.PLAIN,18);
 
-        // Draw Player 1 information
-        p1graphics.setColor(Color.RED);
-        p1graphics.drawRect(4, 2, this.p1info.getWidth() - 8, this.p1info.getHeight() - 6);
-        p1graphics.drawImage(this.players[0].getSprite(), 32, 32, null);
-        // Draw health bar
-        p1graphics.setColor(Color.WHITE);
-        p1graphics.drawRect(150, 32, 240, 16);
-        p1graphics.setColor((this.players[0].getHP() > 3) ? Color.GREEN : Color.RED);
-        p1graphics.fillRect(150, 32, this.players[0].getHP() * 24, 16);
-        // Draw stats
-        p1graphics.setColor(Color.WHITE);
-        p1graphics.setFont(font);
-        int separator = 0;
-        for (Map.Entry<String, Integer> entry : this.players[0].getStats().entrySet()) {
-            p1graphics.drawString(entry.getKey(), 150, 96 + separator);
-            p1graphics.drawString(":", 320, 96 + separator);
-            p1graphics.drawString(entry.getValue().toString(), 350, 96 + separator);
-            separator += 24;
+        playerGraphics[0].setColor(Color.RED);      // Player 1
+        playerGraphics[1].setColor(Color.BLUE);     // Player 2
+        for (int i = 0; i < playerGraphics.length; i++) {
+            // Draw player info box
+            playerGraphics[i].drawRect(4, 2, this.playerInfo[i].getWidth() - 8, this.playerInfo[i].getHeight() - 6);
+            playerGraphics[i].drawImage(this.players[i].getSprite(), 32, 32, null);
+            // Draw health bar
+            playerGraphics[i].setColor(Color.WHITE);
+            playerGraphics[i].drawRect(150, 32, 240, 16);
+            playerGraphics[i].setColor((this.players[i].getHP() > 3) ? Color.GREEN : Color.RED);
+            playerGraphics[i].fillRect(150, 32, this.players[i].getHP() * 24, 16);
+            // Draw stats
+            playerGraphics[i].setColor(Color.WHITE);
+            playerGraphics[i].setFont(font);
+            int separator = 0;
+            for (Map.Entry<String, Integer> entry : this.players[i].getStats().entrySet()) {
+                playerGraphics[i].drawString(entry.getKey(), 150, 96 + separator);
+                playerGraphics[i].drawString(":", 320, 96 + separator);
+                playerGraphics[i].drawString(entry.getValue().toString(), 350, 96 + separator);
+                separator += 24;
+            }
         }
 
-        // Draw Player 2 information
-        p2graphics.setColor(Color.BLUE);
-        p2graphics.drawRect(4, 2, this.p2info.getWidth() - 26, this.p2info.getHeight() - 6);
-        p2graphics.drawImage(this.players[1].getSprite(), 32, 32, null);
-        // Draw health bar
-        p2graphics.setColor(Color.WHITE);
-        p2graphics.drawRect(150, 32, 240, 16);
-        p2graphics.setColor((this.players[1].getHP() > 3) ? Color.GREEN : Color.RED);
-        p2graphics.fillRect(150, 32, this.players[1].getHP() * 24, 16);
-        // Draw stats
-        p2graphics.setColor(Color.WHITE);
-        p2graphics.setFont(font);
-        separator = 0;
-        for (Map.Entry<String, Integer> entry : this.players[1].getStats().entrySet()) {
-            p2graphics.drawString(entry.getKey(), 150, 96 + separator);
-            p2graphics.drawString(":", 320, 96 + separator);
-            p2graphics.drawString(entry.getValue().toString(), 350, 96 + separator);
-            separator += 24;
-        }
-
+        // Draw minimap
         map.drawImage(world, 0, 0, this.minimapWidth, this.HUDHeight, null);
 
-        p1graphics.dispose();
-        p2graphics.dispose();
+        playerGraphics[0].dispose();
+        playerGraphics[1].dispose();
         map.dispose();
     }
 
