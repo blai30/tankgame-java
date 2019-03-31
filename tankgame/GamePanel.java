@@ -145,7 +145,7 @@ public class GamePanel extends JPanel implements Runnable {
 
                     case ("H"):     // Hard wall; unbreakable wall
                         // Code used to choose tile based on adjacent tiles
-                        byte code = 0;
+                        int code = 0;
                         if (y > 0 && mapLayout.get(y - 1).get(x).equals("H")) {
                             code += 1;  // North
                         }
