@@ -30,6 +30,8 @@ public class GamePanel extends JPanel implements Runnable {
     private Graphics2D buffer;
     private GameHUD gameHUD;
 
+    private HashMap<Integer, BufferedImage> tileMap;
+
     private HashMap<Integer, Key> controls1;
     private HashMap<Integer, Key> controls2;
 
@@ -72,7 +74,7 @@ public class GamePanel extends JPanel implements Runnable {
         BufferedImage sprBullet1 = null;
         BufferedImage sprBullet2 = null;
         BufferedImage sprSoftWall = null;
-        BufferedImage sprHardWall = null;
+        BufferedImage tilesHardWall = null;
         try {
             System.out.println(System.getProperty("user.dir"));
             this.background = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bg.jpg"));
@@ -81,7 +83,7 @@ public class GamePanel extends JPanel implements Runnable {
             sprBullet1 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bullet1.png"));
             sprBullet2 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bullet2.png"));
             sprSoftWall = ImageIO.read(GamePanel.class.getResourceAsStream("resources/wallS.png"));
-            sprHardWall = ImageIO.read(GamePanel.class.getResourceAsStream("resources/wallH.png"));
+            tilesHardWall = ImageIO.read(GamePanel.class.getResourceAsStream("resources/wall_tiles.png"));
         } catch (IOException e) {
             System.err.println(e + ": Cannot read image file");
         }
@@ -119,6 +121,16 @@ public class GamePanel extends JPanel implements Runnable {
         this.world = new BufferedImage(mapWidth * 32, mapHeight * 32, BufferedImage.TYPE_INT_RGB);
         this.gameHUD = new GameHUD(this.world);
 
+        // Load hard wall tiles
+        BufferedImage[][] tiles = new BufferedImage[5][4];
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 4; j++) {
+                assert tilesHardWall != null;
+                tiles[i][j] = tilesHardWall.getSubimage(i * 32, j * 32, 32, 32);
+            }
+        }
+        this.loadTiles(tiles);
+
         // Generate entire map
         for (int y = 0; y < mapHeight; y++) {
             for (int x = 0; x < mapWidth; x++) {
@@ -130,7 +142,22 @@ public class GamePanel extends JPanel implements Runnable {
                         GameObjectCollection.spawn(softWall);
                         break;
                     case ("H"):     // Hard wall; unbreakable wall
-                        Wall hardWall = new Wall(x * 32, y * 32, sprHardWall, false);
+                        // Code used to choose tile based on adjacent tiles
+                        byte code = 0;
+                        if (y > 0 && mapLayout.get(y - 1).get(x).equals("H")) {
+                            code += 1;  // North
+                        }
+                        if (y < mapHeight - 1 && mapLayout.get(y + 1).get(x).equals("H")) {
+                            code += 4;  // South
+                        }
+                        if (x > 0 && mapLayout.get(y).get(x - 1).equals("H")) {
+                            code += 8;  // West
+                        }
+                        if (x < mapWidth - 1 && mapLayout.get(y).get(x + 1).equals("H")) {
+                            code += 2;  // East
+                        }
+
+                        Wall hardWall = new Wall(x * 32, y * 32, this.tileMap.get(code), false);
                         GameObjectCollection.spawn(hardWall);
                         break;
                     case ("1"):     // Player 1 tank
@@ -154,6 +181,46 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
         }
+    }
+
+    /**
+     * Called in loadMap to load tile map for hard wall sprites.
+     * The correct sprite is chosen for hard wall based on adjacent hard walls.
+     * @param tiles Double array of sliced tile map
+     */
+    private void loadTiles(BufferedImage[][] tiles) {
+        this.tileMap = new HashMap<>();
+        /*
+            [ ][1][ ]
+            [8][X][2]
+            [ ][4][ ]
+            1st bit = north
+            2nd bit = east
+            3rd bit = south
+            4th bit = west
+            These bits indicate if there is an adjacent hard wall in that direction
+         */
+        this.tileMap.put(0b0000, tiles[0][0]);  // 0
+
+        this.tileMap.put(0b0001, tiles[2][0]);  // N
+        this.tileMap.put(0b0010, tiles[3][0]);  // E
+        this.tileMap.put(0b0100, tiles[1][0]);  // S
+        this.tileMap.put(0b1000, tiles[4][0]);  // W
+
+        this.tileMap.put(0b0011, tiles[3][2]);  // N E
+        this.tileMap.put(0b1001, tiles[4][2]);  // N W
+        this.tileMap.put(0b0110, tiles[1][2]);  // S E
+        this.tileMap.put(0b1100, tiles[2][2]);  // S W
+
+        this.tileMap.put(0b1010, tiles[0][3]);  // W E
+        this.tileMap.put(0b0101, tiles[0][2]);  // N S
+
+        this.tileMap.put(0b1011, tiles[2][1]);  // N E W
+        this.tileMap.put(0b0111, tiles[3][1]);  // N E S
+        this.tileMap.put(0b1110, tiles[1][1]);  // S E W
+        this.tileMap.put(0b1101, tiles[4][1]);  // S W N
+
+        this.tileMap.put(0b1111, tiles[0][1]);  // N S W E
     }
 
     /**
@@ -285,7 +352,7 @@ public class GamePanel extends JPanel implements Runnable {
         for (int i = 0; i < GameObjectCollection.numGameObjects(); i++) {
             GameObject obj = GameObjectCollection.getGameObject(i);
             obj.drawImage(this.buffer);
-            obj.drawCollider(this.buffer);
+//            obj.drawCollider(this.buffer);
             obj.drawGizmos(this.buffer);
 
             // Draw debug information

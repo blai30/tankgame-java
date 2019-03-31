@@ -17,12 +17,12 @@
   <properties>
    <property name="name" value="S"/>
   </properties>
-  <image width="32" height="32" source="../tankgame/resources/wall1.png"/>
+  <image width="32" height="32" source="../tankgame/resources/wallS.png"/>
  </tile>
  <tile id="3">
   <properties>
    <property name="name" value="H"/>
   </properties>
-  <image width="32" height="32" source="../tankgame/resources/wall2.png"/>
+  <image width="32" height="32" source="../tankgame/resources/wallH.png"/>
  </tile>
 </tileset>
