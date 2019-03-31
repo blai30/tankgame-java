@@ -53,6 +53,8 @@ public abstract class Player extends GameObject {
         this.ActionPressed = false;
     }
 
+    public abstract int getHP();
+
     public abstract HashMap<String, Number> getStats();
 
 }

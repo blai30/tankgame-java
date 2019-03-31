@@ -69,6 +69,7 @@ public class GameHUD {
 
     /**
      * Continuously redraw the view of the minimap to be based on the game world.
+     * Continuously redraw player information such as stats and health bar.
      * @param world The game world drawn to the screen
      */
     public void redraw(BufferedImage world) {
@@ -86,14 +87,19 @@ public class GameHUD {
         p1graphics.setColor(Color.RED);
         p1graphics.drawRect(4, 2, this.p1info.getWidth() - 8, this.p1info.getHeight() - 6);
         p1graphics.drawImage(this.players[0].getSprite(), 32, 32, null);
-
+        // Draw health bar
+        p1graphics.setColor(Color.WHITE);
+        p1graphics.drawRect(150, 32, 240, 16);
+        p1graphics.setColor((this.players[0].getHP() > 3) ? Color.GREEN : Color.RED);
+        p1graphics.fillRect(150, 32, this.players[0].getHP() * 24, 16);
+        // Draw stats
         p1graphics.setColor(Color.WHITE);
         p1graphics.setFont(font);
         int separator = 0;
         for (Map.Entry<String, Number> entry : this.players[0].getStats().entrySet()) {
             p1graphics.drawString(entry.getKey(), 150, 96 + separator);
-            p1graphics.drawString(":", 290, 96 + separator);
-            p1graphics.drawString(entry.getValue().toString(), 320, 96 + separator);
+            p1graphics.drawString(":", 320, 96 + separator);
+            p1graphics.drawString(entry.getValue().toString(), 350, 96 + separator);
             separator += 24;
         }
 
@@ -101,14 +107,19 @@ public class GameHUD {
         p2graphics.setColor(Color.BLUE);
         p2graphics.drawRect(4, 2, this.p2info.getWidth() - 26, this.p2info.getHeight() - 6);
         p2graphics.drawImage(this.players[1].getSprite(), 32, 32, null);
-
+        // Draw health bar
+        p2graphics.setColor(Color.WHITE);
+        p2graphics.drawRect(150, 32, 240, 16);
+        p2graphics.setColor((this.players[1].getHP() > 3) ? Color.GREEN : Color.RED);
+        p2graphics.fillRect(150, 32, this.players[1].getHP() * 24, 16);
+        // Draw stats
         p2graphics.setColor(Color.WHITE);
         p2graphics.setFont(font);
         separator = 0;
         for (Map.Entry<String, Number> entry : this.players[1].getStats().entrySet()) {
             p2graphics.drawString(entry.getKey(), 150, 96 + separator);
-            p2graphics.drawString(":", 290, 96 + separator);
-            p2graphics.drawString(entry.getValue().toString(), 320, 96 + separator);
+            p2graphics.drawString(":", 320, 96 + separator);
+            p2graphics.drawString(entry.getValue().toString(), 350, 96 + separator);
             separator += 24;
         }
 

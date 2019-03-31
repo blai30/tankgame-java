@@ -18,7 +18,6 @@ public class Tank extends Player implements SolidObject {
     private BufferedImage sprBullet;
     private Bullet bullet;
 
-    private int maxHP;
     private int currentHP;
     private int lives;
     private float moveSpeed;
@@ -72,8 +71,7 @@ public class Tank extends Player implements SolidObject {
 
     private void init() {
         // Default stats
-        this.maxHP = 10;
-        this.currentHP = this.maxHP;
+        this.currentHP = 10;
         this.lives = 5;
         this.moveSpeed = 4.2f;
         this.fireRate = 1.0f;
@@ -112,7 +110,7 @@ public class Tank extends Player implements SolidObject {
 
     private void respawn() {
         this.lives--;
-        this.currentHP = this.maxHP;
+        this.currentHP = 10;
         // TODO: respawn at new location
     }
 
@@ -122,6 +120,11 @@ public class Tank extends Player implements SolidObject {
         if (this.currentHP <= 0) {
             this.respawn();
         }
+    }
+
+    @Override
+    public int getHP() {
+        return this.currentHP;
     }
 
     @Override

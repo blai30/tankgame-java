@@ -367,7 +367,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
-        // Update the cameras and minimap then redraw them on the screen
+        // Update the cameras and game hud then redraw them on the screen
         this.camera1.redraw(this.world);
         this.camera2.redraw(this.world);
         this.gameHUD.redraw(this.world);
