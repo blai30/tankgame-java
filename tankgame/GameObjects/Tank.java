@@ -20,8 +20,8 @@ public class Tank extends Player implements SolidObject {
 
     private int currentHP;
     private int lives;
-    private float moveSpeed;
-    private float fireRate;
+    private int moveSpeed;
+    private int fireRate;
     private int bonusDamage;
     private int armor;
     private int ammo;
@@ -73,8 +73,8 @@ public class Tank extends Player implements SolidObject {
         // Default stats
         this.currentHP = 10;
         this.lives = 5;
-        this.moveSpeed = 4.2f;
-        this.fireRate = 1.0f;
+        this.moveSpeed = 4;
+        this.fireRate = 1;
         this.bonusDamage = 0;
         this.armor = 0;
         this.ammo = 5;
@@ -128,8 +128,8 @@ public class Tank extends Player implements SolidObject {
     }
 
     @Override
-    public LinkedHashMap<String, Number> getStats() {
-        LinkedHashMap<String, Number> statsCollection = new LinkedHashMap<>();
+    public LinkedHashMap<String, Integer> getStats() {
+        LinkedHashMap<String, Integer> statsCollection = new LinkedHashMap<>();
 
         statsCollection.put("Health", this.currentHP);
         statsCollection.put("Lives", this.lives);

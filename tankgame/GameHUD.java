@@ -96,7 +96,7 @@ public class GameHUD {
         p1graphics.setColor(Color.WHITE);
         p1graphics.setFont(font);
         int separator = 0;
-        for (Map.Entry<String, Number> entry : this.players[0].getStats().entrySet()) {
+        for (Map.Entry<String, Integer> entry : this.players[0].getStats().entrySet()) {
             p1graphics.drawString(entry.getKey(), 150, 96 + separator);
             p1graphics.drawString(":", 320, 96 + separator);
             p1graphics.drawString(entry.getValue().toString(), 350, 96 + separator);
@@ -116,7 +116,7 @@ public class GameHUD {
         p2graphics.setColor(Color.WHITE);
         p2graphics.setFont(font);
         separator = 0;
-        for (Map.Entry<String, Number> entry : this.players[1].getStats().entrySet()) {
+        for (Map.Entry<String, Integer> entry : this.players[1].getStats().entrySet()) {
             p2graphics.drawString(entry.getKey(), 150, 96 + separator);
             p2graphics.drawString(":", 320, 96 + separator);
             p2graphics.drawString(entry.getValue().toString(), 350, 96 + separator);

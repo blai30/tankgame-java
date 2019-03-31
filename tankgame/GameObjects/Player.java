@@ -55,6 +55,6 @@ public abstract class Player extends GameObject {
 
     public abstract int getHP();
 
-    public abstract HashMap<String, Number> getStats();
+    public abstract HashMap<String, Integer> getStats();
 
 }
