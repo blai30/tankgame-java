@@ -15,8 +15,6 @@ public class Bullet extends GameObject {
     private int totalDamage = 1;
     private float velocity;
 
-    private boolean exitBarrel;
-
     /**
      * Constructs a new bullet object with generic data.
      * @param sprite The image of this bullet passed in by a tank object drawn to the screen
@@ -54,8 +52,6 @@ public class Bullet extends GameObject {
 
     private void init() {
         this.velocity = 12.0f;
-
-        this.exitBarrel = false;
     }
 
     public int dealDamage() {

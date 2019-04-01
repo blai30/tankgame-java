@@ -90,10 +90,10 @@ public class GameHUD {
             playerGraphics[i].drawRect(4, 2, this.playerInfo[i].getWidth() - 8, this.playerInfo[i].getHeight() - 6);
             playerGraphics[i].drawImage(this.players[i].getSprite(), 32, 32, null);
             // Draw health bar
-            playerGraphics[i].setColor(Color.WHITE);
-            playerGraphics[i].drawRect(150, 32, 240, 16);
             playerGraphics[i].setColor((this.players[i].getHP() > 3) ? Color.GREEN : Color.RED);
             playerGraphics[i].fillRect(150, 32, this.players[i].getHP() * 24, 16);
+            playerGraphics[i].setColor(Color.WHITE);
+            playerGraphics[i].drawRect(150, 32, 240, 16);
             // Draw stats
             playerGraphics[i].setColor(Color.WHITE);
             playerGraphics[i].setFont(font);
