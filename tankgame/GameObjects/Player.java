@@ -13,6 +13,9 @@ public abstract class Player extends GameObject {
     protected boolean RightPressed = false;
     protected boolean ActionPressed = false;
 
+    protected int currentHP;
+    protected int lives;
+
     public void toggleUpPressed() {
         this.UpPressed = true;
     }
@@ -53,7 +56,13 @@ public abstract class Player extends GameObject {
         this.ActionPressed = false;
     }
 
-    public abstract int getHP();
+    public int getHP() {
+        return this.currentHP;
+    }
+
+    public int getLives() {
+        return this.lives;
+    }
 
     public abstract HashMap<String, Integer> getStats();
 

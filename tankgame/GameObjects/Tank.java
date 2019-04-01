@@ -18,8 +18,6 @@ public class Tank extends Player implements SolidObject {
     private BufferedImage sprBullet;
     private Bullet bullet;
 
-    private int currentHP;
-    private int lives;
     private int moveSpeed;
     private int fireRate;
     private int bonusDamage;
@@ -120,11 +118,6 @@ public class Tank extends Player implements SolidObject {
         if (this.currentHP <= 0) {
             this.respawn();
         }
-    }
-
-    @Override
-    public int getHP() {
-        return this.currentHP;
     }
 
     @Override
