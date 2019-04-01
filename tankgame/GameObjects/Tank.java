@@ -71,6 +71,7 @@ public class Tank extends Player implements SolidObject {
         // Default stats
         this.currentHP = 10;
         this.lives = 5;
+
         this.moveSpeed = 4;
         this.fireRate = 1;
         this.bonusDamage = 0;
