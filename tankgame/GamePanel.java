@@ -121,6 +121,9 @@ public class GamePanel extends JPanel implements Runnable {
             for (int x = 0; x < mapWidth; x++) {
                 switch (mapLayout.get(y).get(x)) {
                     case ("-1"):    // Blank tile; no game object
+                        BufferedImage sprHealth = ResourceCollection.getSprite(ResourceCollection.Sprites.powerHealth);
+                        Powerup health = new Powerup(x * 32, y * 32, 0, sprHealth, Powerup.Type.Health);
+                        GameObjectCollection.spawn(health);
                         continue;
 
                     case ("S"):     // Soft wall; breakable wall

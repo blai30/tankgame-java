@@ -95,6 +95,61 @@ public class Tank extends Player {
         }
     }
 
+
+    // --- POWERUPS ---
+    public void addHealth(int value) {
+        this.currentHP += value;
+        if (this.currentHP > 10) {
+            this.currentHP = 10;
+        }
+    }
+
+    public void addSpeed(int value) {
+        this.moveSpeed += value;
+        if (this.moveSpeed > 10) {
+            this.moveSpeed = 10;
+        }
+    }
+
+    public void addFireRate(int value) {
+        this.fireRate += value;
+        if (this.fireRate > 5) {
+            this.fireRate = 5;
+        }
+    }
+
+    public void addDamage(int value) {
+        this.bonusDamage += value;
+        if (this.bonusDamage > 10) {
+            this.bonusDamage = 10;
+        }
+    }
+
+    public void addArmor(int value) {
+        this.armor += value;
+        if (this.armor > 10) {
+            this.armor = 10;
+        }
+    }
+
+    public void addAmmo(int value) {
+        this.ammo += value;
+        if (this.ammo > 999) {
+            this.ammo = 999;
+        }
+    }
+
+    public void setWeapon(Weapon.Type newWeapon) {
+        this.currentWeapon = newWeapon;
+    }
+    // --- POWERUPS ---
+
+
+    @Override
+    public Weapon.Type getWeapon() {
+        return this.currentWeapon;
+    }
+
     @Override
     public LinkedHashMap<String, Integer> getStats() {
         LinkedHashMap<String, Integer> statsCollection = new LinkedHashMap<>();
@@ -108,11 +163,6 @@ public class Tank extends Player {
         statsCollection.put("Ammo", this.ammo);
 
         return statsCollection;
-    }
-
-    @Override
-    public Weapon.Type getWeapon() {
-        return this.currentWeapon;
     }
 
     /**
@@ -174,6 +224,7 @@ public class Tank extends Player {
 
     @Override
     public void handleCollision(Powerup collidingPowerup) {
+        collidingPowerup.getType().grantBonus(this);
         collidingPowerup.destroy();
     }
 

@@ -12,6 +12,7 @@ public class ResourceCollection {
         bullet1,
         bullet2,
         softWall,
+        powerHealth,
         tilesHardWall;
     }
 
@@ -25,6 +26,7 @@ public class ResourceCollection {
         BufferedImage sprBullet1 = null;
         BufferedImage sprBullet2 = null;
         BufferedImage sprSoftWall = null;
+        BufferedImage sprPowerHealth = null;
 
         BufferedImage tilesHardWall = null;
 
@@ -37,6 +39,7 @@ public class ResourceCollection {
             sprBullet1 = ImageIO.read(ResourceCollection.class.getResourceAsStream("resources/bullet1.png"));
             sprBullet2 = ImageIO.read(ResourceCollection.class.getResourceAsStream("resources/bullet2.png"));
             sprSoftWall = ImageIO.read(ResourceCollection.class.getResourceAsStream("resources/wallS.png"));
+            sprPowerHealth = ImageIO.read(ResourceCollection.class.getResourceAsStream("resources/power_health.png"));
 
             tilesHardWall = ImageIO.read(ResourceCollection.class.getResourceAsStream("resources/wall_tiles.png"));
         } catch (IOException e) {
@@ -52,6 +55,7 @@ public class ResourceCollection {
         sprites.put(Sprites.bullet1, sprBullet1);
         sprites.put(Sprites.bullet2, sprBullet2);
         sprites.put(Sprites.softWall, sprSoftWall);
+        sprites.put(Sprites.powerHealth, sprPowerHealth);
 
         sprites.put(Sprites.tilesHardWall, tilesHardWall);
     }
