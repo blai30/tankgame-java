@@ -16,7 +16,7 @@ public class Tank extends Player implements SolidObject {
     private final float ROTATION_SPEED = 3.2f;
 
     private BufferedImage sprBullet;
-    private Bullet bullet;
+    private Weapon currentWeapon;
 
     private int moveSpeed;
     private int fireRate;
@@ -31,7 +31,7 @@ public class Tank extends Player implements SolidObject {
      * Constructs a tank by passing in a Transform object that the tank will now own.
      * @param transform The tank will take control of this Transform
      * @param sprite The image of this tank drawn to the screen
-     * @param sprBullet The image of the bullet that this tank object will fire drawn to the screen
+     * @param sprBullet The image of the currentWeapon that this tank object will fire drawn to the screen
      */
     public Tank(Transform transform, BufferedImage sprite, BufferedImage sprBullet) {
         // Set properties
@@ -52,7 +52,7 @@ public class Tank extends Player implements SolidObject {
      * @param yPosition The y coordinate of the tank in the game world
      * @param rotation The rotation of the tank in degrees
      * @param sprite The image of this tank drawn to the screen
-     * @param sprBullet The image of the bullet that this tank object will fire drawn to the screen
+     * @param sprBullet The image of the currentWeapon that this tank object will fire drawn to the screen
      */
     public Tank(float xPosition, float yPosition, float rotation, BufferedImage sprite, BufferedImage sprBullet) {
         // Set properties
@@ -100,8 +100,8 @@ public class Tank extends Player implements SolidObject {
 
     private void fire() {
         if (this.fireCooldown >= this.fireDelay) {
-            this.bullet = new Bullet(this.sprBullet, this.bonusDamage);
-            this.instantiate(this.bullet, this.transform.getPosition().add(this.originOffset), this.transform.getRotation());
+            this.currentWeapon = new Bullet(this.sprBullet, this.bonusDamage);
+            this.instantiate(this.currentWeapon, this.transform.getPosition().add(this.originOffset), this.transform.getRotation());
             this.ammo--;
             this.fireCooldown = 0;
         }
@@ -186,8 +186,8 @@ public class Tank extends Player implements SolidObject {
 
     @Override
     public void handleCollision(Bullet collidingBullet) {
-        // Prevent bullet from dealing damage to the tank that fires it
-        if (this.bullet != collidingBullet) {
+        // Prevent currentWeapon from dealing damage to the tank that fires it
+        if (this.currentWeapon != collidingBullet) {
             this.takeDamage(collidingBullet.dealDamage());
             collidingBullet.destroy();
         }

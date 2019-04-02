@@ -83,8 +83,9 @@ public class GameHUD {
 
         Font font = new Font("Courier New", Font.PLAIN,18);
 
-        playerGraphics[0].setColor(Color.RED);      // Player 1
-        playerGraphics[1].setColor(Color.BLUE);     // Player 2
+        playerGraphics[0].setColor(Color.RED);      // Player 1 info box border color
+        playerGraphics[1].setColor(Color.BLUE);     // Player 2 info box border color
+        // Iterate loop for each player
         for (int i = 0; i < playerGraphics.length; i++) {
             // Draw player info box
             playerGraphics[i].drawRect(4, 2, this.playerInfo[i].getWidth() - 8, this.playerInfo[i].getHeight() - 6);

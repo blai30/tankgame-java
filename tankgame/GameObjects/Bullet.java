@@ -10,10 +10,7 @@ import java.awt.image.BufferedImage;
 /**
  * Bullet objects that are fired by tank objects.
  */
-public class Bullet extends GameObject {
-
-    private int totalDamage = 1;
-    private float velocity;
+public class Bullet extends Weapon {
 
     /**
      * Constructs a new bullet object with generic data.
@@ -50,12 +47,9 @@ public class Bullet extends GameObject {
         this.init();
     }
 
-    private void init() {
+    @Override
+    protected void init() {
         this.velocity = 12.0f;
-    }
-
-    public int dealDamage() {
-        return this.totalDamage;
     }
 
     /**
