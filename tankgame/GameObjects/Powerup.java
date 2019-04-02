@@ -1,16 +1,23 @@
 package GameObjects;
 
+import util.Transform;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
  *
  */
-public class Powerup extends GameObject {
+public abstract class Powerup extends GameObject {
 
-    public enum Type {
+    enum Type {
 
         Health {
+            @Override
+            public Powerup createInstance(BufferedImage sprite) {
+                return new Health(sprite);
+            }
+
             @Override
             public void grantBonus(Tank tank) {
                 this.value = 2;
@@ -20,6 +27,11 @@ public class Powerup extends GameObject {
 
         Speed {
             @Override
+            public Powerup createInstance(BufferedImage sprite) {
+                return null;
+            }
+
+            @Override
             public void grantBonus(Tank tank) {
                 this.value = 1;
                 tank.addSpeed(this.value);
@@ -27,6 +39,11 @@ public class Powerup extends GameObject {
         },
 
         FireRate {
+            @Override
+            public Powerup createInstance(BufferedImage sprite) {
+                return null;
+            }
+
             @Override
             public void grantBonus(Tank tank) {
                 this.value = 1;
@@ -36,6 +53,11 @@ public class Powerup extends GameObject {
 
         Damage {
             @Override
+            public Powerup createInstance(BufferedImage sprite) {
+                return null;
+            }
+
+            @Override
             public void grantBonus(Tank tank) {
                 this.value = 1;
                 tank.addDamage(this.value);
@@ -43,6 +65,11 @@ public class Powerup extends GameObject {
         },
 
         Armor {
+            @Override
+            public Powerup createInstance(BufferedImage sprite) {
+                return null;
+            }
+
             @Override
             public void grantBonus(Tank tank) {
                 this.value = 1;
@@ -52,6 +79,11 @@ public class Powerup extends GameObject {
 
         Ammo {
             @Override
+            public Powerup createInstance(BufferedImage sprite) {
+                return null;
+            }
+
+            @Override
             public void grantBonus(Tank tank) {
                 this.value = 10;
                 tank.addAmmo(this.value);
@@ -60,12 +92,22 @@ public class Powerup extends GameObject {
 
         Laser {
             @Override
+            public Powerup createInstance(BufferedImage sprite) {
+                return null;
+            }
+
+            @Override
             public void grantBonus(Tank tank) {
                 tank.setWeapon(Weapon.Type.Laser);
             }
         },
 
         Boomerang {
+            @Override
+            public Powerup createInstance(BufferedImage sprite) {
+                return null;
+            }
+
             @Override
             public void grantBonus(Tank tank) {
                 tank.setWeapon(Weapon.Type.Boomerang);
@@ -74,6 +116,11 @@ public class Powerup extends GameObject {
 
         Rubber {
             @Override
+            public Powerup createInstance(BufferedImage sprite) {
+                return null;
+            }
+
+            @Override
             public void grantBonus(Tank tank) {
                 tank.setWeapon(Weapon.Type.Rubber);
             }
@@ -81,59 +128,16 @@ public class Powerup extends GameObject {
 
         protected int value;
 
+        public abstract Powerup createInstance(BufferedImage sprite);
+
         public abstract void grantBonus(Tank tank);
 
     }
 
-    private Type type;
-
-    public Powerup(float xPosition, float yPosition, float rotation, BufferedImage sprite, Powerup.Type type) {
-        this.construct(xPosition, yPosition, rotation, sprite);
-        this.type = type;
-    }
+    protected Type type;
 
     public Type getType() {
         return this.type;
-    }
-
-    @Override
-    public void update() {
-
-    }
-
-    @Override
-    public void collides(GameObject collidingObj) {
-        collidingObj.handleCollision(this);
-    }
-
-    @Override
-    public void handleCollision(Tank collidingTank) {
-
-    }
-
-    @Override
-    public void handleCollision(Wall collidingWall) {
-
-    }
-
-    @Override
-    public void handleCollision(Weapon collidingWeapon) {
-
-    }
-
-    @Override
-    public void handleCollision(Powerup collidingPowerup) {
-
-    }
-
-    @Override
-    public void drawGizmos(Graphics g) {
-
-    }
-
-    @Override
-    public void drawVariables(Graphics g) {
-
     }
 
 }

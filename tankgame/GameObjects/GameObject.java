@@ -53,6 +53,7 @@ public abstract class GameObject implements CollisionHandling {
         Vector2D spawnPoint = new Vector2D(x, y);
         spawnObj.transform.setPosition(spawnPoint);
         spawnObj.transform.setRotation(rotation);
+        spawnObj.collider.setRect(x, y, spawnObj.width, spawnObj.height);
         GameObjectCollection.spawn(spawnObj);
     }
 

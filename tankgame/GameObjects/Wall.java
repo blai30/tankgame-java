@@ -29,19 +29,27 @@ public class Wall extends GameObject {
     }
 
     private void init() {
+        this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
+
         this.hitPoints = 1;
     }
 
     private void takeDamage(int damageDealt) {
         this.hitPoints -= damageDealt;
         if (this.hitPoints <= 0) {
+            double random = Math.random();
+            if (random < 0.1) {
+                Powerup.Type powerType = Powerup.Type.Health;
+                Powerup powerup = powerType.createInstance(this.sprite);
+                this.instantiate(powerup, this.transform.getPosition().add(this.originOffset), 0);
+            }
             this.destroy();
         }
     }
 
     @Override
     public void update() {
-        this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
+
     }
 
     @Override
