@@ -21,6 +21,24 @@ public abstract class GameObject implements CollisionHandling {
 
     private boolean destroyed = false;
 
+    protected void construct(float xPosition, float yPosition, float rotation, BufferedImage sprite) {
+        this.transform = new Transform(xPosition, yPosition, rotation);
+        this.construct(sprite);
+    }
+
+    /**
+     * Used for projectiles that get instantiated with a location and does not need to construct
+     * with a transform.
+     * @param sprite
+     */
+    protected void construct(BufferedImage sprite) {
+        this.sprite = sprite;
+        this.width = this.sprite.getWidth();
+        this.height = this.sprite.getHeight();
+        this.originOffset = new Vector2D(this.width / 2, this.height / 2);
+        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
+    }
+
     /**
      * To be called by other game objects. This method will spawn a game object
      * centered at location (ie. the tank's origin)
@@ -166,6 +184,7 @@ interface CollisionHandling {
     void collides(GameObject collidingObj);
     void handleCollision(Tank collidingTank);
     void handleCollision(Wall collidingWall);
-    void handleCollision(Bullet collidingBullet);
+    void handleCollision(Weapon collidingWeapon);
+    void handleCollision(Powerup collidingPowerup);
 
 }

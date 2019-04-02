@@ -46,6 +46,11 @@ public class Transform {
         return this.rotation;
     }
 
+    public void setTransform(float xPosition, float yPosition, float rotation) {
+        this.position.set(xPosition, yPosition);
+        this.rotation = rotation;
+    }
+
     public void setTransform(Transform location) {
         this.position.set(location.getPositionX(), location.getPositionY());
         this.rotation = location.getRotation();

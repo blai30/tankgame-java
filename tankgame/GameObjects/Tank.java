@@ -1,10 +1,6 @@
 package GameObjects;
 
-import util.Transform;
-import util.Vector2D;
-
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.LinkedHashMap;
 
@@ -29,25 +25,6 @@ public class Tank extends Player implements SolidObject {
     private float fireDelay;
 
     /**
-     * Constructs a tank by passing in a Transform object that the tank will now own.
-     * @param transform The tank will take control of this Transform
-     * @param sprite The image of this tank drawn to the screen
-     * @param weaponSprite The image of the currentWeapon that this tank object will fire drawn to the screen
-     */
-    public Tank(Transform transform, BufferedImage sprite, BufferedImage weaponSprite) {
-        // Set properties
-        this.transform = transform;
-        this.sprite = sprite;
-        this.width = this.sprite.getWidth();
-        this.height = this.sprite.getHeight();
-        this.originOffset = new Vector2D(this.width / 2, this.height / 2);
-        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
-        this.weaponSprite = weaponSprite;
-
-        this.init();
-    }
-
-    /**
      * Constructs a tank from values to be constructed into a new Transform object.
      * @param xPosition The x coordinate of the tank in the game world
      * @param yPosition The y coordinate of the tank in the game world
@@ -57,12 +34,7 @@ public class Tank extends Player implements SolidObject {
      */
     public Tank(float xPosition, float yPosition, float rotation, BufferedImage sprite, BufferedImage weaponSprite) {
         // Set properties
-        this.transform = new Transform(xPosition, yPosition, rotation);
-        this.sprite = sprite;
-        this.width = this.sprite.getWidth();
-        this.height = this.sprite.getHeight();
-        this.originOffset = new Vector2D(this.width / 2, this.height / 2);
-        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
+        this.construct(xPosition, yPosition, rotation, sprite);
         this.weaponSprite = weaponSprite;
 
         this.init();
@@ -192,12 +164,17 @@ public class Tank extends Player implements SolidObject {
     }
 
     @Override
-    public void handleCollision(Bullet collidingBullet) {
+    public void handleCollision(Weapon collidingWeapon) {
         // Prevent currentWeapon from dealing damage to the tank that fires it
-        if (this.projectile != collidingBullet) {
-            this.takeDamage(collidingBullet.dealDamage());
-            collidingBullet.destroy();
+        if (this.projectile != collidingWeapon) {
+            this.takeDamage(collidingWeapon.dealDamage());
+            collidingWeapon.destroy();
         }
+    }
+
+    @Override
+    public void handleCollision(Powerup collidingPowerup) {
+        collidingPowerup.destroy();
     }
 
     /**

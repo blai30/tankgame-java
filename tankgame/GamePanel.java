@@ -139,7 +139,7 @@ public class GamePanel extends JPanel implements Runnable {
                         continue;
 
                     case ("S"):     // Soft wall; breakable wall
-                        Wall softWall = new Wall(x * 32, y * 32, sprSoftWall, true);
+                        Wall softWall = new Wall(x * 32, y * 32, 0, sprSoftWall, true);
                         GameObjectCollection.spawn(softWall);
                         break;
 
@@ -159,7 +159,7 @@ public class GamePanel extends JPanel implements Runnable {
                             code += 2;  // East
                         }
 
-                        Wall hardWall = new Wall(x * 32, y * 32, this.tileMap.get(code), false);
+                        Wall hardWall = new Wall(x * 32, y * 32, 0, this.tileMap.get(code), false);
                         GameObjectCollection.spawn(hardWall);
                         break;
 

@@ -1,10 +1,6 @@
 package GameObjects;
 
-import util.Transform;
-import util.Vector2D;
-
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 /**
@@ -25,13 +21,8 @@ public class Wall extends GameObject implements SolidObject {
      * @param yPosition The y coordinate of the soft wall in the game world
      * @param sprite The image of this soft wall drawn to the screen
      */
-    public Wall(float xPosition, float yPosition, BufferedImage sprite, boolean isBreakable) {
-        this.transform = new Transform(xPosition, yPosition, 0);
-        this.sprite = sprite;
-        this.width = this.sprite.getWidth();
-        this.height = this.sprite.getHeight();
-        this.originOffset = new Vector2D(this.width / 2, this.height / 2);
-        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
+    public Wall(float xPosition, float yPosition, float rotation, BufferedImage sprite, boolean isBreakable) {
+        this.construct(xPosition, yPosition, rotation, sprite);
         this.isBreakable = isBreakable;
 
         this.init();
@@ -69,11 +60,16 @@ public class Wall extends GameObject implements SolidObject {
     }
 
     @Override
-    public void handleCollision(Bullet collidingBullet) {
+    public void handleCollision(Weapon collidingWeapon) {
         if (this.isBreakable) {
-            this.takeDamage(collidingBullet.dealDamage());
+            this.takeDamage(collidingWeapon.dealDamage());
         }
-        collidingBullet.destroy();
+        collidingWeapon.destroy();
+    }
+
+    @Override
+    public void handleCollision(Powerup collidingPowerup) {
+
     }
 
     @Override

@@ -1,10 +1,8 @@
 package GameObjects;
 
 import util.Transform;
-import util.Vector2D;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 /**
@@ -19,29 +17,7 @@ public class Bullet extends Weapon {
      */
     public Bullet(BufferedImage sprite, int damage) {
         this.transform = new Transform();
-        this.sprite = sprite;
-        this.width = this.sprite.getWidth();
-        this.height = this.sprite.getHeight();
-        this.originOffset = new Vector2D(this.width / 2, this.height / 2);
-        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
-
-        this.totalDamage += damage;
-        this.init();
-    }
-
-    /**
-     * Constructs a new bullet by passing in a Transform object that the bullet will now own.
-     * @param transform The bullet will take control of this Transform
-     * @param sprite The image of this bullet passed in by a tank object drawn to the screen
-     * @param damage Bonus damage passed in by a tank object added to the base damage
-     */
-    public Bullet(Transform transform, BufferedImage sprite, int damage) {
-        this.transform = transform;
-        this.sprite = sprite;
-        this.width = this.sprite.getWidth();
-        this.height = this.sprite.getHeight();
-        this.originOffset = new Vector2D(this.width / 2, this.height / 2);
-        this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
+        this.construct(sprite);
 
         this.totalDamage += damage;
         this.init();
@@ -77,8 +53,13 @@ public class Bullet extends Weapon {
     }
 
     @Override
-    public void handleCollision(Bullet collidingBullet) {
-        collidingBullet.destroy();
+    public void handleCollision(Weapon collidingWeapon) {
+        collidingWeapon.destroy();
+    }
+
+    @Override
+    public void handleCollision(Powerup collidingPowerup) {
+
     }
 
     /**
