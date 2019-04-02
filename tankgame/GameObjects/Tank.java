@@ -16,7 +16,8 @@ public class Tank extends Player implements SolidObject {
     private final float ROTATION_SPEED = 3.2f;
 
     private BufferedImage sprBullet;
-    private Weapon currentWeapon;
+    private Weapon projectile;
+    private Weapon.Type currentWeapon;
 
     private int moveSpeed;
     private int fireRate;
@@ -68,6 +69,7 @@ public class Tank extends Player implements SolidObject {
     }
 
     private void init() {
+        this.currentWeapon = Weapon.Type.Bullet;
         // Default stats
         this.currentHP = 10;
         this.lives = 5;
@@ -100,8 +102,8 @@ public class Tank extends Player implements SolidObject {
 
     private void fire() {
         if (this.fireCooldown >= this.fireDelay) {
-            this.currentWeapon = new Bullet(this.sprBullet, this.bonusDamage);
-            this.instantiate(this.currentWeapon, this.transform.getPosition().add(this.originOffset), this.transform.getRotation());
+            this.projectile = this.currentWeapon.createInstance(this.sprBullet, this.bonusDamage);
+            this.instantiate(this.projectile, this.transform.getPosition().add(this.originOffset), this.transform.getRotation());
             this.ammo--;
             this.fireCooldown = 0;
         }
@@ -187,7 +189,7 @@ public class Tank extends Player implements SolidObject {
     @Override
     public void handleCollision(Bullet collidingBullet) {
         // Prevent currentWeapon from dealing damage to the tank that fires it
-        if (this.currentWeapon != collidingBullet) {
+        if (this.projectile != collidingBullet) {
             this.takeDamage(collidingBullet.dealDamage());
             collidingBullet.destroy();
         }
