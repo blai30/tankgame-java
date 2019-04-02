@@ -77,13 +77,13 @@ public class GamePanel extends JPanel implements Runnable {
         BufferedImage tilesHardWall = null;
         try {
             System.out.println(System.getProperty("user.dir"));
-            this.background = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bg.jpg"));
-            sprTank1 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/tank1.png"));
-            sprTank2 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/tank2.png"));
-            sprBullet1 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bullet1.png"));
-            sprBullet2 = ImageIO.read(GamePanel.class.getResourceAsStream("resources/bullet2.png"));
-            sprSoftWall = ImageIO.read(GamePanel.class.getResourceAsStream("resources/wallS.png"));
-            tilesHardWall = ImageIO.read(GamePanel.class.getResourceAsStream("resources/wall_tiles.png"));
+            this.background = ImageIO.read(this.getClass().getResourceAsStream("resources/bg.jpg"));
+            sprTank1 = ImageIO.read(this.getClass().getResourceAsStream("resources/tank1.png"));
+            sprTank2 = ImageIO.read(this.getClass().getResourceAsStream("resources/tank2.png"));
+            sprBullet1 = ImageIO.read(this.getClass().getResourceAsStream("resources/bullet1.png"));
+            sprBullet2 = ImageIO.read(this.getClass().getResourceAsStream("resources/bullet2.png"));
+            sprSoftWall = ImageIO.read(this.getClass().getResourceAsStream("resources/wallS.png"));
+            tilesHardWall = ImageIO.read(this.getClass().getResourceAsStream("resources/wall_tiles.png"));
         } catch (IOException e) {
             System.err.println(e + ": Cannot read image file");
         }
@@ -91,7 +91,7 @@ public class GamePanel extends JPanel implements Runnable {
         // Loading map file
         InputStream defaultMap = null;
         try {
-            defaultMap = GamePanel.class.getResourceAsStream("resources/defaultmap.csv");
+            defaultMap = this.getClass().getResourceAsStream("resources/defaultmap.csv");
             this.bufferedReader = new BufferedReader(new FileReader(mapFile));
         } catch (IOException | NullPointerException e) {
             System.err.println(e + ": Cannot load map file, loading default map");
