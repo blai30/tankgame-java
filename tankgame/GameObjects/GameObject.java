@@ -65,29 +65,27 @@ public abstract class GameObject implements CollisionHandling {
      * @param obj A solid object such as a wall
      */
     protected void solidCollision(GameObject obj) {
-        if (obj instanceof SolidObject) {
-            Rectangle2D intersection = this.collider.createIntersection(obj.collider);
+        Rectangle2D intersection = this.collider.createIntersection(obj.collider);
 
-            if (intersection.getWidth() >= intersection.getHeight()) {
-                // From the top
-                if (intersection.getMaxY() >= this.collider.getMaxY()) {
-                    this.transform.move(0, -(float) intersection.getHeight());
-                }
-                // From the bottom
-                if (intersection.getMaxY() >= obj.collider.getMaxY()) {
-                    this.transform.move(0, (float) intersection.getHeight());
-                }
+        if (intersection.getWidth() >= intersection.getHeight()) {
+            // From the top
+            if (intersection.getMaxY() >= this.collider.getMaxY()) {
+                this.transform.move(0, -(float) intersection.getHeight());
             }
+            // From the bottom
+            if (intersection.getMaxY() >= obj.collider.getMaxY()) {
+                this.transform.move(0, (float) intersection.getHeight());
+            }
+        }
 
-            if (intersection.getHeight() >= intersection.getWidth()) {
-                // From the left
-                if (intersection.getMaxX() >= this.collider.getMaxX()) {
-                    this.transform.move(-(float) intersection.getWidth(), 0);
-                }
-                // From the right
-                if (intersection.getMaxX() >= obj.collider.getMaxX()) {
-                    this.transform.move((float) intersection.getWidth(), 0);
-                }
+        if (intersection.getHeight() >= intersection.getWidth()) {
+            // From the left
+            if (intersection.getMaxX() >= this.collider.getMaxX()) {
+                this.transform.move(-(float) intersection.getWidth(), 0);
+            }
+            // From the right
+            if (intersection.getMaxX() >= obj.collider.getMaxX()) {
+                this.transform.move((float) intersection.getWidth(), 0);
             }
         }
     }

@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 /**
  * The base class for various types of walls.
  */
-public class Wall extends GameObject implements SolidObject {
+public class Wall extends GameObject {
 
     /**
      * Determines if the wall is allowed to be destroyed by other game elements.

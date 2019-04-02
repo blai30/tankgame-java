@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 /**
  * Tank object to be controlled by a player.
  */
-public class Tank extends Player implements SolidObject {
+public class Tank extends Player {
 
     private final float ROTATION_SPEED = 3.2f;
 
