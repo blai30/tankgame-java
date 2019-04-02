@@ -66,4 +66,6 @@ public abstract class Player extends GameObject {
 
     public abstract HashMap<String, Integer> getStats();
 
+    public abstract Weapon.Type getWeapon();
+
 }

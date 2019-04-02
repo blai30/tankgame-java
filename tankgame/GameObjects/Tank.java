@@ -15,7 +15,7 @@ public class Tank extends Player implements SolidObject {
 
     private final float ROTATION_SPEED = 3.2f;
 
-    private BufferedImage sprBullet;
+    private BufferedImage weaponSprite;
     private Weapon projectile;
     private Weapon.Type currentWeapon;
 
@@ -32,9 +32,9 @@ public class Tank extends Player implements SolidObject {
      * Constructs a tank by passing in a Transform object that the tank will now own.
      * @param transform The tank will take control of this Transform
      * @param sprite The image of this tank drawn to the screen
-     * @param sprBullet The image of the currentWeapon that this tank object will fire drawn to the screen
+     * @param weaponSprite The image of the currentWeapon that this tank object will fire drawn to the screen
      */
-    public Tank(Transform transform, BufferedImage sprite, BufferedImage sprBullet) {
+    public Tank(Transform transform, BufferedImage sprite, BufferedImage weaponSprite) {
         // Set properties
         this.transform = transform;
         this.sprite = sprite;
@@ -42,7 +42,7 @@ public class Tank extends Player implements SolidObject {
         this.height = this.sprite.getHeight();
         this.originOffset = new Vector2D(this.width / 2, this.height / 2);
         this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
-        this.sprBullet = sprBullet;
+        this.weaponSprite = weaponSprite;
 
         this.init();
     }
@@ -53,9 +53,9 @@ public class Tank extends Player implements SolidObject {
      * @param yPosition The y coordinate of the tank in the game world
      * @param rotation The rotation of the tank in degrees
      * @param sprite The image of this tank drawn to the screen
-     * @param sprBullet The image of the currentWeapon that this tank object will fire drawn to the screen
+     * @param weaponSprite The image of the currentWeapon that this tank object will fire drawn to the screen
      */
-    public Tank(float xPosition, float yPosition, float rotation, BufferedImage sprite, BufferedImage sprBullet) {
+    public Tank(float xPosition, float yPosition, float rotation, BufferedImage sprite, BufferedImage weaponSprite) {
         // Set properties
         this.transform = new Transform(xPosition, yPosition, rotation);
         this.sprite = sprite;
@@ -63,14 +63,14 @@ public class Tank extends Player implements SolidObject {
         this.height = this.sprite.getHeight();
         this.originOffset = new Vector2D(this.width / 2, this.height / 2);
         this.collider = new Rectangle2D.Double(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
-        this.sprBullet = sprBullet;
+        this.weaponSprite = weaponSprite;
 
         this.init();
     }
 
     private void init() {
+        // Default weapon and stats
         this.currentWeapon = Weapon.Type.Bullet;
-        // Default stats
         this.currentHP = 10;
         this.lives = 5;
 
@@ -102,7 +102,7 @@ public class Tank extends Player implements SolidObject {
 
     private void fire() {
         if (this.fireCooldown >= this.fireDelay) {
-            this.projectile = this.currentWeapon.createInstance(this.sprBullet, this.bonusDamage);
+            this.projectile = this.currentWeapon.createInstance(this.weaponSprite, this.bonusDamage);
             this.instantiate(this.projectile, this.transform.getPosition().add(this.originOffset), this.transform.getRotation());
             this.ammo--;
             this.fireCooldown = 0;
@@ -136,6 +136,11 @@ public class Tank extends Player implements SolidObject {
         statsCollection.put("Ammo", this.ammo);
 
         return statsCollection;
+    }
+
+    @Override
+    public Weapon.Type getWeapon() {
+        return this.currentWeapon;
     }
 
     /**

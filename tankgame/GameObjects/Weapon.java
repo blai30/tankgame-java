@@ -6,25 +6,26 @@ public abstract class Weapon extends GameObject {
 
     enum Type {
 
-        Bullet(0) {
+        Bullet {
             @Override
             public Weapon createInstance(BufferedImage sprite, int damage) {
                 return new Bullet(sprite, damage);
             }
         },
 
-        Laser(1) {
+        Laser {
+            @Override
+            public Weapon createInstance(BufferedImage sprite, int damage) {
+                return null;
+            }
+        },
+
+        Boomerang {
             @Override
             public Weapon createInstance(BufferedImage sprite, int damage) {
                 return null;
             }
         };
-
-        private int id;
-
-        Type(int id) {
-            this.id = id;
-        }
 
         public abstract Weapon createInstance(BufferedImage sprite, int damage);
 
