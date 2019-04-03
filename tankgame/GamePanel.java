@@ -70,7 +70,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void loadMap(String mapFile) {
         // Loading resources: sprites, tiles, background
         ResourceCollection.init();
-        this.background = ResourceCollection.getSprite(ResourceCollection.Sprites.background);
+        this.background = ResourceCollection.Sprites.background.getImage();
 
         // Loading map file
         InputStream defaultMap = null;
@@ -106,7 +106,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.gameHUD = new GameHUD(this.world);
 
         // Load hard wall tiles
-        BufferedImage hardWallTiles = ResourceCollection.getSprite(ResourceCollection.Sprites.tilesHardWall);
+        BufferedImage hardWallTiles = ResourceCollection.Tiles.tilesHardWall.getImage();
         BufferedImage[][] tiles = new BufferedImage[5][4];
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
@@ -124,7 +124,7 @@ public class GamePanel extends JPanel implements Runnable {
                         continue;
 
                     case ("S"):     // Soft wall; breakable wall
-                        BufferedImage sprite = ResourceCollection.getSprite(ResourceCollection.Sprites.softWall);
+                        BufferedImage sprite = ResourceCollection.Sprites.softWall.getImage();
                         Wall softWall = new Wall(x * 32, y * 32, 0, sprite, true);
                         GameObjectCollection.spawn(softWall);
                         break;
@@ -150,8 +150,8 @@ public class GamePanel extends JPanel implements Runnable {
                         break;
 
                     case ("1"):     // Player 1 tank
-                        BufferedImage sprTank1 = ResourceCollection.getSprite(ResourceCollection.Sprites.tank1);
-                        BufferedImage sprBullet1 = ResourceCollection.getSprite(ResourceCollection.Sprites.bullet1);
+                        BufferedImage sprTank1 = ResourceCollection.Sprites.tank1.getImage();
+                        BufferedImage sprBullet1 = ResourceCollection.Sprites.bullet1.getImage();
                         Tank tank1 = new Tank(x * 32, y * 32, 90f, sprTank1, sprBullet1);
                         this.camera1 = new Camera(tank1);
                         PlayerController tankController1 = new PlayerController(tank1, this.controls1);
@@ -161,8 +161,8 @@ public class GamePanel extends JPanel implements Runnable {
                         break;
 
                     case ("2"):     // Player 2 tank
-                        BufferedImage sprTank2 = ResourceCollection.getSprite(ResourceCollection.Sprites.tank2);
-                        BufferedImage sprBullet2 = ResourceCollection.getSprite(ResourceCollection.Sprites.bullet2);
+                        BufferedImage sprTank2 = ResourceCollection.Sprites.tank2.getImage();
+                        BufferedImage sprBullet2 = ResourceCollection.Sprites.bullet2.getImage();
                         Tank tank2 = new Tank(x * 32, y * 32, 270f, sprTank2, sprBullet2);
                         this.camera2 = new Camera(tank2);
                         PlayerController tankController2 = new PlayerController(tank2, this.controls2);
