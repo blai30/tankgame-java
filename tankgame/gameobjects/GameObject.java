@@ -1,4 +1,4 @@
-package GameObjects;
+package gameobjects;
 
 import util.*;
 
@@ -129,6 +129,7 @@ public abstract class GameObject implements CollisionHandling {
      */
     public void drawCollider(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.MAGENTA);
         g2d.draw(this.collider);
     }
 

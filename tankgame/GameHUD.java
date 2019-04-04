@@ -1,6 +1,6 @@
 
 
-import GameObjects.Player;
+import gameobjects.Player;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
