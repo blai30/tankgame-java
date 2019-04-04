@@ -4,98 +4,58 @@ import util.Transform;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 /**
  *
  */
-public abstract class Powerup extends GameObject {
+public class Powerup extends GameObject {
 
-    enum Type {
+    public enum Type {
 
         Health {
             @Override
-            public Powerup createInstance(BufferedImage sprite) {
-                return new Health(sprite);
-            }
-
-            @Override
             public void grantBonus(Tank tank) {
-                this.value = 2;
-                tank.addHealth(this.value);
+                tank.addHealth(2);
             }
         },
 
         Speed {
             @Override
-            public Powerup createInstance(BufferedImage sprite) {
-                return null;
-            }
-
-            @Override
             public void grantBonus(Tank tank) {
-                this.value = 1;
-                tank.addSpeed(this.value);
+                tank.addSpeed(1);
             }
         },
 
         FireRate {
             @Override
-            public Powerup createInstance(BufferedImage sprite) {
-                return null;
-            }
-
-            @Override
             public void grantBonus(Tank tank) {
-                this.value = 1;
-                tank.addFireRate(this.value);
+                tank.addFireRate(1);
             }
         },
 
         Damage {
             @Override
-            public Powerup createInstance(BufferedImage sprite) {
-                return null;
-            }
-
-            @Override
             public void grantBonus(Tank tank) {
-                this.value = 1;
-                tank.addDamage(this.value);
+                tank.addDamage(1);
             }
         },
 
         Armor {
             @Override
-            public Powerup createInstance(BufferedImage sprite) {
-                return null;
-            }
-
-            @Override
             public void grantBonus(Tank tank) {
-                this.value = 1;
-                tank.addArmor(this.value);
+                tank.addArmor(1);
             }
         },
 
         Ammo {
             @Override
-            public Powerup createInstance(BufferedImage sprite) {
-                return null;
-            }
-
-            @Override
             public void grantBonus(Tank tank) {
-                this.value = 10;
-                tank.addAmmo(this.value);
+                tank.addAmmo(10);
             }
         },
 
         Laser {
-            @Override
-            public Powerup createInstance(BufferedImage sprite) {
-                return null;
-            }
-
             @Override
             public void grantBonus(Tank tank) {
                 tank.setWeapon(Weapon.Type.Laser);
@@ -104,11 +64,6 @@ public abstract class Powerup extends GameObject {
 
         Boomerang {
             @Override
-            public Powerup createInstance(BufferedImage sprite) {
-                return null;
-            }
-
-            @Override
             public void grantBonus(Tank tank) {
                 tank.setWeapon(Weapon.Type.Boomerang);
             }
@@ -116,19 +71,10 @@ public abstract class Powerup extends GameObject {
 
         Rubber {
             @Override
-            public Powerup createInstance(BufferedImage sprite) {
-                return null;
-            }
-
-            @Override
             public void grantBonus(Tank tank) {
                 tank.setWeapon(Weapon.Type.Rubber);
             }
         };
-
-        protected int value;
-
-        public abstract Powerup createInstance(BufferedImage sprite);
 
         public abstract void grantBonus(Tank tank);
 
@@ -136,8 +82,62 @@ public abstract class Powerup extends GameObject {
 
     protected Type type;
 
+    public Powerup(BufferedImage sprite) {
+        this.transform = new Transform();
+        this.construct(sprite);
+        this.type = this.random();
+    }
+
     public Type getType() {
         return this.type;
+    }
+
+    private Powerup.Type[] powerups = Powerup.Type.values();
+
+    private Random random = new Random();
+
+    public final Powerup.Type random() {
+        return powerups[random.nextInt(powerups.length)];
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void drawGizmos(Graphics g) {
+
+    }
+
+    @Override
+    public void drawVariables(Graphics g) {
+
+    }
+
+    @Override
+    public void collides(GameObject collidingObj) {
+        collidingObj.handleCollision(this);
+    }
+
+    @Override
+    public void handleCollision(Tank collidingTank) {
+
+    }
+
+    @Override
+    public void handleCollision(Wall collidingWall) {
+
+    }
+
+    @Override
+    public void handleCollision(Weapon collidingWeapon) {
+
+    }
+
+    @Override
+    public void handleCollision(Powerup collidingPowerup) {
+
     }
 
 }

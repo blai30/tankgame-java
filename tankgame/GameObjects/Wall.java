@@ -39,8 +39,7 @@ public class Wall extends GameObject {
         if (this.hitPoints <= 0) {
             double random = Math.random();
             if (random < 0.1) {
-                Powerup.Type powerType = Powerup.Type.Health;
-                Powerup powerup = powerType.createInstance(this.sprite);
+                Powerup powerup = new Powerup(this.sprite);
                 this.instantiate(powerup, this.transform.getPosition().add(this.originOffset), 0);
             }
             this.destroy();
