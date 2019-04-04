@@ -74,7 +74,7 @@ public class Tank extends Player {
 
     private void fire() {
         if (this.fireCooldown >= this.fireDelay) {
-            this.projectile = this.currentWeapon.createInstance(this.weaponSprite, this.bonusDamage);
+            this.projectile = this.currentWeapon.createInstance(this.weaponSprite, this.bonusDamage, this);
             this.instantiate(this.projectile, this.transform.getPosition().add(this.originOffset), this.transform.getRotation());
             this.ammo--;
             this.fireCooldown = 0;
@@ -87,7 +87,7 @@ public class Tank extends Player {
         // TODO: respawn at new location
     }
 
-    private void takeDamage(int damageDealt) {
+    public void takeDamage(int damageDealt) {
         // Always deal at least 1 damage regardless of armor
         this.currentHP -= Math.max(1, damageDealt - this.armor);
         if (this.currentHP <= 0) {
@@ -139,8 +139,9 @@ public class Tank extends Player {
         }
     }
 
-    public void setWeapon(Weapon.Type newWeapon) {
+    public void setWeapon(Weapon.Type newWeapon, BufferedImage sprWeapon) {
         this.currentWeapon = newWeapon;
+        this.weaponSprite = sprWeapon;
     }
     // --- POWERUPS ---
 
@@ -215,11 +216,7 @@ public class Tank extends Player {
 
     @Override
     public void handleCollision(Weapon collidingWeapon) {
-        // Prevent currentWeapon from dealing damage to the tank that fires it
-        if (this.projectile != collidingWeapon) {
-            this.takeDamage(collidingWeapon.dealDamage());
-            collidingWeapon.destroy();
-        }
+
     }
 
     @Override

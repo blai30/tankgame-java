@@ -5,19 +5,22 @@ import util.Transform;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-/**
- * Bullet objects that are fired by tank objects.
- */
-public class Bullet extends Weapon {
+public class Boomerang extends Weapon {
 
-    /**
-     * Constructs a new bullet object with generic data.
-     * @param sprite The image of this bullet passed in by a tank object drawn to the screen
-     * @param damage Bonus damage passed in by a tank object added to the base damage
-     */
-    public Bullet(BufferedImage sprite, int damage, Tank shooter) {
+    private float timer;
+    private boolean reverse;
+    private BufferedImage[] animation;
+    private int counter;
+
+    public Boomerang(BufferedImage sprite, int damage, Tank shooter) {
+        this.animation = new BufferedImage[20];
+        for (int i = 0; i < 20; i++) {
+            this.animation[i] = sprite.getSubimage(i * 32, 0, 32, 32);
+        }
+        this.sprite = this.animation[0];
+
         this.transform = new Transform();
-        this.construct(sprite);
+        this.construct(this.sprite);
         this.shooter = shooter;
 
         this.totalDamage += damage;
@@ -26,17 +29,36 @@ public class Bullet extends Weapon {
 
     @Override
     protected void init() {
-        this.velocity = 12.0f;
+        this.velocity = 10f;
         this.hitPoints = 1;
+
+        this.timer = 0;
+        this.reverse = false;
+        this.counter = 0;
     }
 
-    /**
-     * Continuously travel in the direction of the bullet object's rotation with velocity.
-     */
+    public void reverse() {
+        this.transform.rotate(180);
+    }
+
     @Override
     public void update() {
         this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
+
+        // Turn boomerang around after certain time passed
+        if (this.timer >= 40 && !this.reverse) {
+            this.reverse = true;
+            this.reverse();
+        }
         this.transform.move(this.velocity);
+
+        // Cycle through sprite animation
+        if (++this.counter >= 20) {
+            this.counter = 0;
+        }
+        this.sprite = this.animation[this.counter];
+
+        this.timer += 1;
     }
 
     @Override
@@ -51,11 +73,15 @@ public class Bullet extends Weapon {
             collidingTank.takeDamage(this.dealDamage());
             this.takeDamage();
         }
+
+        // Boomerang takes damage upon returning to shooter
+        if (this.reverse) {
+            this.takeDamage();
+        }
     }
 
     @Override
     public void handleCollision(Wall collidingWall) {
-
     }
 
     @Override
@@ -71,26 +97,14 @@ public class Bullet extends Weapon {
 
     }
 
-    /**
-     * Draws additional information about the bullet object to the game world.
-     * @param g Graphics object that is passed in for the game object to draw to
-     */
     @Override
     public void drawGizmos(Graphics g) {
 
     }
 
-    /**
-     * Draws the game object's variables in the game world to g.
-     * This method is called when drawDebug is true in GamePanel.
-     * @param g Graphics object that is passed in for the game object to draw to
-     */
     @Override
     public void drawVariables(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
 
-        g2d.drawString("totalDamage: " + this.totalDamage, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 60);
-        g2d.drawString("velocity: " + this.velocity, this.transform.getPositionX(), this.transform.getPositionY() + this.sprite.getHeight() + 72);
     }
 
 }

@@ -123,7 +123,13 @@ public class Powerup extends GameObject {
             }
             @Override
             protected void grantBonus(Tank tank) {
-                tank.setWeapon(Weapon.Type.Laser);
+                BufferedImage sprWeapon = null;
+                try {
+                    sprWeapon = ImageIO.read(Powerup.class.getClassLoader().getResource("resources/weapon_laser.png"));
+                } catch (IOException e) {
+                    System.err.println(e + ": Cannot read image file");
+                }
+                tank.setWeapon(Weapon.Type.Laser, sprWeapon);
             }
         },
 
@@ -139,7 +145,13 @@ public class Powerup extends GameObject {
             }
             @Override
             protected void grantBonus(Tank tank) {
-                tank.setWeapon(Weapon.Type.Boomerang);
+                BufferedImage sprWeapon = null;
+                try {
+                    sprWeapon = ImageIO.read(Powerup.class.getClassLoader().getResource("resources/weapon_boomerang_anim.png"));
+                } catch (IOException e) {
+                    System.err.println(e + ": Cannot read image file");
+                }
+                tank.setWeapon(Weapon.Type.Boomerang, sprWeapon);
             }
         },
 
@@ -155,7 +167,13 @@ public class Powerup extends GameObject {
             }
             @Override
             protected void grantBonus(Tank tank) {
-                tank.setWeapon(Weapon.Type.Rubber);
+                BufferedImage sprWeapon = null;
+                try {
+                    sprWeapon = ImageIO.read(Powerup.class.getClassLoader().getResource("resources/weapon_rubber.png"));
+                } catch (IOException e) {
+                    System.err.println(e + ": Cannot read image file");
+                }
+                tank.setWeapon(Weapon.Type.Rubber, sprWeapon);
             }
         };
 

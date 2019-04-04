@@ -71,7 +71,7 @@ public class Wall extends GameObject {
         if (this.isBreakable) {
             this.takeDamage(collidingWeapon.dealDamage());
         }
-        collidingWeapon.destroy();
+        collidingWeapon.takeDamage();
     }
 
     @Override

@@ -8,41 +8,51 @@ public abstract class Weapon extends GameObject {
 
         Bullet {
             @Override
-            public Weapon createInstance(BufferedImage sprite, int damage) {
-                return new Bullet(sprite, damage);
+            public Weapon createInstance(BufferedImage sprite, int damage, Tank shooter) {
+                return new Bullet(sprite, damage, shooter);
             }
         },
 
         Laser {
             @Override
-            public Weapon createInstance(BufferedImage sprite, int damage) {
+            public Weapon createInstance(BufferedImage sprite, int damage, Tank shooter) {
                 return null;
             }
         },
 
         Boomerang {
             @Override
-            public Weapon createInstance(BufferedImage sprite, int damage) {
-                return null;
+            public Weapon createInstance(BufferedImage sprite, int damage, Tank shooter) {
+                return new Boomerang(sprite, damage, shooter);
             }
         },
 
         Rubber {
             @Override
-            public Weapon createInstance(BufferedImage sprite, int damage) {
+            public Weapon createInstance(BufferedImage sprite, int damage, Tank shooter) {
                 return null;
             }
         };
 
-        public abstract Weapon createInstance(BufferedImage sprite, int damage);
+        public abstract Weapon createInstance(BufferedImage sprite, int damage, Tank shooter);
 
     }
 
+    protected Tank shooter;
+
     protected int totalDamage = 1;  // Default base damage
     protected float velocity;
+    protected int hitPoints;
 
     public int dealDamage() {
         return this.totalDamage;
+    }
+
+    public void takeDamage() {
+        this.hitPoints--;
+        if (this.hitPoints <= 0) {
+            this.destroy();
+        }
     }
 
     protected abstract void init();
