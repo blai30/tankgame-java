@@ -123,8 +123,8 @@ public class GamePanel extends JPanel implements Runnable {
                         continue;
 
                     case ("S"):     // Soft wall; breakable wall
-                        BufferedImage sprite = ResourceCollection.Sprites.softWall.getImage();
-                        Wall softWall = new Wall(x * 32, y * 32, 0, sprite, true);
+                        BufferedImage sprSoftWall = ResourceCollection.Sprites.softWall.getImage();
+                        Wall softWall = new Wall(x * 32, y * 32, 0, sprSoftWall, true);
                         GameObjectCollection.spawn(softWall);
                         break;
 
