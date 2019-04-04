@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
  */
 public class Tank extends Player {
 
-    private final float ROTATION_SPEED = 3.2f;
+    private final float ROTATION_SPEED = 2.5f;
 
     private BufferedImage weaponSprite;
     private Weapon projectile;

@@ -85,15 +85,15 @@ public class Powerup extends GameObject {
     Powerup(BufferedImage sprite) {
         this.transform = new Transform();
         this.construct(sprite);
-        this.type = this.random();
+        this.type = this.randomPower();
     }
 
     private Powerup.Type[] powerups = Powerup.Type.values();
 
     private Random random = new Random();
 
-    private final Powerup.Type random() {
-        return powerups[random.nextInt(powerups.length)];
+    private final Powerup.Type randomPower() {
+        return this.powerups[this.random.nextInt(this.powerups.length)];
     }
 
     void grantBonus(Tank tank) {
