@@ -94,6 +94,11 @@ public class GameHUD {
             playerGraphics[i].setColor(Color.WHITE);
             playerGraphics[i].drawString("Weapon:", 32, 120);
             playerGraphics[i].drawString("[" + this.players[i].getWeapon() + "]", 32, 144);
+            // Draw fire cooldown
+            playerGraphics[i].setColor(Color.ORANGE);
+            playerGraphics[i].fillRect(170, 26, (int) this.players[i].getCooldown() * 24, 4);
+            playerGraphics[i].setColor(Color.WHITE);
+            playerGraphics[i].drawRect(170, 26, 240, 4);
             // Draw health bar
             playerGraphics[i].setColor((this.players[i].getHP() > 5) ? Color.GREEN : (this.players[i].getHP() > 2) ? Color.YELLOW : Color.RED);
             playerGraphics[i].fillRect(170, 32, this.players[i].getHP() * 24, 16);

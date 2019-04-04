@@ -152,6 +152,11 @@ public class Tank extends Player {
     }
 
     @Override
+    public float getCooldown() {
+        return (this.fireCooldown / this.fireDelay) * 10;
+    }
+
+    @Override
     public LinkedHashMap<String, Integer> getStats() {
         LinkedHashMap<String, Integer> statsCollection = new LinkedHashMap<>();
 

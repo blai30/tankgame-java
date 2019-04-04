@@ -64,8 +64,10 @@ public abstract class Player extends GameObject {
         return this.lives;
     }
 
-    public abstract HashMap<String, Integer> getStats();
-
     public abstract Weapon.Type getWeapon();
+
+    public abstract float getCooldown();
+
+    public abstract HashMap<String, Integer> getStats();
 
 }
