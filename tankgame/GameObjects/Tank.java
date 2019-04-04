@@ -224,7 +224,7 @@ public class Tank extends Player {
 
     @Override
     public void handleCollision(Powerup collidingPowerup) {
-        collidingPowerup.getType().grantBonus(this);
+        collidingPowerup.grantBonus(this);
         collidingPowerup.destroy();
     }
 
