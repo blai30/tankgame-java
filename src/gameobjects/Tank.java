@@ -85,7 +85,7 @@ public class Tank extends Player {
 
     private void respawn() {
         this.currentLives--;
-        this.currentHP = 10;
+        this.currentHP = this.maxHP;
         // TODO: respawn at new location
     }
 
@@ -100,45 +100,27 @@ public class Tank extends Player {
 
     // --- POWERUPS ---
     public void addHealth(int value) {
-        this.currentHP += value;
-        if (this.currentHP > this.maxHP) {
-            this.currentHP = this.maxHP;
-        }
+        this.currentHP = Math.min(this.maxHP, this.currentHP + value);
     }
 
     public void addSpeed(int value) {
-        this.moveSpeed += value;
-        if (this.moveSpeed > 10) {
-            this.moveSpeed = 10;
-        }
+        this.moveSpeed = Math.min(10, this.moveSpeed + value);
     }
 
     public void addFireRate(int value) {
-        this.fireRate += value;
-        if (this.fireRate > 10) {
-            this.fireRate = 10;
-        }
+        this.fireRate = Math.min(10, this.fireRate + value);
     }
 
     public void addDamage(int value) {
-        this.damage += value;
-        if (this.damage > 10) {
-            this.damage = 10;
-        }
+        this.damage = Math.min(10, this.damage + value);
     }
 
     public void addArmor(int value) {
-        this.armor += value;
-        if (this.armor > 10) {
-            this.armor = 10;
-        }
+        this.armor = Math.min(10, this.armor + value);
     }
 
     public void addAmmo(int value) {
-        this.ammo += value;
-        if (this.ammo > 999) {
-            this.ammo = 999;
-        }
+        this.ammo = Math.min(999, this.ammo + value);
     }
 
     public void setWeapon(Weapon.Type newWeapon, BufferedImage sprWeapon) {
