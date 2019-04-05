@@ -18,11 +18,11 @@ public enum SpriteCollection {
     powerDamage,
     powerArmor,
     powerAmmo,
-    powerLaser,
+    powerFireball,
     powerBoomerang,
     powerRubber,
 
-    laser,
+    fireball,
     boomerang,
     rubber;
 
@@ -46,11 +46,11 @@ public enum SpriteCollection {
             SpriteCollection.powerDamage.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_damage.png"));
             SpriteCollection.powerArmor.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_armor.png"));
             SpriteCollection.powerAmmo.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_ammo.png"));
-            SpriteCollection.powerLaser.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_laser.png"));
+            SpriteCollection.powerFireball.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_laser.png"));
             SpriteCollection.powerBoomerang.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_boomerang.png"));
             SpriteCollection.powerRubber.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_rubber.png"));
 
-            SpriteCollection.laser.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/weapon_laser.png"));
+            SpriteCollection.fireball.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("weapon_fireball.png"));
             SpriteCollection.boomerang.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/weapon_boomerang_anim.png"));
             SpriteCollection.rubber.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/weapon_rubber.png"));
         } catch (IOException e) {

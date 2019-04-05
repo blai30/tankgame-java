@@ -9,6 +9,8 @@ public class Rubber extends Weapon {
 
     private float stasis;
     private float bounceCount;
+    private float xVel;
+    private float yVel;
 
     public Rubber(BufferedImage sprite, int damage, Tank shooter) {
         this.transform = new Transform();
@@ -20,14 +22,16 @@ public class Rubber extends Weapon {
     }
 
     private void bounce() {
-        this.stasis = 0;
-        this.transform.rotate(90);
+        this.xVel = -this.xVel;
+        this.yVel = -this.yVel;
         this.bounceCount++;
     }
 
     @Override
     protected void init() {
         this.velocity = 9.0f;
+        this.xVel = this.velocity;
+        this.yVel = this.velocity;
         this.hitPoints = 1;
 
         this.stasis = 0;

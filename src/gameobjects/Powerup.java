@@ -58,7 +58,7 @@ public class Powerup extends GameObject {
         Laser {
             @Override
             protected void grantBonus(Tank tank) {
-                tank.setWeapon(Weapon.Type.Laser, this.sprWeapon);
+                tank.setWeapon(Weapon.Type.Fireball, this.sprWeapon);
             }
         },
 
@@ -109,11 +109,11 @@ public class Powerup extends GameObject {
         Type.Damage.sprite = SpriteCollection.powerDamage.getImage();
         Type.Armor.sprite = SpriteCollection.powerArmor.getImage();
         Type.Ammo.sprite = SpriteCollection.powerAmmo.getImage();
-        Type.Laser.sprite = SpriteCollection.powerLaser.getImage();
+        Type.Laser.sprite = SpriteCollection.powerFireball.getImage();
         Type.Boomerang.sprite = SpriteCollection.powerBoomerang.getImage();
         Type.Rubber.sprite = SpriteCollection.powerRubber.getImage();
 
-        Type.Laser.sprWeapon = SpriteCollection.laser.getImage();
+        Type.Laser.sprWeapon = SpriteCollection.fireball.getImage();
         Type.Boomerang.sprWeapon = SpriteCollection.boomerang.getImage();
         Type.Rubber.sprWeapon = SpriteCollection.rubber.getImage();
     }

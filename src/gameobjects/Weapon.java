@@ -13,10 +13,10 @@ public abstract class Weapon extends GameObject {
             }
         },
 
-        Laser {
+        Fireball {
             @Override
             public Weapon createInstance(BufferedImage sprite, int damage, Tank shooter) {
-                return null;
+                return new Fireball(sprite, damage, shooter);
             }
         },
 

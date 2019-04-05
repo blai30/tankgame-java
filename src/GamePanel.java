@@ -180,7 +180,7 @@ public class GamePanel extends JPanel implements Runnable {
                         GameObjectCollection.spawn(powerAmmo);
                         break;
 
-                    case ("WL"):    // Powerup Laser
+                    case ("WL"):    // Powerup Fireball
                         Powerup powerLaser = new Powerup(x * 32, y * 32, 0, Powerup.Type.Laser);
                         GameObjectCollection.spawn(powerLaser);
                         break;
