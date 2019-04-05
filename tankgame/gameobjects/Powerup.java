@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class Powerup extends GameObject {
 
-    private enum Type {
+    enum Type {
 
         Health {
             @Override
@@ -107,7 +107,7 @@ public class Powerup extends GameObject {
             }
             @Override
             protected void grantBonus(Tank tank) {
-                tank.addAmmo(10);
+                tank.addAmmo(20);
             }
         },
 
@@ -190,6 +190,13 @@ public class Powerup extends GameObject {
     Powerup() {
         this.transform = new Transform();
         this.type = this.randomPower();
+        this.type.setSprite();
+        this.construct(this.type.sprite);
+    }
+
+    Powerup(Powerup.Type type) {
+        this.transform = new Transform();
+        this.type = type;
         this.type.setSprite();
         this.construct(this.type.sprite);
     }

@@ -52,7 +52,7 @@ public class Tank extends Player {
         this.fireRate = 1;
         this.bonusDamage = 0;
         this.armor = 0;
-        this.ammo = 5;
+        this.ammo = 30;
 
         this.fireDelay = 60f;
         this.fireCooldown = this.fireDelay;
@@ -201,7 +201,7 @@ public class Tank extends Player {
         }
 
         // Weapon
-        if (this.ActionPressed) {
+        if (this.ActionPressed && this.ammo > 0) {
             this.fire();
         }
     }
