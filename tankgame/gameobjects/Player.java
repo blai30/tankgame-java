@@ -14,7 +14,9 @@ public abstract class Player extends GameObject {
     protected boolean ActionPressed = false;
 
     protected int currentHP;
-    protected int lives;
+    protected int maxHP;
+    protected int currentLives;
+    protected int maxLives;
 
     public void toggleUpPressed() {
         this.UpPressed = true;
@@ -56,17 +58,21 @@ public abstract class Player extends GameObject {
         this.ActionPressed = false;
     }
 
-    public int getHP() {
-        return this.currentHP;
+    public float getHPRatio() {
+        return Math.min(1, (float) this.currentHP / (float) this.maxHP);
     }
 
-    public int getLives() {
-        return this.lives;
+    public int getCurrentLives() {
+        return this.currentLives;
+    }
+
+    public int getMaxLives() {
+        return this.maxLives;
     }
 
     public abstract Weapon.Type getWeapon();
 
-    public abstract float getCooldown();
+    public abstract float getCooldownRatio();
 
     public abstract HashMap<String, Integer> getStats();
 

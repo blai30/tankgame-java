@@ -38,7 +38,7 @@ public class Wall extends GameObject {
         this.hitPoints -= damageDealt;
         if (this.hitPoints <= 0) {
             double random = Math.random();
-            if (random < 0.1) {
+            if (random < 0.2) {
                 Powerup powerup = new Powerup();
                 this.instantiate(powerup, this.transform.getPosition().add(this.originOffset), 0);
             }

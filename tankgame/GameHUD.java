@@ -96,18 +96,20 @@ public class GameHUD {
             playerGraphics[i].drawString("[" + this.players[i].getWeapon() + "]", 32, 144);
             // Draw fire cooldown
             playerGraphics[i].setColor(Color.ORANGE);
-            playerGraphics[i].fillRect(170, 26, (int) this.players[i].getCooldown() * 24, 4);
+            playerGraphics[i].fillRect(170, 26, (int) (this.players[i].getCooldownRatio() * 240), 4);
             playerGraphics[i].setColor(Color.WHITE);
             playerGraphics[i].drawRect(170, 26, 240, 4);
             // Draw health bar
-            playerGraphics[i].setColor((this.players[i].getHP() > 5) ? Color.GREEN : (this.players[i].getHP() > 2) ? Color.YELLOW : Color.RED);
-            playerGraphics[i].fillRect(170, 32, this.players[i].getHP() * 24, 16);
+            playerGraphics[i].setColor((this.players[i].getHPRatio() > 0.5) ? Color.GREEN : (this.players[i].getHPRatio() > 0.25) ? Color.YELLOW : Color.RED);
+            playerGraphics[i].fillRect(170, 32, (int) (this.players[i].getHPRatio() * 240), 16);
             playerGraphics[i].setColor(Color.WHITE);
             playerGraphics[i].drawRect(170, 32, 240, 16);
             // Draw lives
-            for (int j = 0; j < this.players[i].getLives(); j++) {
-                playerGraphics[i].setColor(Color.GREEN);
-                playerGraphics[i].fillOval(170 + (j * 16), 52, 12, 12);
+            for (int j = 0; j < this.players[i].getMaxLives(); j++) {
+                if (j < this.players[i].getCurrentLives()) {
+                    playerGraphics[i].setColor(Color.GREEN);
+                    playerGraphics[i].fillOval(170 + (j * 16), 52, 12, 12);
+                }
                 playerGraphics[i].setColor(Color.WHITE);
                 playerGraphics[i].drawOval(170 + (j * 16), 52, 12, 12);
             }

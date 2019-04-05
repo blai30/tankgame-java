@@ -43,8 +43,10 @@ public class Tank extends Player {
     private void init() {
         // Default weapon and stats
         this.currentWeapon = Weapon.Type.Bullet;
-        this.currentHP = 10;
-        this.lives = 5;
+        this.maxHP = 10;
+        this.currentHP = this.maxHP;
+        this.maxLives = 5;
+        this.currentLives = this.maxLives;
 
         this.moveSpeed = 4;
         this.fireRate = 1;
@@ -52,8 +54,8 @@ public class Tank extends Player {
         this.armor = 0;
         this.ammo = 5;
 
-        this.fireCooldown = 30f;
-        this.fireDelay = 30f;
+        this.fireDelay = 60f;
+        this.fireCooldown = this.fireDelay;
     }
 
     private void rotateRight() {
@@ -82,7 +84,7 @@ public class Tank extends Player {
     }
 
     private void respawn() {
-        this.lives--;
+        this.currentLives--;
         this.currentHP = 10;
         // TODO: respawn at new location
     }
@@ -99,8 +101,8 @@ public class Tank extends Player {
     // --- POWERUPS ---
     public void addHealth(int value) {
         this.currentHP += value;
-        if (this.currentHP > 10) {
-            this.currentHP = 10;
+        if (this.currentHP > this.maxHP) {
+            this.currentHP = this.maxHP;
         }
     }
 
@@ -113,8 +115,8 @@ public class Tank extends Player {
 
     public void addFireRate(int value) {
         this.fireRate += value;
-        if (this.fireRate > 5) {
-            this.fireRate = 5;
+        if (this.fireRate > 10) {
+            this.fireRate = 10;
         }
     }
 
@@ -152,8 +154,8 @@ public class Tank extends Player {
     }
 
     @Override
-    public float getCooldown() {
-        return (this.fireCooldown / this.fireDelay) * 10;
+    public float getCooldownRatio() {
+        return Math.min(1, this.fireCooldown / this.fireDelay);
     }
 
     @Override
@@ -161,7 +163,7 @@ public class Tank extends Player {
         LinkedHashMap<String, Integer> statsCollection = new LinkedHashMap<>();
 
         statsCollection.put("Health", this.currentHP);
-        statsCollection.put("Lives", this.lives);
+        statsCollection.put("Lives", this.currentLives);
         statsCollection.put("Speed", this.moveSpeed);
         statsCollection.put("Fire Rate", this.fireRate);
         statsCollection.put("Damage", this.bonusDamage);
