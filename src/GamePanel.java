@@ -150,6 +150,51 @@ public class GamePanel extends JPanel implements Runnable {
                         GameObjectCollection.spawn(hardWall);
                         break;
 
+                    case ("PH"):    // Powerup Health
+                        Powerup powerHealth = new Powerup(x * 32, y * 32, 0, Powerup.Type.Health);
+                        GameObjectCollection.spawn(powerHealth);
+                        break;
+
+                    case ("PS"):    // Powerup Speed
+                        Powerup powerSpeed = new Powerup(x * 32, y * 32, 0, Powerup.Type.Speed);
+                        GameObjectCollection.spawn(powerSpeed);
+                        break;
+
+                    case ("PF"):    // Powerup Fire Rate
+                        Powerup powerFireRate = new Powerup(x * 32, y * 32, 0, Powerup.Type.FireRate);
+                        GameObjectCollection.spawn(powerFireRate);
+                        break;
+
+                    case ("PD"):    // Powerup Damage
+                        Powerup powerDamage = new Powerup(x * 32, y * 32, 0, Powerup.Type.Damage);
+                        GameObjectCollection.spawn(powerDamage);
+                        break;
+
+                    case ("PA"):    // Powerup Armor
+                        Powerup powerArmor = new Powerup(x * 32, y * 32, 0, Powerup.Type.Armor);
+                        GameObjectCollection.spawn(powerArmor);
+                        break;
+
+                    case ("PM"):    // Powerup Ammo
+                        Powerup powerAmmo = new Powerup(x * 32, y * 32, 0, Powerup.Type.Ammo);
+                        GameObjectCollection.spawn(powerAmmo);
+                        break;
+
+                    case ("WL"):    // Powerup Laser
+                        Powerup powerLaser = new Powerup(x * 32, y * 32, 0, Powerup.Type.Laser);
+                        GameObjectCollection.spawn(powerLaser);
+                        break;
+
+                    case ("WB"):    // Powerup Boomerang
+                        Powerup powerBoomerang = new Powerup(x * 32, y * 32, 0, Powerup.Type.Boomerang);
+                        GameObjectCollection.spawn(powerBoomerang);
+                        break;
+
+                    case ("WR"):    // Powerup Rubber
+                        Powerup powerRubber = new Powerup(x * 32, y * 32, 0, Powerup.Type.Rubber);
+                        GameObjectCollection.spawn(powerRubber);
+                        break;
+
                     case ("1"):     // Player 1 tank
                         BufferedImage sprTank1 = SpriteCollection.tank1.getImage();
                         BufferedImage sprBullet1 = SpriteCollection.bullet1.getImage();
