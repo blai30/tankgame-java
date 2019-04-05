@@ -12,7 +12,7 @@ public class Rubber extends Weapon {
         this.construct(sprite);
         this.shooter = shooter;
 
-        this.totalDamage += damage;
+        this.damage += damage;
         this.init();
     }
 

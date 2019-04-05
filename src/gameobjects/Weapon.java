@@ -40,12 +40,12 @@ public abstract class Weapon extends GameObject {
 
     protected Tank shooter;
 
-    protected int totalDamage = 1;  // Default base damage
+    protected int damage;
     protected float velocity;
     protected int hitPoints;
 
     public int dealDamage() {
-        return this.totalDamage;
+        return this.damage;
     }
 
     public void takeDamage() {

@@ -17,7 +17,7 @@ public class Tank extends Player {
 
     private int moveSpeed;
     private int fireRate;
-    private int bonusDamage;
+    private int damage;
     private int armor;
     private int ammo;
 
@@ -43,14 +43,14 @@ public class Tank extends Player {
     private void init() {
         // Default weapon and stats
         this.currentWeapon = Weapon.Type.Bullet;
-        this.maxHP = 10;
+        this.maxHP = 20;
         this.currentHP = this.maxHP;
         this.maxLives = 5;
         this.currentLives = this.maxLives;
 
         this.moveSpeed = 4;
         this.fireRate = 1;
-        this.bonusDamage = 0;
+        this.damage = 1;
         this.armor = 0;
         this.ammo = 30;
 
@@ -76,7 +76,7 @@ public class Tank extends Player {
 
     private void fire() {
         if (this.fireCooldown >= this.fireDelay) {
-            this.projectile = this.currentWeapon.createInstance(this.weaponSprite, this.bonusDamage, this);
+            this.projectile = this.currentWeapon.createInstance(this.weaponSprite, this.damage, this);
             this.instantiate(this.projectile, this.transform.getPosition().add(this.originOffset), this.transform.getRotation());
             this.ammo--;
             this.fireCooldown = 0;
@@ -121,9 +121,9 @@ public class Tank extends Player {
     }
 
     public void addDamage(int value) {
-        this.bonusDamage += value;
-        if (this.bonusDamage > 10) {
-            this.bonusDamage = 10;
+        this.damage += value;
+        if (this.damage > 10) {
+            this.damage = 10;
         }
     }
 
@@ -166,7 +166,7 @@ public class Tank extends Player {
         statsCollection.put("Lives", this.currentLives);
         statsCollection.put("Speed", this.moveSpeed);
         statsCollection.put("Fire Rate", this.fireRate);
-        statsCollection.put("Damage", this.bonusDamage);
+        statsCollection.put("Damage", this.damage);
         statsCollection.put("Armor", this.armor);
         statsCollection.put("Ammo", this.ammo);
 
@@ -259,7 +259,7 @@ public class Tank extends Player {
         g2d.drawString("currentHP: " + this.currentHP, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 60);
         g2d.drawString("moveSpeed: " + this.moveSpeed, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 72);
         g2d.drawString("fireRate: " + this.fireRate, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 84);
-        g2d.drawString("bonusDamage: " + this.bonusDamage, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 96);
+        g2d.drawString("damage: " + this.damage, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 96);
         g2d.drawString("armor: " + this.armor, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 108);
         g2d.drawString("ammo: " + this.ammo, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 120);
     }
