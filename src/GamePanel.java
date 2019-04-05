@@ -107,7 +107,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.gameHUD = new GameHUD(this.world);
 
         // Load hard wall tiles
-        BufferedImage hardWallTiles = ResourceCollection.Tiles.tilesHardWall.getImage();
+        BufferedImage hardWallTiles = ResourceCollection.Images.tilesHardWall.getImage();
         BufferedImage[][] tiles = new BufferedImage[5][4];
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
