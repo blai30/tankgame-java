@@ -224,8 +224,8 @@ public class Tank extends Player {
         g2d.setColor((this.currentHP > 5) ? Color.GREEN : (this.currentHP > 2) ? Color.YELLOW : Color.RED);
 
         // Draw aim line
-        float toX = (float) (this.currentHP * 50 * Math.cos(Math.toRadians(this.transform.getRotation())));
-        float toY = (float) (this.currentHP * 50 * Math.sin(Math.toRadians(this.transform.getRotation())));
+        float toX = (float) (this.currentHP * 25 * Math.cos(Math.toRadians(this.transform.getRotation())));
+        float toY = (float) (this.currentHP * 25 * Math.sin(Math.toRadians(this.transform.getRotation())));
         g2d.drawLine((int) (this.transform.getPositionX() + this.originOffset.getX()), (int) (this.transform.getPositionY() + this.originOffset.getY()), (int) (this.transform.getPositionX() + this.originOffset.getX() + toX), (int) (this.transform.getPositionY() + this.originOffset.getY() + toY));
     }
 

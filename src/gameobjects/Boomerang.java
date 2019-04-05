@@ -7,8 +7,6 @@ import java.awt.image.BufferedImage;
 
 public class Boomerang extends Weapon {
 
-    private float timer;
-    private boolean reverse;
     private BufferedImage[] animation;
     private int counter;
 
@@ -29,36 +27,25 @@ public class Boomerang extends Weapon {
 
     @Override
     protected void init() {
-        this.velocity = 10f;
+        this.velocity = 12.0f;
         this.hitPoints = 1;
 
-        this.timer = 0;
-        this.reverse = false;
         this.counter = 0;
-    }
-
-    public void reverse() {
-        this.transform.rotate(180);
     }
 
     @Override
     public void update() {
         this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
 
-        // Turn boomerang around after certain time passed
-        if (this.timer >= 40 && !this.reverse) {
-            this.reverse = true;
-            this.reverse();
-        }
+        // Decrease velocity so that boomerang eventually flies backwards
         this.transform.move(this.velocity);
+        this.velocity = Math.max(-16.0f, this.velocity - 0.2f);
 
         // Cycle through sprite animation
         if (++this.counter >= 20) {
             this.counter = 0;
         }
         this.sprite = this.animation[this.counter];
-
-        this.timer += 1;
     }
 
     @Override
@@ -71,11 +58,6 @@ public class Boomerang extends Weapon {
         // Prevents weapon from hitting its own shooter that fires it
         if (collidingTank != this.shooter) {
             collidingTank.takeDamage(this.dealDamage());
-            this.takeDamage();
-        }
-
-        // Boomerang takes damage upon returning to shooter
-        if (this.reverse) {
             this.takeDamage();
         }
     }

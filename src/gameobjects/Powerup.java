@@ -11,7 +11,7 @@ import java.util.Random;
  */
 public class Powerup extends GameObject {
 
-    enum Type {
+    protected enum Type {
 
         Health {
             @Override
@@ -97,7 +97,7 @@ public class Powerup extends GameObject {
         this.construct(this.type.sprite);
     }
 
-    public static void init() {
+    public static void loadSprites() {
         Type.Health.sprite = SpriteCollection.powerHealth.getImage();
         Type.Speed.sprite = SpriteCollection.powerSpeed.getImage();
         Type.FireRate.sprite = SpriteCollection.powerFireRate.getImage();

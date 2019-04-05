@@ -53,7 +53,7 @@ public class GamePanel extends JPanel implements Runnable {
         ResourceCollection.init();
         SpriteCollection.init();
         GameObjectCollection.init();
-        Powerup.init();
+        Powerup.loadSprites();
 
         this.running = true;
     }
