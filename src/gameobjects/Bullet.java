@@ -48,14 +48,17 @@ public class Bullet extends Weapon {
     public void handleCollision(Tank collidingTank) {
         // Prevents weapon from hitting its own shooter that fires it
         if (collidingTank != this.shooter) {
-            collidingTank.takeDamage(this.dealDamage());
+            collidingTank.takeDamage(this.damage);
             this.takeDamage();
         }
     }
 
     @Override
     public void handleCollision(Wall collidingWall) {
-
+        if (collidingWall.isBreakable()) {
+            collidingWall.takeDamage(this.damage);
+        }
+        this.takeDamage();
     }
 
     @Override

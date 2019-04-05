@@ -30,7 +30,7 @@ public abstract class Weapon extends GameObject {
         Rubber {
             @Override
             public Weapon createInstance(BufferedImage sprite, int damage, Tank shooter) {
-                return null;
+                return new Rubber(sprite, damage, shooter);
             }
         };
 
@@ -43,10 +43,6 @@ public abstract class Weapon extends GameObject {
     protected int damage;
     protected float velocity;
     protected int hitPoints;
-
-    public int dealDamage() {
-        return this.damage;
-    }
 
     public void takeDamage() {
         this.hitPoints--;

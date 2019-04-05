@@ -34,7 +34,7 @@ public class Wall extends GameObject {
         this.hitPoints = 1;
     }
 
-    private void takeDamage(int damageDealt) {
+    public void takeDamage(int damageDealt) {
         this.hitPoints -= damageDealt;
         if (this.hitPoints <= 0) {
             double random = Math.random();
@@ -47,6 +47,10 @@ public class Wall extends GameObject {
             }
             this.destroy();
         }
+    }
+
+    public boolean isBreakable() {
+        return this.isBreakable;
     }
 
     @Override
@@ -71,10 +75,7 @@ public class Wall extends GameObject {
 
     @Override
     public void handleCollision(Weapon collidingWeapon) {
-        if (this.isBreakable) {
-            this.takeDamage(collidingWeapon.dealDamage());
-        }
-        collidingWeapon.takeDamage();
+
     }
 
     @Override

@@ -57,7 +57,7 @@ public class Boomerang extends Weapon {
     public void handleCollision(Tank collidingTank) {
         // Prevents weapon from hitting its own shooter that fires it
         if (collidingTank != this.shooter) {
-            collidingTank.takeDamage(this.dealDamage());
+            collidingTank.takeDamage(this.damage);
             this.takeDamage();
         }
     }
