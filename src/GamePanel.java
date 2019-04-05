@@ -50,7 +50,10 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public void init() {
         this.setControls();
+        ResourceCollection.init();
+        SpriteCollection.init();
         GameObjectCollection.init();
+        Powerup.init();
 
         this.running = true;
     }
@@ -68,8 +71,7 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public void loadMap(String mapFile) {
         // Loading resources: sprites, tiles, background
-        ResourceCollection.init();
-        this.background = ResourceCollection.Sprites.background.getImage();
+        this.background = ResourceCollection.Images.background.getImage();
 
         // Loading map file
         InputStream defaultMap = null;
@@ -123,7 +125,7 @@ public class GamePanel extends JPanel implements Runnable {
                         continue;
 
                     case ("S"):     // Soft wall; breakable wall
-                        BufferedImage sprSoftWall = ResourceCollection.Sprites.softWall.getImage();
+                        BufferedImage sprSoftWall = SpriteCollection.softWall.getImage();
                         Wall softWall = new Wall(x * 32, y * 32, 0, sprSoftWall, true);
                         GameObjectCollection.spawn(softWall);
                         break;
@@ -149,8 +151,8 @@ public class GamePanel extends JPanel implements Runnable {
                         break;
 
                     case ("1"):     // Player 1 tank
-                        BufferedImage sprTank1 = ResourceCollection.Sprites.tank1.getImage();
-                        BufferedImage sprBullet1 = ResourceCollection.Sprites.bullet1.getImage();
+                        BufferedImage sprTank1 = SpriteCollection.tank1.getImage();
+                        BufferedImage sprBullet1 = SpriteCollection.bullet1.getImage();
                         Tank tank1 = new Tank(x * 32, y * 32, 90f, sprTank1, sprBullet1);
                         this.camera1 = new Camera(tank1);
                         PlayerController tankController1 = new PlayerController(tank1, this.controls1);
@@ -160,8 +162,8 @@ public class GamePanel extends JPanel implements Runnable {
                         break;
 
                     case ("2"):     // Player 2 tank
-                        BufferedImage sprTank2 = ResourceCollection.Sprites.tank2.getImage();
-                        BufferedImage sprBullet2 = ResourceCollection.Sprites.bullet2.getImage();
+                        BufferedImage sprTank2 = SpriteCollection.tank2.getImage();
+                        BufferedImage sprBullet2 = SpriteCollection.bullet2.getImage();
                         Tank tank2 = new Tank(x * 32, y * 32, 270f, sprTank2, sprBullet2);
                         this.camera2 = new Camera(tank2);
                         PlayerController tankController2 = new PlayerController(tank2, this.controls2);

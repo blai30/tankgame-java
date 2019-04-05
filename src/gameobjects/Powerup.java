@@ -2,10 +2,8 @@ package gameobjects;
 
 import util.Transform;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -17,30 +15,12 @@ public class Powerup extends GameObject {
 
         Health {
             @Override
-            protected void setSprite() {
-                this.sprite = null;
-                try {
-                    this.sprite = ImageIO.read(Powerup.class.getClassLoader().getResource("resources/power_health.png"));
-                } catch (IOException e) {
-                    System.err.println(e + ": Cannot read image file");
-                }
-            }
-            @Override
             protected void grantBonus(Tank tank) {
                 tank.addHealth(2);
             }
         },
 
         Speed {
-            @Override
-            protected void setSprite() {
-                this.sprite = null;
-                try {
-                    this.sprite = ImageIO.read(Powerup.class.getClassLoader().getResource("resources/power_speed.png"));
-                } catch (IOException e) {
-                    System.err.println(e + ": Cannot read image file");
-                }
-            }
             @Override
             protected void grantBonus(Tank tank) {
                 tank.addSpeed(1);
@@ -49,30 +29,12 @@ public class Powerup extends GameObject {
 
         FireRate {
             @Override
-            protected void setSprite() {
-                this.sprite = null;
-                try {
-                    this.sprite = ImageIO.read(Powerup.class.getClassLoader().getResource("resources/power_firerate.png"));
-                } catch (IOException e) {
-                    System.err.println(e + ": Cannot read image file");
-                }
-            }
-            @Override
             protected void grantBonus(Tank tank) {
                 tank.addFireRate(1);
             }
         },
 
         Damage {
-            @Override
-            protected void setSprite() {
-                this.sprite = null;
-                try {
-                    this.sprite = ImageIO.read(Powerup.class.getClassLoader().getResource("resources/power_damage.png"));
-                } catch (IOException e) {
-                    System.err.println(e + ": Cannot read image file");
-                }
-            }
             @Override
             protected void grantBonus(Tank tank) {
                 tank.addDamage(1);
@@ -81,30 +43,12 @@ public class Powerup extends GameObject {
 
         Armor {
             @Override
-            protected void setSprite() {
-                this.sprite = null;
-                try {
-                    this.sprite = ImageIO.read(Powerup.class.getClassLoader().getResource("resources/power_armor.png"));
-                } catch (IOException e) {
-                    System.err.println(e + ": Cannot read image file");
-                }
-            }
-            @Override
             protected void grantBonus(Tank tank) {
                 tank.addArmor(1);
             }
         },
 
         Ammo {
-            @Override
-            protected void setSprite() {
-                this.sprite = null;
-                try {
-                    this.sprite = ImageIO.read(Powerup.class.getClassLoader().getResource("resources/power_ammo.png"));
-                } catch (IOException e) {
-                    System.err.println(e + ": Cannot read image file");
-                }
-            }
             @Override
             protected void grantBonus(Tank tank) {
                 tank.addAmmo(20);
@@ -113,73 +57,27 @@ public class Powerup extends GameObject {
 
         Laser {
             @Override
-            protected void setSprite() {
-                this.sprite = null;
-                try {
-                    this.sprite = ImageIO.read(Powerup.class.getClassLoader().getResource("resources/power_laser.png"));
-                } catch (IOException e) {
-                    System.err.println(e + ": Cannot read image file");
-                }
-            }
-            @Override
             protected void grantBonus(Tank tank) {
-                BufferedImage sprWeapon = null;
-                try {
-                    sprWeapon = ImageIO.read(Powerup.class.getClassLoader().getResource("resources/weapon_laser.png"));
-                } catch (IOException e) {
-                    System.err.println(e + ": Cannot read image file");
-                }
-                tank.setWeapon(Weapon.Type.Laser, sprWeapon);
+                tank.setWeapon(Weapon.Type.Laser, this.sprWeapon);
             }
         },
 
         Boomerang {
             @Override
-            protected void setSprite() {
-                this.sprite = null;
-                try {
-                    this.sprite = ImageIO.read(Powerup.class.getClassLoader().getResource("resources/power_boomerang.png"));
-                } catch (IOException e) {
-                    System.err.println(e + ": Cannot read image file");
-                }
-            }
-            @Override
             protected void grantBonus(Tank tank) {
-                BufferedImage sprWeapon = null;
-                try {
-                    sprWeapon = ImageIO.read(Powerup.class.getClassLoader().getResource("resources/weapon_boomerang_anim.png"));
-                } catch (IOException e) {
-                    System.err.println(e + ": Cannot read image file");
-                }
-                tank.setWeapon(Weapon.Type.Boomerang, sprWeapon);
+                tank.setWeapon(Weapon.Type.Boomerang, this.sprWeapon);
             }
         },
 
         Rubber {
             @Override
-            protected void setSprite() {
-                this.sprite = null;
-                try {
-                    this.sprite = ImageIO.read(Powerup.class.getClassLoader().getResource("resources/power_rubber.png"));
-                } catch (IOException e) {
-                    System.err.println(e + ": Cannot read image file");
-                }
-            }
-            @Override
             protected void grantBonus(Tank tank) {
-                BufferedImage sprWeapon = null;
-                try {
-                    sprWeapon = ImageIO.read(Powerup.class.getClassLoader().getResource("resources/weapon_rubber.png"));
-                } catch (IOException e) {
-                    System.err.println(e + ": Cannot read image file");
-                }
-                tank.setWeapon(Weapon.Type.Rubber, sprWeapon);
+                tank.setWeapon(Weapon.Type.Rubber, this.sprWeapon);
             }
         };
 
         protected BufferedImage sprite;
-
-        protected abstract void setSprite();
+        protected BufferedImage sprWeapon = null;
 
         protected abstract void grantBonus(Tank tank);
 
@@ -190,15 +88,29 @@ public class Powerup extends GameObject {
     Powerup() {
         this.transform = new Transform();
         this.type = this.randomPower();
-        this.type.setSprite();
         this.construct(this.type.sprite);
     }
 
     Powerup(Powerup.Type type) {
         this.transform = new Transform();
         this.type = type;
-        this.type.setSprite();
         this.construct(this.type.sprite);
+    }
+
+    public static void init() {
+        Type.Health.sprite = SpriteCollection.powerHealth.getImage();
+        Type.Speed.sprite = SpriteCollection.powerSpeed.getImage();
+        Type.FireRate.sprite = SpriteCollection.powerFireRate.getImage();
+        Type.Damage.sprite = SpriteCollection.powerDamage.getImage();
+        Type.Armor.sprite = SpriteCollection.powerArmor.getImage();
+        Type.Ammo.sprite = SpriteCollection.powerAmmo.getImage();
+        Type.Laser.sprite = SpriteCollection.powerLaser.getImage();
+        Type.Boomerang.sprite = SpriteCollection.powerBoomerang.getImage();
+        Type.Rubber.sprite = SpriteCollection.powerRubber.getImage();
+
+        Type.Laser.sprWeapon = SpriteCollection.laser.getImage();
+        Type.Boomerang.sprWeapon = SpriteCollection.boomerang.getImage();
+        Type.Rubber.sprWeapon = SpriteCollection.rubber.getImage();
     }
 
     private Powerup.Type[] powerups = Powerup.Type.values();
