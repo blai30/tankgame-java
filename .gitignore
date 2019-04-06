@@ -28,6 +28,10 @@ hs_err_pid*
 # End of https://www.gitignore.io/api/java
 
 
+# Tiled map maker
+tiled/
+
+
 
 
 # Created by https://www.gitignore.io/api/intellij+all
