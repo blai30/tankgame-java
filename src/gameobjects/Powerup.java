@@ -67,13 +67,6 @@ public class Powerup extends GameObject {
             protected void grantBonus(Tank tank) {
                 tank.setWeapon(Weapon.Type.Boomerang, this.sprWeapon);
             }
-        },
-
-        Rubber {
-            @Override
-            protected void grantBonus(Tank tank) {
-                tank.setWeapon(Weapon.Type.Rubber, this.sprWeapon);
-            }
         };
 
         protected BufferedImage sprite;
@@ -111,11 +104,9 @@ public class Powerup extends GameObject {
         Type.Ammo.sprite = SpriteCollection.powerAmmo.getImage();
         Type.Laser.sprite = SpriteCollection.powerFireball.getImage();
         Type.Boomerang.sprite = SpriteCollection.powerBoomerang.getImage();
-        Type.Rubber.sprite = SpriteCollection.powerRubber.getImage();
 
         Type.Laser.sprWeapon = SpriteCollection.fireball.getImage();
         Type.Boomerang.sprWeapon = SpriteCollection.boomerang.getImage();
-        Type.Rubber.sprWeapon = SpriteCollection.rubber.getImage();
     }
 
     private Powerup.Type[] powerups = Powerup.Type.values();

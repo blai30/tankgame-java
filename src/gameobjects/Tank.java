@@ -86,6 +86,12 @@ public class Tank extends Player {
     private void respawn() {
         this.currentLives--;
         this.currentHP = this.maxHP;
+        this.currentWeapon = Weapon.Type.Bullet;
+        this.moveSpeed = 4;
+        this.fireRate = 1;
+        this.damage = 1;
+        this.armor = 0;
+        this.ammo = 30;
         // TODO: respawn at new location
     }
 

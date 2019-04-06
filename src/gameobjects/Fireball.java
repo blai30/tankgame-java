@@ -55,7 +55,10 @@ public class Fireball extends Weapon {
 
     @Override
     public void handleCollision(Weapon collidingWeapon) {
-
+        // Bullets pass through each other unless they are from the other player
+        if (collidingWeapon.shooter != this.shooter) {
+            collidingWeapon.takeDamage();
+        }
     }
 
     @Override

@@ -25,13 +25,6 @@ public abstract class Weapon extends GameObject {
             public Weapon createInstance(BufferedImage sprite, int damage, Tank shooter) {
                 return new Boomerang(sprite, damage, shooter);
             }
-        },
-
-        Rubber {
-            @Override
-            public Weapon createInstance(BufferedImage sprite, int damage, Tank shooter) {
-                return new Rubber(sprite, damage, shooter);
-            }
         };
 
         public abstract Weapon createInstance(BufferedImage sprite, int damage, Tank shooter);

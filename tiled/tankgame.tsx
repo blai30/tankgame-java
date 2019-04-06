@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.2" tiledversion="1.2.3" name="tankgame" tilewidth="50" tileheight="50" tilecount="13" columns="0">
+<tileset version="1.2" tiledversion="1.2.3" name="tankgame" tilewidth="50" tileheight="50" tilecount="12" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <properties>
@@ -65,18 +65,12 @@
   <properties>
    <property name="name" value="WL"/>
   </properties>
-  <image width="32" height="32" source="../src/resources/power_laser.png"/>
+  <image width="32" height="32" source="../src/resources/power_fireball.png"/>
  </tile>
  <tile id="11">
   <properties>
    <property name="name" value="WB"/>
   </properties>
   <image width="32" height="32" source="../src/resources/power_boomerang.png"/>
- </tile>
- <tile id="12">
-  <properties>
-   <property name="name" value="WR"/>
-  </properties>
-  <image width="32" height="32" source="../src/resources/power_rubber.png"/>
  </tile>
 </tileset>

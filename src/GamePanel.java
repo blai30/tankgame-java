@@ -190,11 +190,6 @@ public class GamePanel extends JPanel implements Runnable {
                         GameObjectCollection.spawn(powerBoomerang);
                         break;
 
-                    case ("WR"):    // Powerup Rubber
-                        Powerup powerRubber = new Powerup(x * 32, y * 32, 0, Powerup.Type.Rubber);
-                        GameObjectCollection.spawn(powerRubber);
-                        break;
-
                     case ("1"):     // Player 1 tank
                         BufferedImage sprTank1 = SpriteCollection.tank1.getImage();
                         BufferedImage sprBullet1 = SpriteCollection.bullet1.getImage();
