@@ -30,7 +30,8 @@ hs_err_pid*
 
 # Tiled map maker
 tiled/
-tiled/*
+tiled/*.tmx
+tiled/*.tsx
 *.tmx
 *.tsx
 
