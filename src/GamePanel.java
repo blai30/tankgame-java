@@ -53,7 +53,6 @@ public class GamePanel extends JPanel implements Runnable {
         ResourceCollection.init();
         SpriteCollection.init();
         GameObjectCollection.init();
-        Powerup.loadSprites();
 
         this.running = true;
     }
@@ -186,7 +185,7 @@ public class GamePanel extends JPanel implements Runnable {
                         break;
 
                     case ("WL"):    // Powerup Fireball
-                        Powerup powerLaser = new Powerup(x * 32, y * 32, 0, Powerup.Type.Laser);
+                        Powerup powerLaser = new Powerup(x * 32, y * 32, 0, Powerup.Type.Fireball);
                         GameObjectCollection.spawn(powerLaser);
                         break;
 

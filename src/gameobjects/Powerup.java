@@ -13,56 +13,56 @@ public class Powerup extends GameObject {
 
     public enum Type {
 
-        Health {
+        Health(SpriteCollection.powerHealth.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
                 tank.addHealth(2);
             }
         },
 
-        Speed {
+        Speed(SpriteCollection.powerSpeed.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
                 tank.addSpeed(1);
             }
         },
 
-        FireRate {
+        FireRate(SpriteCollection.powerFireRate.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
                 tank.addFireRate(1);
             }
         },
 
-        Damage {
+        Damage(SpriteCollection.powerDamage.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
                 tank.addDamage(1);
             }
         },
 
-        Armor {
+        Armor(SpriteCollection.powerArmor.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
                 tank.addArmor(1);
             }
         },
 
-        Ammo {
+        Ammo(SpriteCollection.powerAmmo.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
                 tank.addAmmo(20);
             }
         },
 
-        Laser {
+        Fireball(SpriteCollection.powerFireball.getImage(), SpriteCollection.fireball.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
                 tank.setWeapon(Weapon.Type.Fireball, this.sprWeapon);
             }
         },
 
-        Boomerang {
+        Boomerang(SpriteCollection.powerBoomerang.getImage(), SpriteCollection.boomerang.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
                 tank.setWeapon(Weapon.Type.Boomerang, this.sprWeapon);
@@ -71,6 +71,15 @@ public class Powerup extends GameObject {
 
         protected BufferedImage sprite;
         protected BufferedImage sprWeapon = null;
+
+        Type(BufferedImage sprite) {
+            this.sprite = sprite;
+        }
+
+        Type(BufferedImage sprite, BufferedImage sprWeapon) {
+            this.sprite = sprite;
+            this.sprWeapon = sprWeapon;
+        }
 
         protected abstract void grantBonus(Tank tank);
 
@@ -93,20 +102,6 @@ public class Powerup extends GameObject {
     public Powerup(float xPosition, float yPosition, float rotation, Powerup.Type type) {
         this.type = type;
         this.construct(xPosition, yPosition, rotation, this.type.sprite);
-    }
-
-    public static void loadSprites() {
-        Type.Health.sprite = SpriteCollection.powerHealth.getImage();
-        Type.Speed.sprite = SpriteCollection.powerSpeed.getImage();
-        Type.FireRate.sprite = SpriteCollection.powerFireRate.getImage();
-        Type.Damage.sprite = SpriteCollection.powerDamage.getImage();
-        Type.Armor.sprite = SpriteCollection.powerArmor.getImage();
-        Type.Ammo.sprite = SpriteCollection.powerAmmo.getImage();
-        Type.Laser.sprite = SpriteCollection.powerFireball.getImage();
-        Type.Boomerang.sprite = SpriteCollection.powerBoomerang.getImage();
-
-        Type.Laser.sprWeapon = SpriteCollection.fireball.getImage();
-        Type.Boomerang.sprWeapon = SpriteCollection.boomerang.getImage();
     }
 
     private Powerup.Type[] powerups = Powerup.Type.values();
