@@ -150,6 +150,11 @@ public class GamePanel extends JPanel implements Runnable {
                         GameObjectCollection.spawn(hardWall);
                         break;
 
+                    case ("R"):
+                        Spawn respawnPoint = new Spawn(x * 32, y * 32, 0);
+                        GameObjectCollection.spawnPoints.add(respawnPoint);
+                        break;
+
                     case ("PH"):    // Powerup Health
                         Powerup powerHealth = new Powerup(x * 32, y * 32, 0, Powerup.Type.Health);
                         GameObjectCollection.spawn(powerHealth);

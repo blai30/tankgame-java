@@ -3,6 +3,7 @@ package gameobjects;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedHashMap;
+import java.util.Random;
 
 /**
  * Tank object to be controlled by a player.
@@ -92,7 +93,10 @@ public class Tank extends Player {
         this.damage = 1;
         this.armor = 0;
         this.ammo = 30;
-        // TODO: respawn at new location
+
+        // Respawn at new random spawn location
+        Random random = new Random();
+        this.transform.setPosition(GameObjectCollection.spawnPoints.get(random.nextInt(GameObjectCollection.spawnPoints.size())).getTransform().getPosition());
     }
 
     public void takeDamage(int damageDealt) {

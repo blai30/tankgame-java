@@ -8,12 +8,14 @@ import java.util.ArrayList;
 public class GameObjectCollection {
 
     private static ArrayList<GameObject> gameObjects;
+    public static ArrayList<Spawn> spawnPoints;
 
     /**
      * Called when the game is initialized with a map and starts running.
      */
     public static void init() {
         gameObjects = new ArrayList<>();
+        spawnPoints = new ArrayList<>();
     }
 
     /**
