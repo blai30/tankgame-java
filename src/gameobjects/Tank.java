@@ -10,8 +10,21 @@ import java.util.Random;
  */
 public class Tank extends Player {
 
+    /*  Inherited fields from Player abstract class:
+        boolean UpPressed
+        boolean DownPressed
+        boolean LeftPressed
+        boolean RightPressed
+        boolean ActionPressed
+        int currentHP
+        int maxHP
+        int currentLives
+        int maxLives
+    */
+
     private final float ROTATION_SPEED = 2.5f;
 
+    private BufferedImage bulletSprite; // Used to save bullet sprite for when respawning from a different weapon
     private BufferedImage weaponSprite;
     private Weapon projectile;
     private Weapon.Type currentWeapon;
@@ -37,6 +50,7 @@ public class Tank extends Player {
         // Set properties
         this.construct(xPosition, yPosition, rotation, sprite);
         this.weaponSprite = weaponSprite;
+        this.bulletSprite = weaponSprite;
 
         this.init();
     }
@@ -85,9 +99,9 @@ public class Tank extends Player {
     }
 
     private void respawn() {
-        this.currentLives--;
         this.currentHP = this.maxHP;
         this.currentWeapon = Weapon.Type.Bullet;
+        this.weaponSprite = this.bulletSprite;
         this.moveSpeed = 4;
         this.fireRate = 1;
         this.damage = 1;
@@ -103,6 +117,11 @@ public class Tank extends Player {
         // Always deal at least 1 damage regardless of armor
         this.currentHP -= Math.max(1, damageDealt - this.armor);
         if (this.currentHP <= 0) {
+            this.currentLives--;
+            if (this.currentLives < 0) {
+                // TODO: end game and declare winner
+                System.out.println("WINNER");
+            }
             this.respawn();
         }
     }
