@@ -35,6 +35,9 @@ tiled/*.tsx
 *.tmx
 *.tsx
 
+# META-INF
+META-INF/
+
 
 
 
