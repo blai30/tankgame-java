@@ -50,12 +50,13 @@ public class GameWindow extends JFrame {
         }
 
         this.setLayout(new BorderLayout());
-        this.add(game, BorderLayout.CENTER);
         this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
+
+        this.add(game, BorderLayout.CENTER);
     }
 
 }

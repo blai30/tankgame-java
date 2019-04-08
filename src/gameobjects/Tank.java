@@ -121,6 +121,7 @@ public class Tank extends Player {
             if (this.currentLives < 0) {
                 // TODO: end game and declare winner
                 System.out.println("WINNER");
+                this.destroy();
             }
             this.respawn();
         }
