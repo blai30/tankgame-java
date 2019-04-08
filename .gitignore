@@ -38,6 +38,9 @@ tiled/*.tsx
 # META-INF
 META-INF/
 
+# .DS_Store
+.DS_Store
+
 
 
 
