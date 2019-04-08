@@ -14,15 +14,15 @@ src/
 
 ## Controls
 ### Player 1
-UP:     `↑`
-DOWN:   `↓`
-LEFT:   `←`
-RIGHT:  `→`
-FIRE:   `/`
+* UP:     `↑`
+* DOWN:   `↓`
+* LEFT:   `←`
+* RIGHT:  `→`
+* FIRE:   `/`
 
 ### Player 2
-UP:     `W`
-DOWN:   `S`
-LEFT:   `A`
-RIGHT:  `D`
-FIRE:   `F`
+* UP:     `W`
+* DOWN:   `S`
+* LEFT:   `A`
+* RIGHT:  `D`
+* FIRE:   `F`
