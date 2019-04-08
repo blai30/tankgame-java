@@ -26,3 +26,8 @@ src/
 * LEFT:   `A`
 * RIGHT:  `D`
 * FIRE:   `F`
+
+## To load .csv map file
+`java -jar csc413-tankgame-blai30.jar [map filename]`
+
+Example: `java -jar csc413-tankgame-blai30.jar maps/dust2.csv`
