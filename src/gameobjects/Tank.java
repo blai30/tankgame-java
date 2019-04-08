@@ -16,10 +16,10 @@ public class Tank extends Player {
         boolean LeftPressed
         boolean RightPressed
         boolean ActionPressed
+        int MAX_HP
+        int MAX_LIVES
         int currentHP
-        int maxHP
         int currentLives
-        int maxLives
     */
 
     private final float ROTATION_SPEED = 2.5f;
@@ -58,10 +58,8 @@ public class Tank extends Player {
     private void init() {
         // Default weapon and stats
         this.currentWeapon = Weapon.Type.Bullet;
-        this.maxHP = 20;
-        this.currentHP = this.maxHP;
-        this.maxLives = 5;
-        this.currentLives = this.maxLives;
+        this.currentHP = this.MAX_HP;
+        this.currentLives = this.MAX_LIVES;
 
         this.moveSpeed = 4;
         this.fireRate = 1;
@@ -99,7 +97,7 @@ public class Tank extends Player {
     }
 
     private void respawn() {
-        this.currentHP = this.maxHP;
+        this.currentHP = this.MAX_HP;
         this.currentWeapon = Weapon.Type.Bullet;
         this.weaponSprite = this.bulletSprite;
         this.moveSpeed = 4;
@@ -130,7 +128,7 @@ public class Tank extends Player {
 
     // --- POWERUPS ---
     public void addHealth(int value) {
-        this.currentHP = Math.min(this.maxHP, this.currentHP + value);
+        this.currentHP = Math.min(this.MAX_HP, this.currentHP + value);
     }
 
     public void addSpeed(int value) {

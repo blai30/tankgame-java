@@ -13,10 +13,11 @@ public abstract class Player extends GameObject {
     protected boolean RightPressed = false;
     protected boolean ActionPressed = false;
 
+    protected final int MAX_HP = 5;
+    protected final int MAX_LIVES = 5;
+
     protected int currentHP;
-    protected int maxHP;
     protected int currentLives;
-    protected int maxLives;
 
     public void toggleUpPressed() {
         this.UpPressed = true;
@@ -59,7 +60,7 @@ public abstract class Player extends GameObject {
     }
 
     public float getHPRatio() {
-        return Math.min(1, (float) this.currentHP / (float) this.maxHP);
+        return Math.min(1, (float) this.currentHP / (float) this.MAX_HP);
     }
 
     public int getCurrentLives() {
@@ -67,7 +68,7 @@ public abstract class Player extends GameObject {
     }
 
     public int getMaxLives() {
-        return this.maxLives;
+        return this.MAX_LIVES;
     }
 
     public abstract Weapon.Type getWeapon();
