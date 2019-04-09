@@ -393,10 +393,10 @@ public class GamePanel extends JPanel implements Runnable {
             GameObject obj = GameObjectCollection.getGameObject(i);
             obj.drawGizmos(this.buffer);    // Draw gizmos under its own sprite
             obj.drawImage(this.buffer);
-//            obj.drawCollider(this.buffer);
 
             // Draw debug information
             if (this.drawDebug) {
+                obj.drawCollider(this.buffer);
                 obj.drawTransform(this.buffer);
                 obj.drawVariables(this.buffer);
             }

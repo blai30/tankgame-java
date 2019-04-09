@@ -69,6 +69,8 @@ public class Tank extends Player {
 
         this.fireDelay = 60f;
         this.fireCooldown = this.fireDelay;
+
+        this.loser = false;
     }
 
     private void rotateRight() {
@@ -116,12 +118,14 @@ public class Tank extends Player {
         this.currentHP -= Math.max(1, damageDealt - this.armor);
         if (this.currentHP <= 0) {
             this.currentLives--;
-            if (this.currentLives < 0) {
-                // TODO: end game and declare winner
+            if (this.currentLives <= 0) {
+                // TODO: end game and declare loser
+                this.loser = true;
                 System.out.println("WINNER");
                 this.destroy();
+            } else {
+                this.respawn();
             }
-            this.respawn();
         }
     }
 

@@ -19,6 +19,8 @@ public abstract class Player extends GameObject {
     protected int currentHP;
     protected int currentLives;
 
+    protected boolean loser;
+
     public void toggleUpPressed() {
         this.UpPressed = true;
     }
@@ -69,6 +71,10 @@ public abstract class Player extends GameObject {
 
     public int getMaxLives() {
         return this.MAX_LIVES;
+    }
+
+    public boolean isLoser() {
+        return this.loser;
     }
 
     public abstract Weapon.Type getWeapon();

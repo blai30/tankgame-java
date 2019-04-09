@@ -37,7 +37,7 @@ public class GameWindow extends JFrame {
      * Constructs a game window with the necessary configurations.
      * @param game Game panel that will be contained inside the game window
      */
-    GameWindow(GamePanel game) {
+    GameWindow(JPanel game) {
         this.setTitle(title);
 
         try {

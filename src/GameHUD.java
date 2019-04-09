@@ -94,16 +94,19 @@ public class GameHUD {
             playerGraphics[i].setColor(Color.WHITE);
             playerGraphics[i].drawString("Weapon:", 32, 120);
             playerGraphics[i].drawString("[" + this.players[i].getWeapon() + "]", 32, 144);
+
             // Draw fire cooldown
             playerGraphics[i].setColor(Color.ORANGE);
             playerGraphics[i].fillRect(170, 26, (int) (this.players[i].getCooldownRatio() * 240), 4);
             playerGraphics[i].setColor(Color.WHITE);
             playerGraphics[i].drawRect(170, 26, 240, 4);
+
             // Draw health bar
             playerGraphics[i].setColor((this.players[i].getHPRatio() > 0.5) ? Color.GREEN : (this.players[i].getHPRatio() > 0.25) ? Color.YELLOW : Color.RED);
             playerGraphics[i].fillRect(170, 32, (int) (this.players[i].getHPRatio() * 240), 16);
             playerGraphics[i].setColor(Color.WHITE);
             playerGraphics[i].drawRect(170, 32, 240, 16);
+
             // Draw lives
             for (int j = 0; j < this.players[i].getMaxLives(); j++) {
                 if (j < this.players[i].getCurrentLives()) {
@@ -113,6 +116,7 @@ public class GameHUD {
                 playerGraphics[i].setColor(Color.WHITE);
                 playerGraphics[i].drawOval(170 + (j * 16), 52, 12, 12);
             }
+
             // Draw stats
             playerGraphics[i].setColor(Color.WHITE);
             int separator = 0;

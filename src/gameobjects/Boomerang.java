@@ -3,23 +3,21 @@ package gameobjects;
 import util.Transform;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Boomerang extends Weapon {
 
-    private BufferedImage[] animation;
-    private int counter;
+    private float spin;
 
     public Boomerang(BufferedImage sprite, int damage, Tank shooter) {
-        this.animation = new BufferedImage[20];
-        for (int i = 0; i < 20; i++) {
-            this.animation[i] = sprite.getSubimage(i * 32, 0, 32, 32);
-        }
-        this.sprite = this.animation[0];
-
         this.transform = new Transform();
-        this.construct(this.sprite);
+        this.construct(sprite);
         this.shooter = shooter;
+
+        Random rand = new Random();
+        this.spin = rand.nextInt(360);
 
         this.damage += damage;
         this.init();
@@ -29,8 +27,6 @@ public class Boomerang extends Weapon {
     protected void init() {
         this.velocity = 12.0f;
         this.hitPoints = 1;
-
-        this.counter = 0;
     }
 
     @Override
@@ -40,12 +36,7 @@ public class Boomerang extends Weapon {
         // Decrease velocity so that boomerang eventually flies backwards
         this.transform.move(this.velocity);
         this.velocity = Math.max(-16.0f, this.velocity - 0.2f);
-
-        // Cycle through sprite animation
-        if (++this.counter >= 20) {
-            this.counter = 0;
-        }
-        this.sprite = this.animation[this.counter];
+        this.spin += 20;
     }
 
     @Override
@@ -91,6 +82,15 @@ public class Boomerang extends Weapon {
     @Override
     public void drawVariables(Graphics g) {
 
+    }
+
+    // Using a separate value for rotation that movement does not depend on to draw spinning boomerang
+    @Override
+    public void drawImage(Graphics g) {
+        AffineTransform rotation = AffineTransform.getTranslateInstance(this.transform.getPositionX(), this.transform.getPositionY());
+        rotation.rotate(Math.toRadians(this.spin), this.sprite.getWidth() / 2.0, this.sprite.getHeight() / 2.0);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(this.sprite, rotation, null);
     }
 
 }
