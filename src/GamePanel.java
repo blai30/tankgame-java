@@ -300,36 +300,36 @@ public class GamePanel extends JPanel implements Runnable {
      */
     @Override
     public void run() {
-        long timer = System.currentTimeMillis();
-        long lastTime = System.nanoTime();
-
-        final double NS = 1000000000.0 / 60.0; // Locked ticks per second to 60
-        double delta = 0;
-        int fps = 0;    // Frames per second
-        int ticks = 0;  // Ticks/Updates per second; should be 60 at all times
+//        long timer = System.currentTimeMillis();
+//        long lastTime = System.nanoTime();
+//
+//        final double NS = 1000000000.0 / 60.0; // Locked ticks per second to 60
+//        double delta = 0;
+//        int fps = 0;    // Frames per second
+//        int ticks = 0;  // Ticks/Updates per second; should be 60 at all times
 
         // Count FPS, Ticks, and execute updates
         while (this.running) {
-            long currentTime = System.nanoTime();
+//            long currentTime = System.nanoTime();
 
-            delta += (currentTime - lastTime) / NS;
-            lastTime = currentTime;
-            if (delta >= 1) {
+//            delta += (currentTime - lastTime) / NS;
+//            lastTime = currentTime;
+//            if (delta >= 1) {
                 this.update();
-                ticks++;
-                delta--;
-            }
+//                ticks++;
+//                delta--;
+//            }
             this.repaint();
-            fps++;
+//            fps++;
 
             // Update FPS and Ticks counter every second
-            if (System.currentTimeMillis() - timer > 1000) {
-                timer = System.currentTimeMillis();
-                System.out.println("FPS: " + fps + ", Ticks: " + ticks);
-                gameWindow.setTitle(GameWindow.title + " | " + "FPS: " + fps + ", Ticks: " + ticks);
-                fps = 0;
-                ticks = 0;
-            }
+//            if (System.currentTimeMillis() - timer > 1000) {
+//                timer = System.currentTimeMillis();
+//                System.out.println("FPS: " + fps + ", Ticks: " + ticks);
+//                gameWindow.setTitle(GameWindow.title + " | " + "FPS: " + fps + ", Ticks: " + ticks);
+//                fps = 0;
+//                ticks = 0;
+//            }
         }
     }
 
