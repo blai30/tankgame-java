@@ -13,7 +13,7 @@ public abstract class Player extends GameObject {
     protected boolean RightPressed = false;
     protected boolean ActionPressed = false;
 
-    protected final int MAX_HP = 5;
+    protected final int MAX_HP = 20;
     protected final int MAX_LIVES = 5;
 
     protected int currentHP;

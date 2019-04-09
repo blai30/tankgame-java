@@ -42,7 +42,7 @@ public class GameWindow extends JFrame {
 
         try {
             System.out.println(System.getProperty("user.dir"));
-            Image icon = ImageIO.read(this.getClass().getResourceAsStream("resources/icon.png"));
+            Image icon = ImageIO.read(GameWindow.class.getClassLoader().getResource("resources/icon.png"));
             this.setIconImage(icon);
         } catch (IOException e) {
             System.out.println("IOException: cannot read image file");
@@ -54,9 +54,9 @@ public class GameWindow extends JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
 
         this.add(game, BorderLayout.CENTER);
+        this.setVisible(true);
     }
 
 }

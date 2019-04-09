@@ -70,7 +70,7 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public void loadMap(String mapFile) {
         // Loading resources: sprites, tiles, background
-        this.background = ResourceCollection.Images.background.getImage();
+        this.background = ResourceCollection.background.getImage();
 
         // Loading map file
         InputStream defaultMap = null;
@@ -106,7 +106,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.gameHUD = new GameHUD(this.world);
 
         // Load hard wall tiles
-        BufferedImage hardWallTiles = ResourceCollection.Images.tilesHardWall.getImage();
+        BufferedImage hardWallTiles = ResourceCollection.tilesHardWall.getImage();
         BufferedImage[][] tiles = new BufferedImage[5][4];
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {

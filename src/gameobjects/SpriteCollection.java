@@ -44,10 +44,10 @@ public enum SpriteCollection {
             SpriteCollection.powerDamage.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_damage.png"));
             SpriteCollection.powerArmor.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_armor.png"));
             SpriteCollection.powerAmmo.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_ammo.png"));
-            SpriteCollection.powerFireball.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("power_fireball.png"));
+            SpriteCollection.powerFireball.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_fireball.png"));
             SpriteCollection.powerBoomerang.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_boomerang.png"));
 
-            SpriteCollection.fireball.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("weapon_fireball.png"));
+            SpriteCollection.fireball.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/weapon_fireball.png"));
             SpriteCollection.boomerang.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/weapon_boomerang_anim.png"));
         } catch (IOException e) {
             System.err.println(e + ": Cannot read image file");
