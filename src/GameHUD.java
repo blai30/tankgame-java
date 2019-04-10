@@ -90,11 +90,12 @@ public class GameHUD {
             if (!this.players[i].isLoser()) {
                 // Draw player info box
                 playerGraphics[i].drawRect(4, 2, this.playerInfo[i].getWidth() - 8, this.playerInfo[i].getHeight() - 6);
-                playerGraphics[i].drawImage(this.players[i].getSprite(), 32, 32, null);
                 playerGraphics[i].setFont(font);
                 playerGraphics[i].setColor(Color.WHITE);
-                playerGraphics[i].drawString("Weapon:", 32, 120);
-                playerGraphics[i].drawString("[" + this.players[i].getWeapon() + "]", 32, 144);
+                playerGraphics[i].drawString("Player " + (i + 1), 32, 40);
+                playerGraphics[i].drawString("Weapon:", 32, 96);
+                playerGraphics[i].drawString("[" + this.players[i].getWeapon() + "]", 32, 120);
+                playerGraphics[i].drawImage(this.players[i].getSprite(), 32, 192, null);
 
                 // Draw fire cooldown
                 playerGraphics[i].setColor(Color.ORANGE);

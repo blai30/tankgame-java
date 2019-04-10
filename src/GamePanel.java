@@ -4,6 +4,7 @@ import gameobjects.*;
 import util.*;
 
 import javax.swing.*;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -455,6 +456,32 @@ class GameController implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             System.out.println("Escape key pressed: Closing game");
             this.gamePanel.exit();
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_F1) {
+            System.out.println("F1 key pressed: Displaying help");
+
+            String[] columnHeaders = { "", "Player 1", "Player 2" };
+            Object[][] data = {
+                    {"Forward", "Up", "W"},
+                    {"Backward", "Down", "S"},
+                    {"Turn Left", "Left", "A"},
+                    {"Turn Right", "Right", "D"},
+                    {"Fire", "/", "F"},
+                    {"", "", ""},
+                    {"Help", "F1", ""},
+                    {"Reset", "F5", ""},
+                    {"Exit", "ESC", ""} };
+
+            JTable controlsTable = new JTable(data, columnHeaders);
+            JTableHeader tableHeader = controlsTable.getTableHeader();
+
+            JPanel panel = new JPanel();
+            panel.setLayout(new BorderLayout());
+            panel.add(tableHeader, BorderLayout.NORTH);
+            panel.add(controlsTable, BorderLayout.CENTER);
+
+            JOptionPane.showMessageDialog(this.gamePanel, panel, "Controls", JOptionPane.PLAIN_MESSAGE);
         }
 
         if (e.getKeyCode() == KeyEvent.VK_F5) {

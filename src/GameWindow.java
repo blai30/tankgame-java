@@ -18,6 +18,7 @@ class GameLauncher {
             game.loadMap(null);
         }
         game.launch();
+        System.gc();
     }
 
 }
