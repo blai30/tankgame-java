@@ -30,6 +30,10 @@ public class GameObjectCollection {
         gameObjects.remove(obj);
     }
 
+    public static void clear() {
+        gameObjects.clear();
+    }
+
     /**
      * Counts the number of game objects present in the game world.
      * @return Number of game objects in the array list

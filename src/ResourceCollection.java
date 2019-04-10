@@ -15,7 +15,6 @@ public enum ResourceCollection {
 
     public static void init() {
         try {
-            System.out.println(System.getProperty("user.dir"));
             background.image = ImageIO.read(ResourceCollection.class.getClassLoader().getResource("resources/bg.jpg"));
             tilesHardWall.image = ImageIO.read(ResourceCollection.class.getClassLoader().getResource("resources/wall_tiles.png"));
         } catch (IOException e) {

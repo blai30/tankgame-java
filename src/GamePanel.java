@@ -6,6 +6,7 @@ import util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 public class GamePanel extends JPanel implements Runnable {
 
     private GameWindow gameWindow;
+    private GameController gameController;
 
     private Thread thread;
     private boolean running = false;
@@ -28,6 +30,8 @@ public class GamePanel extends JPanel implements Runnable {
     private BufferedImage world;
     private Graphics2D buffer;
     private GameHUD gameHUD;
+
+    private String mapFile;
 
     private HashMap<Integer, BufferedImage> tileMap;
 
@@ -59,6 +63,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void launch() {
         this.gameWindow = new GameWindow(this);
+        this.gameController = new GameController(this);
+        this.addKeyListener(this.gameController);
     }
 
     /**
@@ -69,6 +75,7 @@ public class GamePanel extends JPanel implements Runnable {
      * @param mapFile Name of the file to generate map from
      */
     public void loadMap(String mapFile) {
+        this.mapFile = mapFile;
         // Loading resources: sprites, tiles, background
         this.background = ResourceCollection.background.getImage();
 
@@ -295,6 +302,18 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    public void exit() {
+        System.exit(0);
+    }
+
+    public void resetGame() {
+        GameObjectCollection.init();
+        GameObjectCollection.clear();
+        System.gc();
+        this.init();
+        this.loadMap(this.mapFile);
+    }
+
     /**
      * Game starts running and keeps running.
      */
@@ -414,6 +433,39 @@ public class GamePanel extends JPanel implements Runnable {
 
         g2.dispose();
         this.buffer.dispose();
+    }
+
+}
+
+class GameController implements KeyListener {
+
+    private GamePanel gamePanel;
+
+    public GameController(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            System.out.println("Escape key pressed: Closing game");
+            this.gamePanel.exit();
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_F5) {
+            System.out.println("F5 key pressed: Resetting game");
+            this.gamePanel.resetGame();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 
 }
