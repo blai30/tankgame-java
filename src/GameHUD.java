@@ -126,6 +126,16 @@ public class GameHUD {
                 playerGraphics[i].drawString(entry.getValue().toString(), 370, 96 + separator);
                 separator += 24;
             }
+
+            // Draw game over when player loses
+            if (players[i].isLoser()) {
+                playerGraphics[i].fillRect(0, 0, this.playerInfo[i].getWidth(), this.playerInfo[i].getHeight());
+                Font bigFont = new Font("Courier New", Font.BOLD,72);
+                playerGraphics[i].setFont(bigFont);
+                playerGraphics[i].setColor(Color.RED);
+                playerGraphics[i].drawString("GAME", this.playerInfo[i].getWidth() / 2 - 100, this.playerInfo[i].getHeight() / 2 - 20);
+                playerGraphics[i].drawString("OVER", this.playerInfo[i].getWidth() / 2 - 100, this.playerInfo[i].getHeight() / 2 + 50);
+            }
         }
 
         // Draw minimap
