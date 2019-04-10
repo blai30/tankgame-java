@@ -129,7 +129,7 @@ public class GameHUD {
 
             // Draw game over when player loses
             if (players[i].isLoser()) {
-                playerGraphics[i].fillRect(0, 0, this.playerInfo[i].getWidth(), this.playerInfo[i].getHeight());
+                playerGraphics[i].clearRect(0, 0, this.playerInfo[i].getWidth(), this.playerInfo[i].getHeight());
                 Font bigFont = new Font("Courier New", Font.BOLD,72);
                 playerGraphics[i].setFont(bigFont);
                 playerGraphics[i].setColor(Color.RED);
