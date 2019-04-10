@@ -179,7 +179,7 @@ public class Tank extends Player {
 
     @Override
     public float getCooldownRatio() {
-        return (this.fireCooldown / this.fireDelay < 1) ? this.fireCooldown / this.fireDelay : 1;
+        return this.fireCooldown / this.fireDelay;
     }
 
     @Override
@@ -204,7 +204,7 @@ public class Tank extends Player {
     public void update() {
         this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
 
-        if (this.fireCooldown <= this.fireDelay) {
+        if (this.fireCooldown < this.fireDelay) {
             this.fireCooldown += this.fireRate;
         }
 
