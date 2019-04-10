@@ -32,7 +32,7 @@ public class GameWindow extends JFrame {
     // Please do not use smaller dimensions as the game UI elements may not fit properly
     public static final int SCREEN_WIDTH = 1280;
     public static final int SCREEN_HEIGHT = 960;
-    public static final String title = "Tank Game by Brian Lai";
+    public static final String title = "Tank Game by Brian Lai | Press F1 to view controls";
 
     /**
      * Constructs a game window with the necessary configurations.
