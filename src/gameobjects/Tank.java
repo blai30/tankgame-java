@@ -132,27 +132,39 @@ public class Tank extends Player {
 
     // --- POWERUPS ---
     public void addHealth(int value) {
-        this.currentHP = Math.min(this.MAX_HP, this.currentHP + value);
+        if ((this.currentHP += value) >= this.MAX_HP) {
+            this.currentHP = this.MAX_HP;
+        }
     }
 
     public void addSpeed(int value) {
-        this.moveSpeed = Math.min(10, this.moveSpeed + value);
+        if ((this.moveSpeed += value) >= 10) {
+            this.moveSpeed = 10;
+        }
     }
 
     public void addFireRate(int value) {
-        this.fireRate = Math.min(10, this.fireRate + value);
+        if ((this.fireRate += value) >= 10) {
+            this.fireRate = 10;
+        }
     }
 
     public void addDamage(int value) {
-        this.damage = Math.min(10, this.damage + value);
+        if ((this.damage += value) >= 10) {
+            this.damage = 10;
+        }
     }
 
     public void addArmor(int value) {
-        this.armor = Math.min(10, this.armor + value);
+        if ((this.armor += value) >= 10) {
+            this.armor = 10;
+        }
     }
 
     public void addAmmo(int value) {
-        this.ammo = Math.min(999, this.ammo + value);
+        if ((this.ammo += value) >= 999) {
+            this.ammo = 999;
+        }
     }
 
     public void setWeapon(Weapon.Type newWeapon, BufferedImage sprWeapon) {
@@ -169,7 +181,7 @@ public class Tank extends Player {
 
     @Override
     public float getCooldownRatio() {
-        return Math.min(1, this.fireCooldown / this.fireDelay);
+        return (this.fireCooldown / this.fireDelay < 1) ? this.fireCooldown / this.fireDelay : 1;
     }
 
     @Override
