@@ -129,6 +129,9 @@ public class GameHUD {
                 }
             } else {    // Draw game over when player loses
                 playerGraphics[i].clearRect(0, 0, this.playerInfo[i].getWidth(), this.playerInfo[i].getHeight());
+                playerGraphics[i].setColor(Color.WHITE);
+                playerGraphics[i].drawString("ESC to exit game", 12, this.playerInfo[i].getHeight() - 28);
+                playerGraphics[i].drawString("F5 to reset game", 12, this.playerInfo[i].getHeight() - 12);
                 Font bigFont = new Font("Courier New", Font.BOLD,72);
                 playerGraphics[i].setFont(bigFont);
                 playerGraphics[i].setColor(Color.RED);
