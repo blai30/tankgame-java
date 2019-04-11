@@ -58,27 +58,41 @@ public class Powerup extends GameObject {
         Fireball(SpriteCollection.powerFireball.getImage(), SpriteCollection.fireball.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
-                tank.setWeapon(Weapon.Type.Fireball, this.sprWeapon);
+                tank.setWeapon(Weapon.Type.Fireball, this.sprPower);
             }
         },
 
         Boomerang(SpriteCollection.powerBoomerang.getImage(), SpriteCollection.boomerang.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
-                tank.setWeapon(Weapon.Type.Boomerang, this.sprWeapon);
+                tank.setWeapon(Weapon.Type.Boomerang, this.sprPower);
+            }
+        },
+
+        // This enum must be last to keep out of the random pool
+        Max(SpriteCollection.powerMax.getImage(), SpriteCollection.tankMax.getImage()) {
+            @Override
+            protected void grantBonus(Tank tank) {
+                tank.addHealth(20);
+                tank.addSpeed(10);
+                tank.addFireRate(10);
+                tank.addDamage(10);
+                tank.addArmor(10);
+                tank.addAmmo(999);
+                tank.setSprite(this.sprPower);
             }
         };
 
         protected BufferedImage sprite;
-        protected BufferedImage sprWeapon = null;
+        protected BufferedImage sprPower = null;
 
         Type(BufferedImage sprite) {
             this.sprite = sprite;
         }
 
-        Type(BufferedImage sprite, BufferedImage sprWeapon) {
+        Type(BufferedImage sprite, BufferedImage sprPower) {
             this.sprite = sprite;
-            this.sprWeapon = sprWeapon;
+            this.sprPower = sprPower;
         }
 
         protected abstract void grantBonus(Tank tank);
@@ -109,7 +123,8 @@ public class Powerup extends GameObject {
     private Random random = new Random();
 
     private final Powerup.Type randomPower() {
-        return this.powerups[this.random.nextInt(this.powerups.length)];
+        // Exclude power max from random pool
+        return this.powerups[this.random.nextInt(this.powerups.length - 1)];
     }
 
     void grantBonus(Tank tank) {

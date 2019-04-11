@@ -45,14 +45,18 @@ public class Wall extends GameObject {
         // Chance to randomly drop powerups upon destroy
         if (this.hitPoints <= 0) {
             double random = Math.random();
-            // Random powerup at 20% chance
-            if (random < 0.2) {
+            if (random < 0.01) {
+                // Low chance of spawning power max
+                Powerup powerMax = new Powerup(Powerup.Type.Max);
+                this.instantiate(powerMax, this.transform.getPosition().add(this.originOffset), 0);
+            } else if (random < 0.2) {
+                // Random powerup at 20% chance excluding power max
                 Powerup powerup = new Powerup();
                 this.instantiate(powerup, this.transform.getPosition().add(this.originOffset), 0);
             } else if (random < 0.25) {
                 // Ammo at 25% chance if random powerup did not pass
-                Powerup powerup = new Powerup(Powerup.Type.Ammo);
-                this.instantiate(powerup, this.transform.getPosition().add(this.originOffset), 0);
+                Powerup powerAmmo = new Powerup(Powerup.Type.Ammo);
+                this.instantiate(powerAmmo, this.transform.getPosition().add(this.originOffset), 0);
             }
             this.destroy();
         }

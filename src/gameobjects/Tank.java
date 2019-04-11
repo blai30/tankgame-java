@@ -24,7 +24,8 @@ public class Tank extends Player {
 
     private final float ROTATION_SPEED = 2.5f;
 
-    private BufferedImage bulletSprite; // Used to save bullet sprite for when respawning from a different weapon
+    private BufferedImage originalSprite;   // Used to save original sprite in case tank gets powerMax which alters tank sprite
+    private BufferedImage bulletSprite;     // Used to save bullet sprite for when respawning from a different weapon
     private BufferedImage weaponSprite;
     private Weapon projectile;
     private Weapon.Type currentWeapon;
@@ -49,6 +50,7 @@ public class Tank extends Player {
     public Tank(float xPosition, float yPosition, float rotation, BufferedImage sprite, BufferedImage weaponSprite) {
         // Set properties
         this.construct(xPosition, yPosition, rotation, sprite);
+        this.originalSprite = this.sprite;
         this.weaponSprite = weaponSprite;
         this.bulletSprite = weaponSprite;
 
@@ -110,6 +112,7 @@ public class Tank extends Player {
     private void respawn() {
         this.currentHP = this.MAX_HP;
         this.currentWeapon = Weapon.Type.Bullet;
+        this.sprite = this.originalSprite;
         this.weaponSprite = this.bulletSprite;
 
         this.moveSpeed = Math.max(4, this.moveSpeed - 2);
@@ -177,6 +180,9 @@ public class Tank extends Player {
     public void setWeapon(Weapon.Type newWeapon, BufferedImage sprWeapon) {
         this.currentWeapon = newWeapon;
         this.weaponSprite = sprWeapon;
+    }
+    public void setSprite(BufferedImage newSprite) {
+        this.sprite = newSprite;
     }
     // --- POWERUPS ---
 
