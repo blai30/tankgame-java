@@ -55,22 +55,23 @@ public class Tank extends Player {
         this.init();
     }
 
+    /**
+     * Initialize default weapon and stats
+     */
     private void init() {
-        // Default weapon and stats
         this.currentWeapon = Weapon.Type.Bullet;
         this.currentHP = this.MAX_HP;
         this.currentLives = this.MAX_LIVES;
 
+        this.statsCollection = new LinkedHashMap<>();
         this.moveSpeed = 4;
         this.fireRate = 1;
         this.damage = 1;
         this.armor = 0;
         this.ammo = 50;
-        this.statsCollection = new LinkedHashMap<>();
 
         this.fireDelay = 60f;
         this.fireCooldown = this.fireDelay;
-
         this.loser = false;
     }
 
@@ -90,6 +91,9 @@ public class Tank extends Player {
         this.transform.move(-this.moveSpeed);
     }
 
+    /**
+     * Instantiate current weapon and deduct ammo.
+     */
     private void fire() {
         if (this.fireCooldown >= this.fireDelay) {
             this.projectile = this.currentWeapon.createInstance(this.weaponSprite, this.damage, this);
@@ -99,6 +103,9 @@ public class Tank extends Player {
         }
     }
 
+    /**
+     * Reset HP, weapon, ammo, and deduct stats by 2.
+     */
     private void respawn() {
         this.currentHP = this.MAX_HP;
         this.currentWeapon = Weapon.Type.Bullet;
@@ -115,6 +122,11 @@ public class Tank extends Player {
         this.transform.setPosition(GameObjectCollection.spawnPoints.get(random.nextInt(GameObjectCollection.spawnPoints.size())).getTransform().getPosition());
     }
 
+    /**
+     * Take (at least 1) damage from bullets and lose life when out of HP.
+     * Lose the game when out of lives.
+     * @param damageDealt Damage of the bullet
+     */
     public void takeDamage(int damageDealt) {
         // Always deal at least 1 damage regardless of armor
         this.currentHP -= Math.max(1, damageDealt - this.armor);

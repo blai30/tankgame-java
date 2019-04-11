@@ -7,6 +7,12 @@ import java.awt.image.BufferedImage;
 
 public class Fireball extends Weapon {
 
+    /**
+     * Constructs a new fireball object with generic data.
+     * @param sprite The image of this bullet passed in by a tank object drawn to the screen
+     * @param damage Bonus damage passed in by a tank object added to the base damage
+     * @param shooter The tank that originally fired this bullet, prevents it from shooting itself
+     */
     public Fireball(BufferedImage sprite, int damage, Tank shooter) {
         this.transform = new Transform();
         this.construct(sprite);
@@ -16,22 +22,13 @@ public class Fireball extends Weapon {
         this.init();
     }
 
+    /**
+     * Initialize weapons with default stats.
+     */
     @Override
     protected void init() {
         this.velocity = 16.0f;
         this.hitPoints = 5;
-    }
-
-    @Override
-    public void update() {
-        this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
-
-        this.transform.move(this.velocity);
-    }
-
-    @Override
-    public void collides(GameObject collidingObj) {
-        collidingObj.handleCollision(this);
     }
 
     @Override
@@ -43,6 +40,10 @@ public class Fireball extends Weapon {
         }
     }
 
+    /**
+     * Fireballs can destroy up to 5 soft walls. (Based on hitPoints)
+     * @param collidingWall
+     */
     @Override
     public void handleCollision(Wall collidingWall) {
         if (collidingWall.isBreakable()) {
@@ -51,29 +52,6 @@ public class Fireball extends Weapon {
         } else {
             this.destroy();
         }
-    }
-
-    @Override
-    public void handleCollision(Weapon collidingWeapon) {
-        // Bullets pass through each other unless they are from the other player
-        if (collidingWeapon.shooter != this.shooter) {
-            collidingWeapon.takeDamage();
-        }
-    }
-
-    @Override
-    public void handleCollision(Powerup collidingPowerup) {
-
-    }
-
-    @Override
-    public void drawGizmos(Graphics g) {
-
-    }
-
-    @Override
-    public void drawVariables(Graphics g) {
-
     }
 
 }
