@@ -24,7 +24,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Thread thread;
     private boolean running = false;
-    private boolean drawDebug = false;
+    private boolean drawDebug = false;  // Draws various debugging info for game objects
 
     private BufferedReader bufferedReader;
     private BufferedImage background = null;
@@ -415,6 +415,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             // Draw debug information
             if (this.drawDebug) {
+                this.buffer.setColor(Color.WHITE);
                 obj.drawCollider(this.buffer);
                 obj.drawTransform(this.buffer);
                 obj.drawVariables(this.buffer);
