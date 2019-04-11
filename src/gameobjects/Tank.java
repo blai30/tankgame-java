@@ -65,7 +65,7 @@ public class Tank extends Player {
         this.fireRate = 1;
         this.damage = 1;
         this.armor = 0;
-        this.ammo = 30;
+        this.ammo = 50;
         this.statsCollection = new LinkedHashMap<>();
 
         this.fireDelay = 60f;
@@ -103,11 +103,12 @@ public class Tank extends Player {
         this.currentHP = this.MAX_HP;
         this.currentWeapon = Weapon.Type.Bullet;
         this.weaponSprite = this.bulletSprite;
-        this.moveSpeed = 4;
-        this.fireRate = 1;
-        this.damage = 1;
-        this.armor = 0;
-        this.ammo = 30;
+
+        this.moveSpeed = Math.max(4, this.moveSpeed - 2);
+        this.fireRate = Math.max(1, this.fireRate - 2);
+        this.damage = Math.max(1, this.damage - 2);
+        this.armor = Math.max(0, this.armor - 2);
+        this.ammo = 50;
 
         // Respawn at new random spawn location
         Random random = new Random();

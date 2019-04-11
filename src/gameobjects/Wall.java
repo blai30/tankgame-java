@@ -41,7 +41,7 @@ public class Wall extends GameObject {
             if (random < 0.2) {
                 Powerup powerup = new Powerup();
                 this.instantiate(powerup, this.transform.getPosition().add(this.originOffset), 0);
-            } else if (random < 0.3) {
+            } else if (random < 0.25) {
                 Powerup powerup = new Powerup(Powerup.Type.Ammo);
                 this.instantiate(powerup, this.transform.getPosition().add(this.originOffset), 0);
             }
