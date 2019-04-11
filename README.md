@@ -35,7 +35,15 @@ src/
 ## To load .csv map file
 `java -jar csc413-tankgame-blai30.jar [map filename]`
 
-Example: `java -jar csc413-tankgame-blai30.jar maps/dust2.csv`
+Example:
+```
+java -jar csc413-tankgame-blai30.jar maps/dust2.csv
+```
+
+Alternatively, place a .csv map file in the same directory as .jar and run:
+```
+java -jar csc413-tankgame-blai30.jar *.csv
+```
 
 ## Creating your own map
 Format is .csv (Comma-separated values). Width and height of the map should be at least 32x32 tiles (1024x1024 pixels). Recommended to surround map with hard wall tiles to prevent tanks from leaving the map.
