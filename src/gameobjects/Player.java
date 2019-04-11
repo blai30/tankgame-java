@@ -1,6 +1,7 @@
 package gameobjects;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * A game object that extends this class is allowed to be controlled by a player.
@@ -12,6 +13,8 @@ public abstract class Player extends GameObject {
     protected boolean LeftPressed = false;
     protected boolean RightPressed = false;
     protected boolean ActionPressed = false;
+
+    protected LinkedHashMap<String, Integer> statsCollection;
 
     protected final int MAX_HP = 20;
     protected final int MAX_LIVES = 5;

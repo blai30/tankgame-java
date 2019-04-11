@@ -66,6 +66,7 @@ public class Tank extends Player {
         this.damage = 1;
         this.armor = 0;
         this.ammo = 30;
+        this.statsCollection = new LinkedHashMap<>();
 
         this.fireDelay = 60f;
         this.fireCooldown = this.fireDelay;
@@ -184,17 +185,15 @@ public class Tank extends Player {
 
     @Override
     public LinkedHashMap<String, Integer> getStats() {
-        LinkedHashMap<String, Integer> statsCollection = new LinkedHashMap<>();
+        this.statsCollection.put("Health", this.currentHP);
+        this.statsCollection.put("Lives", this.currentLives);
+        this.statsCollection.put("Speed", this.moveSpeed);
+        this.statsCollection.put("Fire Rate", this.fireRate);
+        this.statsCollection.put("Damage", this.damage);
+        this.statsCollection.put("Armor", this.armor);
+        this.statsCollection.put("Ammo", this.ammo);
 
-        statsCollection.put("Health", this.currentHP);
-        statsCollection.put("Lives", this.currentLives);
-        statsCollection.put("Speed", this.moveSpeed);
-        statsCollection.put("Fire Rate", this.fireRate);
-        statsCollection.put("Damage", this.damage);
-        statsCollection.put("Armor", this.armor);
-        statsCollection.put("Ammo", this.ammo);
-
-        return statsCollection;
+        return this.statsCollection;
     }
 
     /**

@@ -309,7 +309,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void resetGame() {
         GameObjectCollection.init();
-        GameObjectCollection.clear();
         System.gc();
         this.init();
         this.loadMap(this.mapFile);

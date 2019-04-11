@@ -1,5 +1,3 @@
-
-
 import gameobjects.Player;
 
 import java.awt.*;
@@ -133,6 +131,7 @@ public class GameHUD {
                 playerGraphics[i].setColor(Color.WHITE);
                 playerGraphics[i].drawString("Press ESC to exit game", 12, this.playerInfo[i].getHeight() - 28);
                 playerGraphics[i].drawString("Press F5 to reset game", 12, this.playerInfo[i].getHeight() - 12);
+
                 Font bigFont = new Font("Courier New", Font.BOLD,72);
                 playerGraphics[i].setFont(bigFont);
                 playerGraphics[i].setColor(Color.RED);
