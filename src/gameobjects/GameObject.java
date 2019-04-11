@@ -21,6 +21,14 @@ public abstract class GameObject implements CollisionHandling {
 
     private boolean destroyed = false;
 
+    /**
+     * Constructs game object with location, rotation, and sprite.
+     * This method exists to reduce duplicate code.
+     * @param xPosition
+     * @param yPosition
+     * @param rotation
+     * @param sprite
+     */
     protected void construct(float xPosition, float yPosition, float rotation, BufferedImage sprite) {
         this.transform = new Transform(xPosition, yPosition, rotation);
         this.construct(sprite);
@@ -67,7 +75,7 @@ public abstract class GameObject implements CollisionHandling {
      */
     protected void solidCollision(GameObject obj) {
         Rectangle2D intersection = this.collider.createIntersection(obj.collider);
-
+        // Vertical collision
         if (intersection.getWidth() >= intersection.getHeight()) {
             // From the top
             if (intersection.getMaxY() >= this.collider.getMaxY()) {
@@ -78,7 +86,7 @@ public abstract class GameObject implements CollisionHandling {
                 this.transform.move(0, (float) intersection.getHeight());
             }
         }
-
+        // Horizontal collision
         if (intersection.getHeight() >= intersection.getWidth()) {
             // From the left
             if (intersection.getMaxX() >= this.collider.getMaxX()) {
@@ -107,6 +115,7 @@ public abstract class GameObject implements CollisionHandling {
         return this.collider;
     }
 
+    // Marked for deletion?
     public boolean isDestroyed() {
         return destroyed;
     }

@@ -19,8 +19,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     private GameWindow gameWindow;
     private GameController gameController;
-
     private Thread thread;
+
     private boolean running = false;
     private boolean drawDebug = false;  // Draws various debugging info for game objects
 
@@ -31,8 +31,7 @@ public class GamePanel extends JPanel implements Runnable {
     private GameHUD gameHUD;
 
     private String mapFile;
-
-    private HashMap<Integer, BufferedImage> tileMap;
+    private HashMap<Integer, BufferedImage> tileMap;    // Tiles for hard walls loaded by bitmask
 
     private HashMap<Integer, Key> controls1;
     private HashMap<Integer, Key> controls2;
@@ -301,10 +300,16 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * When ESC is pressed, close the game
+     */
     public void exit() {
         System.exit(0);
     }
 
+    /**
+     * When F5 is pressed, reset game object collection, collect garbage, reinitialize game panel, reload map
+     */
     public void resetGame() {
         GameObjectCollection.init();
         System.gc();
@@ -360,6 +365,7 @@ public class GamePanel extends JPanel implements Runnable {
                 GameObject obj = GameObjectCollection.getGameObject(i);
                 obj.update();
                 if (obj.isDestroyed()) {
+                    // Destroy and remove game objects that were marked for deletion
                     GameObjectCollection.destroy(obj);
                 } else {
                     for (int j = 0; j < GameObjectCollection.numGameObjects(); j++) {
@@ -436,6 +442,9 @@ public class GamePanel extends JPanel implements Runnable {
 
 }
 
+/**
+ * Used to control the game
+ */
 class GameController implements KeyListener {
 
     private GamePanel gamePanel;
@@ -449,18 +458,24 @@ class GameController implements KeyListener {
 
     }
 
+    /**
+     * Key events for general game operations such as exit
+     * @param e Keyboard key pressed
+     */
     @Override
     public void keyPressed(KeyEvent e) {
+        // Close game
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             System.out.println("Escape key pressed: Closing game");
             this.gamePanel.exit();
         }
 
+        // Display controls
         if (e.getKeyCode() == KeyEvent.VK_F1) {
             System.out.println("F1 key pressed: Displaying help");
 
             String[] columnHeaders = { "", "Player 1", "Player 2" };
-            Object[][] data = {
+            Object[][] controls = {
                     {"Forward", "Up", "W"},
                     {"Backward", "Down", "S"},
                     {"Turn Left", "Left", "A"},
@@ -471,9 +486,10 @@ class GameController implements KeyListener {
                     {"Reset", "F5", ""},
                     {"Exit", "ESC", ""} };
 
-            JTable controlsTable = new JTable(data, columnHeaders);
+            JTable controlsTable = new JTable(controls, columnHeaders);
             JTableHeader tableHeader = controlsTable.getTableHeader();
 
+            // Wrap JTable inside JPanel to display
             JPanel panel = new JPanel();
             panel.setLayout(new BorderLayout());
             panel.add(tableHeader, BorderLayout.NORTH);
@@ -482,6 +498,7 @@ class GameController implements KeyListener {
             JOptionPane.showMessageDialog(this.gamePanel, panel, "Controls", JOptionPane.PLAIN_MESSAGE);
         }
 
+        // Reset game
         if (e.getKeyCode() == KeyEvent.VK_F5) {
             System.out.println("F5 key pressed: Resetting game");
             this.gamePanel.resetGame();

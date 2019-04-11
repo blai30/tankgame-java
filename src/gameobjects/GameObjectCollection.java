@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class GameObjectCollection {
 
     private static ArrayList<GameObject> gameObjects;
-    public static ArrayList<Spawn> spawnPoints;
+    public static ArrayList<Spawn> spawnPoints; // Spawn points for tanks to respawn
 
     /**
      * Called when the game is initialized with a map and starts running.
@@ -26,12 +26,12 @@ public class GameObjectCollection {
         gameObjects.add(obj);
     }
 
+    /**
+     * Removes a game object from the game world.
+     * @param obj Game object to be removed
+     */
     public static void destroy(GameObject obj) {
         gameObjects.remove(obj);
-    }
-
-    public static void clear() {
-        gameObjects.clear();
     }
 
     /**

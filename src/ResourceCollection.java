@@ -2,6 +2,9 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/**
+ * Collection of resources for the game to load from
+ */
 public enum ResourceCollection {
 
     background,
@@ -13,6 +16,7 @@ public enum ResourceCollection {
         return this.image;
     }
 
+    // Load resources from disk
     public static void init() {
         try {
             background.image = ImageIO.read(ResourceCollection.class.getClassLoader().getResource("resources/bg.jpg"));
