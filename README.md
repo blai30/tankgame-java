@@ -33,7 +33,9 @@ src/
 * View Controls: `F1`
 
 ## To load .csv map file
-`java -jar csc413-tankgame-blai30.jar [map filename]`
+```
+java -jar csc413-tankgame-blai30.jar [map filename]
+```
 
 Example:
 ```
