@@ -12,6 +12,7 @@ class GameLauncher {
         GamePanel game = new GamePanel();
         game.init();
         try {
+            // $ java -jar csc413-tankgame-blai30.jar [args]
             game.loadMap(args[0]);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println(e + ": Program args not given");
