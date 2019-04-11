@@ -27,10 +27,34 @@ src/
 * RIGHT:  `D`
 * FIRE:   `F`
 
+### System
+* EXIT: `ESC`
+* RESET: `F5`
+* View Controls: `F1`
+
 ## To load .csv map file
 `java -jar csc413-tankgame-blai30.jar [map filename]`
 
 Example: `java -jar csc413-tankgame-blai30.jar maps/dust2.csv`
+
+## Creating your own map
+Format is .csv (Comma-separated values). Width and height of the map should be at least 32x32 tiles (1024x1024 pixels). Recommended to surround map with hard wall tiles to prevent tanks from leaving the map.
+
+Possible tiles:
+* Tank1 initial spawn: `1`
+* Tank2 initial spawn: `2`
+* Respawn point: `R`
+* Soft wall: `S`
+* Hard wall: `H`
+* Powerup Health: `PH`
+* Powerup Speed: `PS`
+* Powerup Fire Rate: `PF`
+* Powerup Damage: `PD`
+* Powerup Armor: `PA`
+* Powerup Ammo: `PM`
+* Powerup weapon Fireball: `WF`
+* Powerup weapon Boomerang: `WB`
+* Powerup Gold: `PG`
 
 ## Available powerups
 * Health: Increase current health by 2 (max: 20)
@@ -41,6 +65,7 @@ Example: `java -jar csc413-tankgame-blai30.jar maps/dust2.csv`
 * Ammo: Increase ammo by 20 (max 999)
 * Fireball: Change weapon to fireball
 * Boomerang: Change weapon to boomerang
+* Gold: Set all stats to their maximum values and change tank sprite to golden
 
 ## Rules
 * Bullets fired from your own tank will not deal damage to itself.
@@ -52,10 +77,11 @@ Example: `java -jar csc413-tankgame-blai30.jar maps/dust2.csv`
 If tank B's armor is greater than or equal to tank A's damage, tank B will always take at least 1 damage regardless of its armor.
 
 ### Strategy
-Destroy crates for chance to gain powerups and get stronger. Reducing opposing tank's health to 0 will deduct a life and reset opposing tank's stats. Reduce your opponent's lives down to 0 to win the game.
+Destroy crates for chance to gain powerups and get stronger. Reducing opposing tank's health to 0 will deduct a life and subtract opposing tank's speed, fire rate, damage, and armor by 2 each. Other stats will be reset to their initial values. Reduce your opponent's lives down to 0 to win the game.
 
 ### Tips
-* Fireballs are great for scavenging powerups from crates since each fireball is capable of destroying up to 5 crates.
+* Fireballs are great for scavenging powerups from crates since each fireball is capable of destroying multiple crates per projectile.
 * Boomerangs will reverse direction after reaching a certain distance. Fire these in the opposite direction of your opponent to reach them if they are far.
 * Ammo has a high chance of dropping from crates so don't hesitate to fire bullets.
 * The orange bar above the health bar indicates firing cooldown and tells you when your next bullet is ready to be fired.
+* If you are behind, consider avoiding your opponent to collect powerups and possibly get a powerup gold to max out your stats.
