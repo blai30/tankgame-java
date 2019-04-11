@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements Runnable {
     private Thread thread;
 
     private boolean running = false;
-    private boolean drawDebug = true;  // Draws various debugging info for game objects
+    private boolean drawDebug = false;  // Draws various debugging info for game objects
 
     private BufferedReader bufferedReader;
     private BufferedImage background = null;

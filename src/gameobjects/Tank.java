@@ -75,21 +75,22 @@ public class Tank extends Player {
         this.loser = false;
     }
 
+
+    // --- MOVEMENT ---
     private void rotateRight() {
         this.transform.rotate(this.ROTATION_SPEED);
     }
-
     private void rotateLeft() {
         this.transform.rotate(-this.ROTATION_SPEED);
     }
-
     private void moveForwards() {
         this.transform.move(this.moveSpeed);
     }
-
     private void moveBackwards() {
         this.transform.move(-this.moveSpeed);
     }
+    // --- MOVEMENT ---
+
 
     /**
      * Instantiate current weapon and deduct ammo.
@@ -125,7 +126,7 @@ public class Tank extends Player {
     /**
      * Take (at least 1) damage from bullets and lose life when out of HP.
      * Lose the game when out of lives.
-     * @param damageDealt Damage of the bullet
+     * @param damageDealt Damage of the weapon
      */
     public void takeDamage(int damageDealt) {
         // Always deal at least 1 damage regardless of armor
@@ -148,37 +149,31 @@ public class Tank extends Player {
             this.currentHP = this.MAX_HP;
         }
     }
-
     public void addSpeed(int value) {
         if ((this.moveSpeed += value) >= 10) {
             this.moveSpeed = 10;
         }
     }
-
     public void addFireRate(int value) {
         if ((this.fireRate += value) >= 10) {
             this.fireRate = 10;
         }
     }
-
     public void addDamage(int value) {
         if ((this.damage += value) >= 10) {
             this.damage = 10;
         }
     }
-
     public void addArmor(int value) {
         if ((this.armor += value) >= 10) {
             this.armor = 10;
         }
     }
-
     public void addAmmo(int value) {
         if ((this.ammo += value) >= 999) {
             this.ammo = 999;
         }
     }
-
     public void setWeapon(Weapon.Type newWeapon, BufferedImage sprWeapon) {
         this.currentWeapon = newWeapon;
         this.weaponSprite = sprWeapon;
@@ -186,16 +181,29 @@ public class Tank extends Player {
     // --- POWERUPS ---
 
 
+    /**
+     * Pass the tank's current weapon to GameHUD to draw on screen.
+     * @return Type of weapon
+     */
     @Override
     public Weapon.Type getWeapon() {
         return this.currentWeapon;
     }
 
+    /**
+     * Pass ratio of the tank's weapon cooldown to GameHUD to draw on screen.
+     * Used in the form of a meter.
+     * @return Time elapsed / total time
+     */
     @Override
     public float getCooldownRatio() {
         return this.fireCooldown / this.fireDelay;
     }
 
+    /**
+     * Pass the tank's stats to GameHUD to draw on screen.
+     * @return Collection of the tank's stats
+     */
     @Override
     public LinkedHashMap<String, Integer> getStats() {
         this.statsCollection.put("Health", this.currentHP);
@@ -216,6 +224,7 @@ public class Tank extends Player {
     public void update() {
         this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
 
+        // Cooldown
         if (this.fireCooldown < this.fireDelay) {
             this.fireCooldown += this.fireRate;
         }

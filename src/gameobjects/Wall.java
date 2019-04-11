@@ -28,20 +28,29 @@ public class Wall extends GameObject {
         this.init();
     }
 
+    /**
+     * Initialize walls with default stats
+     */
     private void init() {
-        this.collider.setRect(this.transform.getPositionX(), this.transform.getPositionY(), this.width, this.height);
-
         this.hitPoints = 1;
     }
 
+    /**
+     * Breakable walls take damage and have a chance to randomly drop powerups.
+     * @param damageDealt Damage of the weapon
+     */
     public void takeDamage(int damageDealt) {
         this.hitPoints -= damageDealt;
+
+        // Chance to randomly drop powerups upon destroy
         if (this.hitPoints <= 0) {
             double random = Math.random();
+            // Random powerup at 20% chance
             if (random < 0.2) {
                 Powerup powerup = new Powerup();
                 this.instantiate(powerup, this.transform.getPosition().add(this.originOffset), 0);
             } else if (random < 0.25) {
+                // Ammo at 25% chance if random powerup did not pass
                 Powerup powerup = new Powerup(Powerup.Type.Ammo);
                 this.instantiate(powerup, this.transform.getPosition().add(this.originOffset), 0);
             }
@@ -49,13 +58,17 @@ public class Wall extends GameObject {
         }
     }
 
+    /**
+     * Used to determine if the wall is breakable (soft wall) or unbreakable (hard wall).
+     * @return Breakable?
+     */
     public boolean isBreakable() {
         return this.isBreakable;
     }
 
     @Override
     public void update() {
-
+        // Ignored as walls do not do anything
     }
 
     @Override
@@ -88,9 +101,16 @@ public class Wall extends GameObject {
 
     }
 
+    /**
+     * Draws the game object's variables in the game world to g.
+     * This method is called when drawDebug is true in GamePanel.
+     * @param g Graphics object that is passed in for the game object to draw to
+     */
     @Override
     public void drawVariables(Graphics g) {
-
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawString("hitPoints: " + this.hitPoints, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 60);
+        g2d.drawString("isBreakable: " + this.isBreakable, this.transform.getPositionX(), this.transform.getPositionY() + this.height + 72);
     }
 
 }

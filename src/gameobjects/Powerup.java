@@ -118,17 +118,7 @@ public class Powerup extends GameObject {
 
     @Override
     public void update() {
-
-    }
-
-    @Override
-    public void drawGizmos(Graphics g) {
-
-    }
-
-    @Override
-    public void drawVariables(Graphics g) {
-
+        // Ignored as powerup pickups do not do anything
     }
 
     @Override
@@ -153,6 +143,16 @@ public class Powerup extends GameObject {
 
     @Override
     public void handleCollision(Powerup collidingPowerup) {
+
+    }
+
+    @Override
+    public void drawGizmos(Graphics g) {
+
+    }
+
+    @Override
+    public void drawVariables(Graphics g) {
 
     }
 
