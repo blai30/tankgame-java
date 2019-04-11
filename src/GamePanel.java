@@ -275,7 +275,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     /**
      * Initialize key bindings for player 1 and player 2.
-     * TODO: load controls from file
      */
     private void setControls() {
         this.controls1 = new HashMap<>();
