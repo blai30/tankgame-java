@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 public abstract class Weapon extends GameObject {
     // Possible weapon types that are predefined
     enum Type {
-
+        // Basic bullet
         Bullet {
             @Override
             public Weapon createInstance(BufferedImage sprite, int damage, Tank shooter) {
@@ -17,6 +17,7 @@ public abstract class Weapon extends GameObject {
             }
         },
 
+        // Fast projectile that destroys multiple breakable walls
         Fireball {
             @Override
             public Weapon createInstance(BufferedImage sprite, int damage, Tank shooter) {
@@ -24,6 +25,7 @@ public abstract class Weapon extends GameObject {
             }
         },
 
+        // Projectile with slow initial velocity that reverses direction and accelerates
         Boomerang {
             @Override
             public Weapon createInstance(BufferedImage sprite, int damage, Tank shooter) {
@@ -35,7 +37,7 @@ public abstract class Weapon extends GameObject {
 
     }
 
-    protected Tank shooter;
+    protected Tank shooter; // Tank that originally fired the weapon. Prevents damaging itself.
 
     protected int damage;
     protected float velocity;

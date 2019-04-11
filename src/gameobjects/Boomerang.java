@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Boomerang extends Weapon {
 
-    private float spin;
+    private float spin; // Separate from rotation to animate spinning sprite
 
     /**
      * Constructs a new boomerang object with generic data.

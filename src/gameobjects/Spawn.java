@@ -2,6 +2,9 @@ package gameobjects;
 
 import util.Transform;
 
+/**
+ * Spawn point for tanks to respawn from.
+ */
 public class Spawn {
 
     private Transform transform;

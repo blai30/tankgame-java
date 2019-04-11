@@ -2,7 +2,6 @@ package gameobjects;
 
 import util.Transform;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Fireball extends Weapon {

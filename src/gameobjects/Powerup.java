@@ -7,12 +7,13 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
- *
+ * Powerups with predefined types that spawn from breakable walls at random.
+ * These powerups grant tanks various bonuses when collided with.
  */
 public class Powerup extends GameObject {
 
     public enum Type {
-
+        // Increase Health
         Health(SpriteCollection.powerHealth.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
@@ -20,6 +21,7 @@ public class Powerup extends GameObject {
             }
         },
 
+        // Increase Speed
         Speed(SpriteCollection.powerSpeed.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
@@ -27,6 +29,7 @@ public class Powerup extends GameObject {
             }
         },
 
+        // Increase Fire Rate
         FireRate(SpriteCollection.powerFireRate.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
@@ -34,6 +37,7 @@ public class Powerup extends GameObject {
             }
         },
 
+        // Increase Damage
         Damage(SpriteCollection.powerDamage.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
@@ -41,6 +45,7 @@ public class Powerup extends GameObject {
             }
         },
 
+        // Increase Armor
         Armor(SpriteCollection.powerArmor.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
@@ -48,6 +53,7 @@ public class Powerup extends GameObject {
             }
         },
 
+        // Increase Ammo
         Ammo(SpriteCollection.powerAmmo.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
@@ -55,6 +61,7 @@ public class Powerup extends GameObject {
             }
         },
 
+        // Get Fireball weapon
         Fireball(SpriteCollection.powerFireball.getImage(), SpriteCollection.fireball.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
@@ -62,6 +69,7 @@ public class Powerup extends GameObject {
             }
         },
 
+        // Get Boomerang weapon
         Boomerang(SpriteCollection.powerBoomerang.getImage(), SpriteCollection.boomerang.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
@@ -69,6 +77,7 @@ public class Powerup extends GameObject {
             }
         },
 
+        // Increase stats to max
         // This enum must be last to keep out of the random pool
         Gold(SpriteCollection.powerGold.getImage(), SpriteCollection.tankGold.getImage()) {
             @Override
@@ -86,10 +95,12 @@ public class Powerup extends GameObject {
         protected BufferedImage sprite;
         protected BufferedImage sprPower = null;
 
+        // For stat increasing powerups
         Type(BufferedImage sprite) {
             this.sprite = sprite;
         }
 
+        // For weapon powerups and max stats
         Type(BufferedImage sprite, BufferedImage sprPower) {
             this.sprite = sprite;
             this.sprPower = sprPower;
@@ -101,27 +112,29 @@ public class Powerup extends GameObject {
 
     private Type type;
 
+    // Construct random powerup (excluding gold)
     public Powerup() {
         this.transform = new Transform();
         this.type = this.randomPower();
         this.construct(this.type.sprite);
     }
 
+    // Construct specific powerup
     public Powerup(Powerup.Type type) {
         this.transform = new Transform();
         this.type = type;
         this.construct(this.type.sprite);
     }
 
+    // Construct specific powerup at location
     public Powerup(float xPosition, float yPosition, float rotation, Powerup.Type type) {
         this.type = type;
         this.construct(xPosition, yPosition, rotation, this.type.sprite);
     }
 
+    // Random powerups
     private Powerup.Type[] powerups = Powerup.Type.values();
-
     private Random random = new Random();
-
     private final Powerup.Type randomPower() {
         // Exclude power max from random pool
         return this.powerups[this.random.nextInt(this.powerups.length - 1)];

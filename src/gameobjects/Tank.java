@@ -182,6 +182,7 @@ public class Tank extends Player {
         this.weaponSprite = sprWeapon;
     }
     public void setSprite(BufferedImage newSprite) {
+        // Used by powerup gold, changes tank's sprite to a golden tank
         this.sprite = newSprite;
     }
     // --- POWERUPS ---
@@ -274,7 +275,7 @@ public class Tank extends Player {
 
     @Override
     public void handleCollision(Weapon collidingWeapon) {
-
+        // Damage handled in the weapon class
     }
 
     @Override
