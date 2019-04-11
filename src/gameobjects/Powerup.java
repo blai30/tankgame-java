@@ -70,7 +70,7 @@ public class Powerup extends GameObject {
         },
 
         // This enum must be last to keep out of the random pool
-        Max(SpriteCollection.powerMax.getImage(), SpriteCollection.tankMax.getImage()) {
+        Gold(SpriteCollection.powerGold.getImage(), SpriteCollection.tankGold.getImage()) {
             @Override
             protected void grantBonus(Tank tank) {
                 tank.addHealth(20);

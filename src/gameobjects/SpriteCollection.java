@@ -11,7 +11,7 @@ public enum SpriteCollection {
     // Solid objects
     tank1,
     tank2,
-    tankMax,
+    tankGold,
     softWall,
     // Powerup pickups
     powerHealth,
@@ -22,7 +22,7 @@ public enum SpriteCollection {
     powerAmmo,
     powerFireball,
     powerBoomerang,
-    powerMax,
+    powerGold,
     // Weapons
     bullet1,
     bullet2,
@@ -40,7 +40,7 @@ public enum SpriteCollection {
         try {
             SpriteCollection.tank1.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/tank1.png"));
             SpriteCollection.tank2.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/tank2.png"));
-            SpriteCollection.tankMax.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/tank3.png"));
+            SpriteCollection.tankGold.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/tank3.png"));
             SpriteCollection.softWall.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/wallS.png"));
 
             SpriteCollection.powerHealth.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_health.png"));
@@ -51,7 +51,7 @@ public enum SpriteCollection {
             SpriteCollection.powerAmmo.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_ammo.png"));
             SpriteCollection.powerFireball.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_fireball.png"));
             SpriteCollection.powerBoomerang.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_boomerang.png"));
-            SpriteCollection.powerMax.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_max.png"));
+            SpriteCollection.powerGold.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/power_gold.png"));
 
             SpriteCollection.bullet1.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/bullet1.png"));
             SpriteCollection.bullet2.image = ImageIO.read(SpriteCollection.class.getClassLoader().getResource("resources/bullet2.png"));

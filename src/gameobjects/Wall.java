@@ -47,7 +47,7 @@ public class Wall extends GameObject {
             double random = Math.random();
             if (random < 0.01) {
                 // Low chance of spawning power max
-                Powerup powerMax = new Powerup(Powerup.Type.Max);
+                Powerup powerMax = new Powerup(Powerup.Type.Gold);
                 this.instantiate(powerMax, this.transform.getPosition().add(this.originOffset), 0);
             } else if (random < 0.2) {
                 // Random powerup at 20% chance excluding power max

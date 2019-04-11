@@ -24,7 +24,7 @@ public class Tank extends Player {
 
     private final float ROTATION_SPEED = 2.5f;
 
-    private BufferedImage originalSprite;   // Used to save original sprite in case tank gets powerMax which alters tank sprite
+    private BufferedImage originalSprite;   // Used to save original sprite in case tank gets powerGold which alters tank sprite
     private BufferedImage bulletSprite;     // Used to save bullet sprite for when respawning from a different weapon
     private BufferedImage weaponSprite;
     private Weapon projectile;
@@ -77,6 +77,26 @@ public class Tank extends Player {
         this.loser = false;
     }
 
+    /**
+     * Reset HP, weapon, ammo, and deduct stats by 2.
+     */
+    private void respawn() {
+        this.currentHP = this.MAX_HP;
+        this.currentWeapon = Weapon.Type.Bullet;
+        this.sprite = this.originalSprite;
+        this.weaponSprite = this.bulletSprite;
+
+        this.moveSpeed = Math.max(4, this.moveSpeed - 2);
+        this.fireRate = Math.max(1, this.fireRate - 2);
+        this.damage = Math.max(1, this.damage - 2);
+        this.armor = Math.max(0, this.armor - 2);
+        this.ammo = 50;
+
+        // Respawn at new random spawn location
+        Random random = new Random();
+        this.transform.setPosition(GameObjectCollection.spawnPoints.get(random.nextInt(GameObjectCollection.spawnPoints.size())).getTransform().getPosition());
+    }
+
 
     // --- MOVEMENT ---
     private void rotateRight() {
@@ -104,26 +124,6 @@ public class Tank extends Player {
             this.ammo--;
             this.fireCooldown = 0;
         }
-    }
-
-    /**
-     * Reset HP, weapon, ammo, and deduct stats by 2.
-     */
-    private void respawn() {
-        this.currentHP = this.MAX_HP;
-        this.currentWeapon = Weapon.Type.Bullet;
-        this.sprite = this.originalSprite;
-        this.weaponSprite = this.bulletSprite;
-
-        this.moveSpeed = Math.max(4, this.moveSpeed - 2);
-        this.fireRate = Math.max(1, this.fireRate - 2);
-        this.damage = Math.max(1, this.damage - 2);
-        this.armor = Math.max(0, this.armor - 2);
-        this.ammo = 50;
-
-        // Respawn at new random spawn location
-        Random random = new Random();
-        this.transform.setPosition(GameObjectCollection.spawnPoints.get(random.nextInt(GameObjectCollection.spawnPoints.size())).getTransform().getPosition());
     }
 
     /**
