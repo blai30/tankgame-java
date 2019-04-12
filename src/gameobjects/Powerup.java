@@ -1,5 +1,6 @@
 package gameobjects;
 
+import util.SpriteCollection;
 import util.Transform;
 
 import java.awt.*;
