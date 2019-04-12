@@ -265,7 +265,8 @@ public class Tank extends Player {
 
     @Override
     public void handleCollision(Tank collidingTank) {
-        this.solidCollision(collidingTank);
+//        this.solidCollision(collidingTank);   // This one has no resistance so collidingTank gets pushed back by this tank's speed
+        collidingTank.solidCollision(this); // This one adds resistance so collidingTank gets pushed back slowly
     }
 
     @Override
