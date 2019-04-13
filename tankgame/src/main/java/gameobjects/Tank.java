@@ -189,7 +189,7 @@ public class Tank extends Player {
 
 
     /**
-     * Pass the tank's current weapon to GameHUD to draw on screen.
+     * Pass the tank's current weapon to main.java.GameHUD to draw on screen.
      * @return Type of weapon
      */
     @Override
@@ -198,7 +198,7 @@ public class Tank extends Player {
     }
 
     /**
-     * Pass ratio of the tank's weapon cooldown to GameHUD to draw on screen.
+     * Pass ratio of the tank's weapon cooldown to main.java.GameHUD to draw on screen.
      * Used in the form of a meter.
      * @return Time elapsed / total time
      */
@@ -208,7 +208,7 @@ public class Tank extends Player {
     }
 
     /**
-     * Pass the tank's stats to GameHUD to draw on screen.
+     * Pass the tank's stats to main.java.GameHUD to draw on screen.
      * @return Collection of the tank's stats
      */
     @Override
@@ -304,7 +304,7 @@ public class Tank extends Player {
 
     /**
      * Draws the game object's variables in the game world to g.
-     * This method is called when drawDebug is true in GamePanel.
+     * This method is called when drawDebug is true in main.java.GamePanel.
      * @param g Graphics object that is passed in for the game object to draw to
      */
     @Override

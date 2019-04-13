@@ -59,7 +59,7 @@ public class GameHUD {
     }
 
     /**
-     * Called by GamePanel to draw the minimap on the screen.
+     * Called by main.java.GamePanel to draw the minimap on the screen.
      * @return The view of the minimap of the game world
      */
     public BufferedImage getMinimap() {

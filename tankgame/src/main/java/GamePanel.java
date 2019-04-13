@@ -74,13 +74,12 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public void loadMap(String mapFile) {
         this.mapFile = mapFile;
-        // Loading resources: sprites, tiles, background
+        // Loading main.resources: sprites, tiles, background
         this.background = ResourceCollection.background.getImage();
 
         // Loading map file
-        InputStream defaultMap = null;
+        InputStream defaultMap = this.getClass().getResourceAsStream("resources/defaultmap.csv");
         try {
-            defaultMap = this.getClass().getResourceAsStream("resources/defaultmap.csv");
             this.bufferedReader = new BufferedReader(new FileReader(mapFile));
         } catch (IOException | NullPointerException e) {
             System.err.println(e + ": Cannot load map file, loading default map");

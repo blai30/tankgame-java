@@ -1,7 +1,5 @@
 package util;
 
-
-
 /**
  * Used to identify the position and rotation of game objects in the world.
  */

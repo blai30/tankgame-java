@@ -107,7 +107,7 @@ public class Wall extends GameObject {
 
     /**
      * Draws the game object's variables in the game world to g.
-     * This method is called when drawDebug is true in GamePanel.
+     * This method is called when drawDebug is true in main.java.GamePanel.
      * @param g Graphics object that is passed in for the game object to draw to
      */
     @Override

@@ -3,7 +3,7 @@ import gameobjects.GameObject;
 import java.awt.image.BufferedImage;
 
 /**
- * Camera objects provide a screen for each player which follows the assigned tank.
+ * main.java.Camera objects provide a screen for each player which follows the assigned tank.
  */
 public class Camera {
 
@@ -23,7 +23,7 @@ public class Camera {
 
     /**
      * Continuously crops the game world to the dimensions of the camera.
-     * @param world The game world passed in by GamePanel that this camera will crop
+     * @param world The game world passed in by main.java.GamePanel that this camera will crop
      */
     public void redraw(BufferedImage world) {
         float x = this.trackObject.getTransform().getPositionX() + this.trackObject.getOriginOffset().getX() - ((float) WIDTH / 2);
@@ -47,7 +47,7 @@ public class Camera {
     }
 
     /**
-     * Called by GamePanel to draw the camera to the screen.
+     * Called by main.java.GamePanel to draw the camera to the screen.
      * @return This view of this camera object
      */
     public BufferedImage getScreen() {

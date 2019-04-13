@@ -143,7 +143,7 @@ public abstract class GameObject implements CollisionHandling {
 
     /**
      * Draws general information about the game object in the game world to g.
-     * This method is called when drawGizmos is true in GamePanel.
+     * This method is called when drawGizmos is true in main.java.GamePanel.
      * @param g Graphics object that is passed in for the game object to draw to
      */
     public void drawTransform(Graphics g) {
@@ -164,7 +164,7 @@ public abstract class GameObject implements CollisionHandling {
     }
 
     /**
-     * Constantly called in the update method in GamePanel for every game object.
+     * Constantly called in the update method in main.java.GamePanel for every game object.
      */
     public abstract void update();
 
@@ -177,7 +177,7 @@ public abstract class GameObject implements CollisionHandling {
 
     /**
      * Draws the game object's variables in the game world to g.
-     * This method is called when drawDebug is true in GamePanel.
+     * This method is called when drawDebug is true in main.java.GamePanel.
      * @param g Graphics object that is passed in for the game object to draw to
      */
     public abstract void drawVariables(Graphics g);
