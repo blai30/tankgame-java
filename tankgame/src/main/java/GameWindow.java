@@ -44,7 +44,7 @@ public class GameWindow extends JFrame {
 
         try {
             System.out.println(System.getProperty("user.dir"));
-            Image icon = ImageIO.read(GameWindow.class.getClassLoader().getResource("resources/icon.png"));
+            Image icon = ImageIO.read(this.getClass().getResource("/resources/icon.png"));
             this.setIconImage(icon);
         } catch (IOException e) {
             System.out.println("IOException: cannot read image file");

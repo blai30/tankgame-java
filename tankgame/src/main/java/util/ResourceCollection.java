@@ -21,8 +21,8 @@ public enum ResourceCollection {
     // Load main.resources from disk
     public static void init() {
         try {
-            background.image = ImageIO.read(ResourceCollection.class.getClassLoader().getResource("resources/bg.jpg"));
-            tilesHardWall.image = ImageIO.read(ResourceCollection.class.getClassLoader().getResource("resources/wall_tiles.png"));
+            background.image = ImageIO.read(ResourceCollection.class.getResource("/resources/bg.jpg"));
+            tilesHardWall.image = ImageIO.read(ResourceCollection.class.getResource("/resources/wall_tiles.png"));
         } catch (IOException e) {
             System.err.println(e + ": Cannot read image file");
             e.printStackTrace();
