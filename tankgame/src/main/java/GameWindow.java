@@ -18,6 +18,7 @@ class GameLauncher {
             System.err.println(e + ": Program args not given");
             game.loadMap(null);
         }
+        GameWindow.gameWindow = new GameWindow(game);
         game.launch();
         System.gc();
     }
@@ -31,9 +32,11 @@ public class GameWindow extends JFrame {
 
     // MINIMUM RECOMMENDED SUPPORTED SIZE IS 1280x960 !
     // Please do not use smaller dimensions as the game UI elements may not fit properly
-    public static final int SCREEN_WIDTH = 1280;
-    public static final int SCREEN_HEIGHT = 960;
-    public static final String title = "Tank Game by Brian Lai | Press F1 to view controls";
+    static final int SCREEN_WIDTH = 1280;
+    static final int SCREEN_HEIGHT = 960;
+    static final String title = "Tank Game by Brian Lai | Press F1 to view controls";
+
+    static GameWindow gameWindow;
 
     /**
      * Constructs a game window with the necessary configurations.

@@ -17,7 +17,6 @@ import java.util.HashMap;
  */
 public class GamePanel extends JPanel implements Runnable {
 
-    private GameWindow gameWindow;
     private GameController gameController;
     private Thread thread;
 
@@ -60,7 +59,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void launch() {
-        this.gameWindow = new GameWindow(this);
         this.gameController = new GameController(this);
         this.addKeyListener(this.gameController);
     }
@@ -352,7 +350,7 @@ public class GamePanel extends JPanel implements Runnable {
             if (System.currentTimeMillis() - timer > 1000) {
                 timer = System.currentTimeMillis();
                 System.out.println("FPS: " + fps + ", Ticks: " + ticks);
-                gameWindow.setTitle(GameWindow.title + " | " + "FPS: " + fps + ", Ticks: " + ticks);
+                GameWindow.gameWindow.setTitle(GameWindow.title + " | " + "FPS: " + fps + ", Ticks: " + ticks);
                 fps = 0;
                 ticks = 0;
             }
