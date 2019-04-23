@@ -10,7 +10,7 @@ IntelliJ IDEA Ultimate 2019.1
 JDK 11.0.2
 
 ## Current working directory used for the game
-src/
+tankgame/src/main/java/
 
 ## Controls
 ### Player 1
